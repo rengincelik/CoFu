@@ -65,7 +65,40 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\6000.0.36f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.UIToolkit.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\Model\Data\GameEnum.cs" />
+    <Compile Include="Assets\Scripts\View\UI\Menu\SettingsView.cs" />
+    <Compile Include="Assets\Scripts\Architecture\Services\LevelService.cs" />
+    <Compile Include="Assets\Scripts\View\GamePlay\ColorDotView.cs" />
+    <Compile Include="Assets\Scripts\Architecture\Commands\UseJokerCommand.cs" />
+    <Compile Include="Assets\Scripts\Tools\DebugManager.cs" />
+    <Compile Include="Assets\Scripts\View\UI\HUD\ScoreDisplayview.cs" />
+    <Compile Include="Assets\Scripts\Architecture\Factories\DotFactory.cs" />
+    <Compile Include="Assets\Scripts\View\UI\Menu\MainMenuView.cs" />
+    <Compile Include="Assets\Scripts\Model\Logic\ColorCombinations.cs" />
+    <Compile Include="Assets\Scripts\View\UI\HUD\TimeDisplayView.cs" />
+    <Compile Include="Assets\Scripts\Architecture\Services\JokerService.cs" />
+    <Compile Include="Assets\Scripts\Model\Logic\ColorVector.cs" />
+    <Compile Include="Assets\Scripts\Architecture\Core\ICommand.cs" />
+    <Compile Include="Assets\Scripts\Tools\PerformanceMonitor.cs" />
+    <Compile Include="Assets\Scripts\Model\Config\JokerConfig.cs" />
+    <Compile Include="Assets\Scripts\View\UI\HUD\LevelDisplayView.cs" />
+    <Compile Include="Assets\Scripts\Model\Config\LevelConfig.cs" />
+    <Compile Include="Assets\Scripts\Architecture\Utilities\UniTaskHelper.cs" />
     <Compile Include="Assets\v_EditorAssets\TutorialInfo\Scripts\Readme.cs" />
+    <Compile Include="Assets\Scripts\Architecture\Services\EconomyService.cs" />
+    <Compile Include="Assets\Scripts\Model\Data\PlayerData.cs" />
+    <Compile Include="Assets\Scripts\Architecture\Services\GameService.cs" />
+    <Compile Include="Assets\Scripts\Architecture\Utilities\Extensions.cs" />
+    <Compile Include="Assets\Scripts\View\VFX\ParticleSpawner.cs" />
+    <Compile Include="Assets\Scripts\View\VFX\MerceEffectController.cs" />
+    <Compile Include="Assets\Scripts\View\GamePlay\SlotView.cs" />
+    <Compile Include="Assets\Scripts\Model\Logic\ColorPallette.cs" />
+    <Compile Include="Assets\Scripts\View\UI\Menu\PauseMenuView.cs" />
+    <Compile Include="Assets\Scripts\Architecture\Commands\DotTappedCommand.cs" />
+    <Compile Include="Assets\Scripts\Architecture\Commands\RestartLevelCommand.cs" />
+    <Compile Include="Assets\Scripts\Architecture\Commands\StartGameCommand.cs" />
+    <Compile Include="Assets\Scripts\Architecture\Core\Singleton.cs" />
+    <Compile Include="Assets\Scripts\Architecture\Factories\SlotManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
@@ -1046,10 +1079,10 @@
     <ProjectReference Include="Unity.AI.Navigation.csproj" />
     <ProjectReference Include="Unity.RenderPipeline.Universal.ShaderLibrary.csproj" />
     <ProjectReference Include="Unity.RenderPipelines.Universal.Shaders.csproj" />
-    <ProjectReference Include="Unity.RenderPipelines.Core.Runtime.Shared.csproj" />
+    <ProjectReference Include="VTabs.csproj" />
     <ProjectReference Include="Unity.Timeline.Editor.csproj" />
     <ProjectReference Include="Unity.ShaderGraph.Editor.csproj" />
-    <ProjectReference Include="VTabs.csproj" />
+    <ProjectReference Include="Unity.RenderPipelines.Core.Runtime.Shared.csproj" />
     <ProjectReference Include="Unity.Timeline.csproj" />
     <ProjectReference Include="Unity.RenderPipelines.Core.Editor.Shared.csproj" />
     <ProjectReference Include="UnityEngine.UI.csproj" />
