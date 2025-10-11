@@ -70,6 +70,7 @@
     <Compile Include="Assets\Scripts\Architecture\Services\LevelService.cs" />
     <Compile Include="Assets\Scripts\View\GamePlay\ColorDotView.cs" />
     <Compile Include="Assets\Scripts\Architecture\Commands\UseJokerCommand.cs" />
+    <Compile Include="Assets\Scripts\Model\Logic\ColorUnit.cs" />
     <Compile Include="Assets\Scripts\Tools\DebugManager.cs" />
     <Compile Include="Assets\Scripts\View\UI\HUD\ScoreDisplayview.cs" />
     <Compile Include="Assets\Scripts\Architecture\Factories\DotFactory.cs" />
@@ -77,7 +78,6 @@
     <Compile Include="Assets\Scripts\Model\Logic\ColorCombinations.cs" />
     <Compile Include="Assets\Scripts\View\UI\HUD\TimeDisplayView.cs" />
     <Compile Include="Assets\Scripts\Architecture\Services\JokerService.cs" />
-    <Compile Include="Assets\Scripts\Model\Logic\ColorVector.cs" />
     <Compile Include="Assets\Scripts\Architecture\Core\ICommand.cs" />
     <Compile Include="Assets\Scripts\Tools\PerformanceMonitor.cs" />
     <Compile Include="Assets\Scripts\Model\Config\JokerConfig.cs" />
@@ -87,18 +87,19 @@
     <Compile Include="Assets\v_EditorAssets\TutorialInfo\Scripts\Readme.cs" />
     <Compile Include="Assets\Scripts\Architecture\Services\EconomyService.cs" />
     <Compile Include="Assets\Scripts\Model\Data\PlayerData.cs" />
+    <Compile Include="Assets\Scripts\Model\Logic\ColorFusionTable.cs" />
     <Compile Include="Assets\Scripts\Architecture\Services\GameService.cs" />
     <Compile Include="Assets\Scripts\Architecture\Utilities\Extensions.cs" />
     <Compile Include="Assets\Scripts\View\VFX\ParticleSpawner.cs" />
     <Compile Include="Assets\Scripts\View\VFX\MerceEffectController.cs" />
     <Compile Include="Assets\Scripts\View\GamePlay\SlotView.cs" />
-    <Compile Include="Assets\Scripts\Model\Logic\ColorPallette.cs" />
     <Compile Include="Assets\Scripts\View\UI\Menu\PauseMenuView.cs" />
     <Compile Include="Assets\Scripts\Architecture\Commands\DotTappedCommand.cs" />
     <Compile Include="Assets\Scripts\Architecture\Commands\RestartLevelCommand.cs" />
     <Compile Include="Assets\Scripts\Architecture\Commands\StartGameCommand.cs" />
     <Compile Include="Assets\Scripts\Architecture\Core\Singleton.cs" />
     <Compile Include="Assets\Scripts\Architecture\Factories\SlotManager.cs" />
+    <Compile Include="Assets\Scripts\Model\Config\GridConfig.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
