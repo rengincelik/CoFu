@@ -21,42 +21,16 @@
 
 using UnityEngine;
 
-public class DotTappedCommand 
+public class DotTappedCommand : ICommand
 {
-    // private ColorDotView dot;
-    // private SlotView slot;
-    
-    // public async UniTask Execute()
-    // {
-    //     // 1. LOGIC (Core)
-    //     var newColor = ColorCombinations.TryCombine(
-    //         slot.CurrentColor, 
-    //         dot.CurrentColor
-    //     );
+    public bool CanExecute()
+    {
+        throw new System.NotImplementedException();
+    }
+    public void Execute()
+    {
         
-    //     if (newColor.IsNull) return; // Invalid combination
-        
-    //     // 2. STATE UPDATE
-    //     slot.UpdateColor(newColor);
-    //     dot.gameObject.SetActive(false); // Dot'u gizle
-        
-    //     // 3. VFX (Opsiyonel - toggle edilebilir!)
-    //     if (GameSettings.EnableVFX)
-    //     {
-    //         await MergeEffectController.Instance.PlayMergeEffect(
-    //             dot.transform.position,
-    //             slot.transform.position,
-    //             dot.CurrentColor,
-    //             slot.PreviousColor,
-    //             newColor
-    //         );
-    //     }
-        
-    //     // 4. GAME LOGIC
-    //     if (newColor.IsWhite)
-    //     {
-    //         EconomyService.Instance.AddWhiteEssence(1);
-    //     }
-    // }
+    }
 }
+
 

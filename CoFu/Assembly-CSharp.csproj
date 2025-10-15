@@ -65,10 +65,16 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\6000.0.36f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.UIToolkit.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\View\UI\HUD\TargetDisplayView.cs" />
     <Compile Include="Assets\Scripts\Model\Data\GameEnum.cs" />
+    <Compile Include="Assets\Scripts\View\UI\Menu\ResumeDialogView.cs" />
     <Compile Include="Assets\Scripts\View\UI\Menu\SettingsView.cs" />
     <Compile Include="Assets\Scripts\Architecture\Services\LevelService.cs" />
+    <Compile Include="Assets\Scripts\Architecture\Core\IUpdatable.cs" />
+    <Compile Include="Assets\Scripts\Architecture\Core\IJoker.cs" />
     <Compile Include="Assets\Scripts\View\GamePlay\ColorDotView.cs" />
+    <Compile Include="Assets\Scripts\Architecture\Managers\MobileLifeCycleManager.cs" />
+    <Compile Include="Assets\Scripts\Architecture\Managers\UpdateManager.cs" />
     <Compile Include="Assets\Scripts\Architecture\Commands\UseJokerCommand.cs" />
     <Compile Include="Assets\Scripts\Model\Logic\ColorUnit.cs" />
     <Compile Include="Assets\Scripts\Tools\DebugManager.cs" />
@@ -76,30 +82,62 @@
     <Compile Include="Assets\Scripts\Architecture\Factories\DotFactory.cs" />
     <Compile Include="Assets\Scripts\View\UI\Menu\MainMenuView.cs" />
     <Compile Include="Assets\Scripts\Model\Logic\ColorCombinations.cs" />
+    <Compile Include="Assets\Scripts\View\UI\ObjectiveDisplayView.cs" />
     <Compile Include="Assets\Scripts\View\UI\HUD\TimeDisplayView.cs" />
     <Compile Include="Assets\Scripts\Architecture\Services\JokerService.cs" />
     <Compile Include="Assets\Scripts\Architecture\Core\ICommand.cs" />
     <Compile Include="Assets\Scripts\Tools\PerformanceMonitor.cs" />
     <Compile Include="Assets\Scripts\Model\Config\JokerConfig.cs" />
-    <Compile Include="Assets\Scripts\View\UI\HUD\LevelDisplayView.cs" />
+    <Compile Include="Assets\Scripts\Architecture\Managers\ManagerBehavior.cs" />
+    <Compile Include="Assets\Scripts\View\UI\HUD\EssenceDisplayView.cs" />
     <Compile Include="Assets\Scripts\Model\Config\LevelConfig.cs" />
     <Compile Include="Assets\Scripts\Architecture\Utilities\UniTaskHelper.cs" />
     <Compile Include="Assets\v_EditorAssets\TutorialInfo\Scripts\Readme.cs" />
     <Compile Include="Assets\Scripts\Architecture\Services\EconomyService.cs" />
+    <Compile Include="Assets\Scripts\Architecture\Core\ITickable.cs" />
     <Compile Include="Assets\Scripts\Model\Data\PlayerData.cs" />
     <Compile Include="Assets\Scripts\Model\Logic\ColorFusionTable.cs" />
     <Compile Include="Assets\Scripts\Architecture\Services\GameService.cs" />
     <Compile Include="Assets\Scripts\Architecture\Utilities\Extensions.cs" />
     <Compile Include="Assets\Scripts\View\VFX\ParticleSpawner.cs" />
+    <Compile Include="Assets\Scripts\View\UI\HUD\LevelInfoView.cs" />
     <Compile Include="Assets\Scripts\View\VFX\MerceEffectController.cs" />
+    <Compile Include="Assets\Scripts\View\UI\LevelSelectView.cs" />
     <Compile Include="Assets\Scripts\View\GamePlay\SlotView.cs" />
     <Compile Include="Assets\Scripts\View\UI\Menu\PauseMenuView.cs" />
     <Compile Include="Assets\Scripts\Architecture\Commands\DotTappedCommand.cs" />
     <Compile Include="Assets\Scripts\Architecture\Commands\RestartLevelCommand.cs" />
     <Compile Include="Assets\Scripts\Architecture\Commands\StartGameCommand.cs" />
     <Compile Include="Assets\Scripts\Architecture\Core\Singleton.cs" />
+    <Compile Include="Assets\Scripts\Architecture\Managers\AdManager.cs" />
     <Compile Include="Assets\Scripts\Architecture\Factories\SlotManager.cs" />
     <Compile Include="Assets\Scripts\Model\Config\GridConfig.cs" />
+    <Compile Include="Assets\Scripts\Architecture\Commands\JokerCommand.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile-2-Pass.shader" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap.shader" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMPro_Mobile.cginc" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF SSD.shader" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface-Mobile.shader" />
+    <None Include="Assets\TextMesh Pro\Shaders\SDFFunctions.hlsl" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface.shader" />
+    <None Include="Assets\TextMesh Pro\Sprites\EmojiOne Attribution.txt" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap-Custom-Atlas.shader" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF.shader" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile SSD.shader" />
+    <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMPro_Properties.cginc" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMPro_Surface.cginc" />
+    <None Include="Assets\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Masking.shader" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF Overlay.shader" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap-Mobile.shader" />
+    <None Include="Assets\TextMesh Pro\Fonts\LiberationSans - OFL.txt" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile.shader" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_Sprite.shader" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
@@ -1115,6 +1153,7 @@
     <ProjectReference Include="Unity.RenderPipelines.Core.Editor.csproj" />
     <ProjectReference Include="Unity.RenderPipelines.Universal.Runtime.csproj" />
     <ProjectReference Include="Unity.VisualScripting.State.csproj" />
+    <ProjectReference Include="Unity.2D.Sprite.Editor.csproj" />
     <ProjectReference Include="Unity.AI.Navigation.Editor.ConversionSystem.csproj" />
     <ProjectReference Include="Unity.TextMeshPro.Editor.csproj" />
     <ProjectReference Include="Unity.Burst.Editor.csproj" />

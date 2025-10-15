@@ -1,16 +1,24 @@
 using UnityEngine;
+using UnityEngine.UI;
 
-public class PauseMenuView : MonoBehaviour
-{
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
+// ============================================
+// PAUSE MENU VIEW
+// ============================================
+public class PauseMenuView : MonoBehaviour {
+    [SerializeField] private GameObject pausePanel;
+    [SerializeField] private Button resumeButton;
+    [SerializeField] private Button restartButton;
+    [SerializeField] private Button menuButton;
+
+
+    private void Show() {
+        pausePanel.SetActive(true);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    private void Hide() {
+        pausePanel.SetActive(false);
     }
+
+
+
 }

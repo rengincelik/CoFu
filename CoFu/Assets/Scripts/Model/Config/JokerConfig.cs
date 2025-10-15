@@ -1,7 +1,10 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Joker", menuName = "ColorCombiner/JokerConfig")]
+[CreateAssetMenu(fileName = "JokerConfig", menuName = "Game/JokerConfig")]
 public class JokerConfig : ScriptableObject
 {
-    
+    public Sprite Icon;
+    public Cost cost;
+    public bool IsPassive;
+    public JokerType Type;
 }

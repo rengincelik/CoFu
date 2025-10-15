@@ -16,17 +16,15 @@
 
 using UnityEngine;
 
-public class UseJokerCommand : MonoBehaviour
+public class UseJokerCommand : ICommand
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public bool CanExecute()
     {
-        
+        throw new System.NotImplementedException();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void Execute()
     {
-        
+        throw new System.NotImplementedException();
     }
 }

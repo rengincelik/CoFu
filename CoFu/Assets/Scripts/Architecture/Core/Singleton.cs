@@ -20,10 +20,8 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
             {
                 if (_instance == null)
                 {
-                    // Use FindFirstObjectByType<T> instead of FindObjectOfType<T>()
                     _instance = Object.FindFirstObjectByType<T>();
 
-                    // Use FindObjectsByType with sorting mode None
                     var instances = Object.FindObjectsByType<T>(FindObjectsSortMode.None);
 
                     if (instances.Length > 1)
@@ -52,3 +50,4 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
         applicationIsQuitting = true;
     }
 }
+

@@ -14,21 +14,23 @@
 // ├── AddScore(int points)
 // ├── CanAffordJoker(JokerType type)
 // └── BuyJoker(JokerType type)
-
-
 using UnityEngine;
 
-public class EconomyService : MonoBehaviour
+public struct Cost
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+    public CurrencyType currencyType;
+    public int Amount;
+}
 
-    // Update is called once per frame
-    void Update()
+public class EconomyService : Singleton<EconomyService>
+{
+    public int WhiteEssence { get; private set; }
+
+    public event System.Action<int> OnEssenceChanged;
+
+    public void AddEssence(int amount)
     {
-        
+        WhiteEssence += amount;
+        OnEssenceChanged?.Invoke(WhiteEssence);
     }
 }

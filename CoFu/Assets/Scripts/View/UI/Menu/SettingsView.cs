@@ -1,16 +1,28 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SettingsView : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    [SerializeField] private Slider musicSlider;
+    [SerializeField] private Slider sfxSlider;
+
+    // void Start()
+    // {
+    //     musicSlider.value = PlayerData.Instance.MusicVolume;
+    //     sfxSlider.value = PlayerData.Instance.SFXVolume;
+
+    //     musicSlider.onValueChanged.AddListener(OnMusicChanged);
+    //     sfxSlider.onValueChanged.AddListener(OnSFXChanged);
+    // }
+
+    void OnMusicChanged(float value)
     {
-        
+        PlayerData.Instance.SetMusicVolume(value);
     }
 
-    // Update is called once per frame
-    void Update()
+    void OnSFXChanged(float value)
     {
-        
+        PlayerData.Instance.SetSFXVolume(value);
     }
 }
+

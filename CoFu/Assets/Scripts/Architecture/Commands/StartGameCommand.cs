@@ -7,18 +7,29 @@
 
 
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
-public class StartGameCommand : MonoBehaviour
-{
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
+public class StartGameCommand : ICommand {
+    private LevelConfig levelToLoad;
+    
+    public StartGameCommand(LevelConfig level) {
+        levelToLoad = level;
     }
 
-    // Update is called once per frame
-    void Update()
+    public bool CanExecute()
     {
+        throw new System.NotImplementedException();
+    }
+
+    public void Execute() {
+        // // 1. Sahneye geç
+        // SceneManager.LoadScene("GamePlay");
         
+        // // 2. Level'i yükle
+        // LevelService.Instance.LoadLevel(levelToLoad);
+        
+        // // 3. Oyunu başlat
+        // GameService.Instance.StartGame();
     }
 }
+

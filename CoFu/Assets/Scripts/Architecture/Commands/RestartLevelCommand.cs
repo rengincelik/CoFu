@@ -1,16 +1,14 @@
 using UnityEngine;
 
-public class RestartLevelCommand : MonoBehaviour
+public class RestartLevelCommand : ICommand
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public bool CanExecute()
     {
-        
+        throw new System.NotImplementedException();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void Execute()
     {
-        
+        throw new System.NotImplementedException();
     }
 }

@@ -16,25 +16,13 @@
 // ├── ApplyShuffle()
 // └── CanUseJoker(JokerType type)
 
-// Joker Tipleri:
-// ├── TimeFreeze (10 saniye dondur)
-// ├── Shuffle (tüm dot'ları yeniden dağıt)
-// └── HintGlow (doğru kombinasyonu göster)
-
-
+using System.Collections.Generic;
 using UnityEngine;
 
-public class JokerService : MonoBehaviour
-{
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+public class JokerService : Singleton<JokerService>
+{
+    
+
 }
+
