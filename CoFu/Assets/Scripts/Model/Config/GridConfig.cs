@@ -11,14 +11,11 @@ public class GridConfig : ScriptableObject
     [HideInInspector]
     public bool[] spawnPattern;
 
-    // ... GetSpawnPositions method is fine ...
     public List<Vector2Int> GetSpawnPositions()
     {
         var positions = new List<Vector2Int>();
 
-        // Add a safety check in case the array is null/wrong size in runtime
-        if (spawnPattern == null || spawnPattern.Length != gridWidth * gridHeight)
-            return positions;
+        if (spawnPattern == null || spawnPattern.Length != gridWidth * gridHeight)return positions;
 
         for (int y = 0; y < gridHeight; y++)
         {
@@ -31,19 +28,16 @@ public class GridConfig : ScriptableObject
                 }
             }
         }
-
         return positions;
     }
 
     public void OnValidate()
     {
-        // 1. Ensure minimum size is 1x1
         gridWidth = Mathf.Max(1, gridWidth);
         gridHeight = Mathf.Max(1, gridHeight);
 
         int requiredSize = gridWidth * gridHeight;
 
-        // 2. Handle null or incorrect size
         if (spawnPattern == null)
         {
             spawnPattern = new bool[requiredSize];

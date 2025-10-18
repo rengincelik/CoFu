@@ -34,3 +34,4 @@ public class EconomyService : Singleton<EconomyService>
         OnEssenceChanged?.Invoke(WhiteEssence);
     }
 }
+
