@@ -23,21 +23,15 @@ public class ValueDisplay : MonoBehaviour
 
     private void UpdateDisplay()
     {
-        int value = displayType switch
-        {
-            DisplayType.Score => GameStateService.Instance.GetScore(),
-            DisplayType.Coins => GameStateService.Instance.GetCoins(),
-            DisplayType.Jokers => GameStateService.Instance.GetJokersRemaining(),
-            _ => 0
-        };
+        // int value = displayType switch
+        // {
+        //     DisplayType.Score => GameStateService.Instance.GetScore(),
+        //     DisplayType.Coins => GameStateService.Instance.GetCoins(),
+        //     DisplayType.Jokers => GameStateService.Instance.GetJokersRemaining(),
+        //     _ => 0
+        // };
         
-        text.text = value.ToString();
+        // text.text = value.ToString();
     }
 }
 
-public enum DisplayType
-{
-    Score,
-    Coins,
-    Jokers
-}

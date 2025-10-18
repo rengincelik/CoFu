@@ -6,10 +6,11 @@ public class GameButton : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] private Button button;
-    
+
     [Header("Command")]
     [SerializeField] private CommandEventSO commandEvent;
-    [SerializeField] private CommandType commandType;
+
+    [SerializeField] private GameState gameState;
 
     private void Start()
     {
@@ -27,27 +28,8 @@ public class GameButton : MonoBehaviour
 
     private ICommand CreateCommand()
     {
-        return commandType switch
-        {
-            CommandType.Pause => new PauseCommand(),
-            CommandType.Resume => new ResumeCommand(),
-            CommandType.Play => new PlayCommand(),
-            CommandType.Restart => new RestartCommand(),
-            // Daha fazla ekle...
-            _ => null
-        };
+        return CommandFactory.CreateGameStateCommand(gameState);
     }
 }
 
-// Enum - Inspector'da seç
-public enum CommandType
-{
-    Pause,
-    Resume,
-    Play,
-    Restart,
-    NextLevel,
-    UseJoker,
-    WatchAd
-}
 
