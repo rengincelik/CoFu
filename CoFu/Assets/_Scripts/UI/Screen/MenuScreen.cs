@@ -1,7 +1,7 @@
 using GameUI;
 using UnityEngine;
 
-public class MenuScreen : UIScreen
+public class MenuScreen : ScreenView
 {
     //play buttonu var
     // live kısmı var . burda zaman ve amount olacak

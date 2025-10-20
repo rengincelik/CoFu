@@ -73,7 +73,6 @@
     <Compile Include="Assets\_InGame\Logic\ColorFusionTable.cs" />
     <Compile Include="Assets\_InGame\Services\AnimationService.cs" />
     <Compile Include="Assets\_InGame\Config\GridConfig.cs" />
-    <Compile Include="Assets\_Scripts\UI\Popup\AddLivePopup.cs" />
     <Compile Include="Assets\_Joker\Joker_logic\CollectWhiteJoker.cs" />
     <Compile Include="Assets\_Scripts\UI\Screen\LoadingScreen.cs" />
     <Compile Include="Assets\_Core\Singleton.cs" />
@@ -82,19 +81,26 @@
     <Compile Include="Assets\_Scripts\UI\Popup\FailPopup.cs" />
     <Compile Include="Assets\_Scripts\UI\Popup\SettingsPopup.cs" />
     <Compile Include="Assets\v_EditorAssets\TutorialInfo\Scripts\Readme.cs" />
+    <Compile Include="Assets\_Scripts\UI\_GameUI\ScreenItem.cs" />
     <Compile Include="Assets\_Scripts\UI\Screen\GamePlayScreen.cs" />
     <Compile Include="Assets\_Scripts\UI\Screen\MenuScreen.cs" />
     <Compile Include="Assets\_Joker\Joker_logic\AddTileJoker.cs" />
     <Compile Include="Assets\_Core\Extensions.cs" />
     <Compile Include="Assets\_InGame\Logic\ColorUnit.cs" />
+    <Compile Include="Assets\_InGame\Services\GameStateService.cs" />
+    <Compile Include="Assets\_Scripts\_Command\CommandGenerator.cs" />
     <Compile Include="Assets\_InGame\Services\LiveService.cs" />
     <Compile Include="Assets\_InGame\Services\EconomyService.cs" />
     <Compile Include="Assets\_Scripts\UI\_GameUI\UIManager.cs" />
+    <Compile Include="Assets\_Scripts\UI\_GameUI\Popup.cs" />
     <Compile Include="Assets\_Scripts\_Command\Commands.cs" />
     <Compile Include="Assets\_Joker\JokerHandler.cs" />
     <Compile Include="Assets\_Scripts\UI\Popup\LoadingPopup.cs" />
     <Compile Include="Assets\_Scripts\_Command\CommandExecuter.cs" />
+    <Compile Include="Assets\_Scripts\UI\_GameUI\ScreenTransitionManager.cs" />
     <Compile Include="Assets\_InGame\Logic\ColorCombinations.cs" />
+    <Compile Include="Assets\_Scripts\UI\_GameUI\PopupItem.cs" />
+    <Compile Include="Assets\_Scripts\UI\_GameUI\Screen.cs" />
     <Compile Include="Assets\_Scripts\UI\_GameUI\UIScreen.cs" />
   </ItemGroup>
   <ItemGroup>

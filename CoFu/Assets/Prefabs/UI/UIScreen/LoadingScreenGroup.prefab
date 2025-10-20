@@ -345,6 +345,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6847472081513562611}
+  - component: {fileID: 5408481725543624903}
   m_Layer: 0
   m_Name: LoadingScreenGroup
   m_TagString: Untagged
@@ -370,6 +371,24 @@ Transform:
   - {fileID: 3990518749611867036}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5408481725543624903
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5852002522786410488}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 984618e02213ddb4cab0f80b4fd3dabe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 2
+  popups: []
+  screenItems:
+  - {fileID: 6669610968798356847}
+  - {fileID: 2677226784338348824}
+  - {fileID: 5977257734190664262}
 --- !u!1 &6291956897764695222
 GameObject:
   m_ObjectHideFlags: 0
@@ -383,6 +402,7 @@ GameObject:
   - component: {fileID: 6730140548055662506}
   - component: {fileID: 896558541438046352}
   - component: {fileID: 3013396853526308039}
+  - component: {fileID: 6669610968798356847}
   m_Layer: 5
   m_Name: Loading_canvas
   m_TagString: Untagged
@@ -485,6 +505,18 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
+--- !u!114 &6669610968798356847
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6291956897764695222}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e39cbe726bce2b04cbf2d7a485c08056, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6981370913765034148
 GameObject:
   m_ObjectHideFlags: 0
@@ -990,6 +1022,7 @@ GameObject:
   - component: {fileID: 1427516578743463293}
   - component: {fileID: 1665647679557218163}
   - component: {fileID: 4260417032891948900}
+  - component: {fileID: 5977257734190664262}
   m_Layer: 5
   m_Name: Canvas_COFUText
   m_TagString: Untagged
@@ -1092,6 +1125,18 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
+--- !u!114 &5977257734190664262
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8919912741786652293}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e39cbe726bce2b04cbf2d7a485c08056, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8928255114260150720
 GameObject:
   m_ObjectHideFlags: 0
@@ -1105,6 +1150,7 @@ GameObject:
   - component: {fileID: 9043289297759764750}
   - component: {fileID: 1515128832417589066}
   - component: {fileID: 4175538277687231409}
+  - component: {fileID: 2677226784338348824}
   m_Layer: 5
   m_Name: Canvas_loadingSlider
   m_TagString: Untagged
@@ -1207,3 +1253,15 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
+--- !u!114 &2677226784338348824
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8928255114260150720}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e39cbe726bce2b04cbf2d7a485c08056, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

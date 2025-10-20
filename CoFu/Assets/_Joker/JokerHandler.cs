@@ -2,6 +2,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+public enum JokerType {AddTile,Cleaner,Collecter,Shuffle}
 public struct Cost
 {
     //tip için birşey gelecek
@@ -23,7 +24,8 @@ public class JokerHandler : MonoBehaviour
 {
     public IJoker joker;
     public JokerConfig jokerConfig;
-    public Image iconImage;
+    public Image activeIconImage;
+    public Image deactiveIconImage;
     public Button ad_Button;
     public Button use_Button;
     public TextMeshProUGUI costText;
@@ -36,18 +38,22 @@ public class JokerHandler : MonoBehaviour
 
         if (canAfford)
         {
-            use_Button.gameObject.SetActive(true);
-            ad_Button.gameObject.SetActive(false);
+            ActivateTheJoker(true);
             costText.text = jokerConfig.cost.Amount.ToString();
         }
         else
         {
-            use_Button.gameObject.SetActive(false);
-            ad_Button.gameObject.SetActive(true);
+            ActivateTheJoker(false);
             costText.text = jokerConfig.cost.Amount.ToString();
         }
     }
-
+    void ActivateTheJoker(bool On)
+    {
+        use_Button.gameObject.SetActive(On);
+        ad_Button.gameObject.SetActive(!On);
+        activeIconImage.gameObject.SetActive(On);
+        deactiveIconImage.gameObject.SetActive(!On);
+    }
 
     // --- CONTEXT MENU TEST METOTLARI (Debug için) ---
 

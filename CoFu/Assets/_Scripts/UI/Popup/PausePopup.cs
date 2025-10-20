@@ -1,7 +1,7 @@
 // PausePopup.cs
 using GameUI;
 
-public class PausePopup : UIPopup
+public class PausePopup : Popup
 {
     
 }

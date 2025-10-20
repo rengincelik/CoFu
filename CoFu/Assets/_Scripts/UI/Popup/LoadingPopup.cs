@@ -1,7 +1,7 @@
 
 using GameUI;
 
-public class LoadingPopup: UIPopup
+public class LoadingPopup: Popup
 {
     
 }

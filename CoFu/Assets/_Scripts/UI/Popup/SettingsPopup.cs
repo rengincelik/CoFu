@@ -3,7 +3,7 @@ using GameUI;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SettingsPopup : UIPopup
+public class SettingsPopup : Popup
 {
     [SerializeField] private Toggle soundToggle;
     [SerializeField] private Toggle musicToggle;

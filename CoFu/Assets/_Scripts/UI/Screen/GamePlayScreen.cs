@@ -1,7 +1,7 @@
 using GameUI;
 using UnityEngine;
 
-public class GamePlayScreen : UIScreen
+public class GamePlayScreen : ScreenView
 {
     //arkaplan var
     //yunkısmı var

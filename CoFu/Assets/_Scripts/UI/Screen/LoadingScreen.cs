@@ -1,7 +1,7 @@
 using GameUI;
 using UnityEngine;
 
-public class LoadingScreen : UIScreen
+public class LoadingScreen : ScreenView
 {
     //loading slider 
     // cofu text var

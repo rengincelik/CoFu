@@ -3,7 +3,7 @@ using GameUI;
 using TMPro;
 using UnityEngine;
 
-public class FailPopup : UIPopup
+public class FailPopup : Popup
 {
     [SerializeField] private TextMeshProUGUI failText;
     [SerializeField] private GameObject addTimeButton;

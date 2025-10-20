@@ -67,33 +67,33 @@ namespace GameUI
             canvasGroup.DOKill();
             rectTransform.DOKill();
 
-            switch (animationType)
-            {
-                case AnimationType.Fade:
-                    canvasGroup.alpha = 0f;
-                    canvasGroup.DOFade(1f, animationDuration).SetEase(easeType).SetUpdate(true);
-                    break;
+            // switch (animationType)
+            // {
+            //     case AnimationType.Fade:
+            //         canvasGroup.alpha = 0f;
+            //         canvasGroup.DOFade(1f, animationDuration).SetEase(easeType).SetUpdate(true);
+            //         break;
 
-                case AnimationType.Scale:
-                    canvasGroup.alpha = 1f;
-                    rectTransform.localScale = Vector3.zero;
-                    rectTransform.DOScale(1f, animationDuration).SetEase(easeType).SetUpdate(true);
-                    break;
+            //     case AnimationType.Scale:
+            //         canvasGroup.alpha = 1f;
+            //         rectTransform.localScale = Vector3.zero;
+            //         rectTransform.DOScale(1f, animationDuration).SetEase(easeType).SetUpdate(true);
+            //         break;
 
-                case AnimationType.SlideFromBottom:
-                    canvasGroup.alpha = 1f;
-                    Vector2 originalPos = rectTransform.anchoredPosition;
-                    rectTransform.anchoredPosition = new Vector2(originalPos.x, -Screen.height);
-                    rectTransform.DOAnchorPos(originalPos, animationDuration).SetEase(easeType).SetUpdate(true);
-                    break;
+            //     case AnimationType.SlideFromBottom:
+            //         canvasGroup.alpha = 1f;
+            //         Vector2 originalPos = rectTransform.anchoredPosition;
+            //         rectTransform.anchoredPosition = new Vector2(originalPos.x, -Screen.height);
+            //         rectTransform.DOAnchorPos(originalPos, animationDuration).SetEase(easeType).SetUpdate(true);
+            //         break;
 
-                case AnimationType.SlideFromTop:
-                    canvasGroup.alpha = 1f;
-                    originalPos = rectTransform.anchoredPosition;
-                    rectTransform.anchoredPosition = new Vector2(originalPos.x, Screen.height);
-                    rectTransform.DOAnchorPos(originalPos, animationDuration).SetEase(easeType).SetUpdate(true);
-                    break;
-            }
+            //     case AnimationType.SlideFromTop:
+            //         canvasGroup.alpha = 1f;
+            //         originalPos = rectTransform.anchoredPosition;
+            //         rectTransform.anchoredPosition = new Vector2(originalPos.x, Screen.height);
+            //         rectTransform.DOAnchorPos(originalPos, animationDuration).SetEase(easeType).SetUpdate(true);
+            //         break;
+            // }
 
             canvasGroup.interactable = true;
             canvasGroup.blocksRaycasts = true;
@@ -106,26 +106,26 @@ namespace GameUI
 
             Sequence sequence = DOTween.Sequence();
 
-            switch (animationType)
-            {
-                case AnimationType.Fade:
-                    sequence.Append(canvasGroup.DOFade(0f, animationDuration).SetEase(easeType));
-                    break;
+            // switch (animationType)
+            // {
+            //     case AnimationType.Fade:
+            //         sequence.Append(canvasGroup.DOFade(0f, animationDuration).SetEase(easeType));
+            //         break;
 
-                case AnimationType.Scale:
-                    sequence.Append(rectTransform.DOScale(0f, animationDuration).SetEase(easeType));
-                    break;
+            //     case AnimationType.Scale:
+            //         sequence.Append(rectTransform.DOScale(0f, animationDuration).SetEase(easeType));
+            //         break;
 
-                case AnimationType.SlideFromBottom:
-                    Vector2 targetPos = new Vector2(rectTransform.anchoredPosition.x, -Screen.height);
-                    sequence.Append(rectTransform.DOAnchorPos(targetPos, animationDuration).SetEase(easeType));
-                    break;
+            //     case AnimationType.SlideFromBottom:
+            //         Vector2 targetPos = new Vector2(rectTransform.anchoredPosition.x, -Screen.height);
+            //         sequence.Append(rectTransform.DOAnchorPos(targetPos, animationDuration).SetEase(easeType));
+            //         break;
 
-                case AnimationType.SlideFromTop:
-                    targetPos = new Vector2(rectTransform.anchoredPosition.x, Screen.height);
-                    sequence.Append(rectTransform.DOAnchorPos(targetPos, animationDuration).SetEase(easeType));
-                    break;
-            }
+            //     case AnimationType.SlideFromTop:
+            //         targetPos = new Vector2(rectTransform.anchoredPosition.x, Screen.height);
+            //         sequence.Append(rectTransform.DOAnchorPos(targetPos, animationDuration).SetEase(easeType));
+            //         break;
+            // }
 
             sequence.SetUpdate(true);
             sequence.OnComplete(() =>

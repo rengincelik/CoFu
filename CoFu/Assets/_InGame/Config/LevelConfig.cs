@@ -1,15 +1,22 @@
 using System;
 using System.Collections.Generic;
+using JetBrains.Annotations;
 using UnityEngine;
 
+[System.Serializable]
+public struct Level
+{
+    //bunlar 0 ise bence limit yok gibi çalışsın sistem
+    public int timeLimit;
+    public int targetWhite;
+}
 [CreateAssetMenu(fileName = "Level", menuName = "ColorCombiner/LevelConfig")]
 public class LevelConfig : ScriptableObject
 {
     //bu kısım level başlarken kullanılacak
     [SerializeField] GridConfig gridConfig;
-    [SerializeField] JokerConfig[] jokerConfigs;
-    // [SerializeField] LevelType levelType;
     [SerializeField] int levelNumber;
+    [SerializeField] Level level;
 
 
 }
@@ -20,7 +27,7 @@ public class LevelStateData
     public int score;
     public int coins;
     public float timeLeft;
-    public int moveLeft;
+    public int targetRemaining;
     public int currentLevel;
     public bool isPaused;
 
