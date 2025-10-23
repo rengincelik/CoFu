@@ -10,11 +10,31 @@ public class ScreenManager : Singleton<ScreenManager>
 
     public void GoToLayer(ScreenViewType type)
     {
-        foreach(var s in screenViews)
+        if (screenViews == null || screenViews.Count == 0)
         {
-            s.gameObject.SetActive(s.type == type);
+            Debug.LogWarning("[ScreenManager] screenViews list is null or empty.");
+            return;
+        }
+
+        foreach (var s in screenViews)
+        {
+            if (s == null)
+                continue;
+
+            bool active = s.type == type;
+            s.gameObject.SetActive(active);
+
+            if (active && s.openingSequences != null && s.openingSequences.Length > 0)
+            {
+                if (SequenceService.Instance != null)
+                    SequenceService.Instance.PlaySequence(s.openingSequences);
+                else
+                    Debug.LogWarning("[ScreenManager] SequenceService instance is null.");
+            }
         }
     }
+
+
 
 
     [ContextMenu("Go To Layer Play")]

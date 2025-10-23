@@ -66,7 +66,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\_InGame\Config\LevelConfig.cs" />
-    <Compile Include="Assets\_Scripts\UI\_GameUI\UIPopup.cs" />
+    <Compile Include="Assets\_InGame\Services\SequenceService.cs" />
     <Compile Include="Assets\_Joker\Joker_logic\ShuffleJoker.cs" />
     <Compile Include="Assets\_Joker\Joker_logic\CleanerJoker.cs" />
     <Compile Include="Assets\_Scripts\UI\Popup\Winpopup.cs" />
@@ -91,7 +91,6 @@
     <Compile Include="Assets\_Scripts\_Command\CommandGenerator.cs" />
     <Compile Include="Assets\_InGame\Services\LiveService.cs" />
     <Compile Include="Assets\_InGame\Services\EconomyService.cs" />
-    <Compile Include="Assets\_Scripts\UI\_GameUI\UIManager.cs" />
     <Compile Include="Assets\_Scripts\UI\_GameUI\Popup.cs" />
     <Compile Include="Assets\_Scripts\_Command\Commands.cs" />
     <Compile Include="Assets\_Joker\JokerHandler.cs" />
@@ -100,8 +99,8 @@
     <Compile Include="Assets\_Scripts\UI\_GameUI\ScreenTransitionManager.cs" />
     <Compile Include="Assets\_InGame\Logic\ColorCombinations.cs" />
     <Compile Include="Assets\_Scripts\UI\_GameUI\PopupItem.cs" />
+    <Compile Include="Assets\_Scripts\UI\ItemANim\ItemAnimation.cs" />
     <Compile Include="Assets\_Scripts\UI\_GameUI\Screen.cs" />
-    <Compile Include="Assets\_Scripts\UI\_GameUI\UIScreen.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

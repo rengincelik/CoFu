@@ -1,6 +1,7 @@
 using UnityEngine;
 
-public class ScreenItem: MonoBehaviour
+public class ScreenItem : MonoBehaviour
 {
-    
+
+
 }

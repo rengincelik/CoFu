@@ -2,12 +2,10 @@ using System;
 using NUnit.Framework;
 using UnityEngine;
 
-// ========== ENUMS ==========
 
 public enum MusicType { GamePlay, NonGamePlay }
 public enum SFXType {ButtonClick, Victory, Fail, CoinCollect}
 
-public enum AnimationType { Scale, Fade, Slide }
 
 
 
@@ -173,145 +171,36 @@ public class ScreenEventSO : BaseEventSO<ScreenViewType> { }
 public class PopupEventSO : BaseEventSO<PopupType> { }
 
 
-// // ========== ENUMS ==========
-// public enum AudioType { GamePlay, NonGamePlay }
-// public enum SFXType {ButtonClick, Victory, Fail, CoinCollect}
-// public enum AnimationType { Scale, Fade, Slide }
+public enum AdType { Rewarded, Interstitial, Banner }
 
+public class ShowAdCommand : IAdCommand
+{
+    AdType _adType;
+    AdEventSO _adEvent;
 
-// // ========== INTERFACE ==========
-// public interface ICommand { void Execute(); }
-// public interface IUICommand : ICommand { }
-// public interface IGamePlayCommand : ICommand { }
-// public interface IJokerCommand : ICommand { }
-// public interface IAdCommand:ICommand{}
+    public ShowAdCommand(AdType adType, AdEventSO adEvent)
+    {
+        _adType = adType;
+        _adEvent = adEvent;
+    }
 
-// // ========== COMMANDS ==========
-// public class LevelStartCommand : IGamePlayCommand
-// {
-//     public void Execute()
-//     {
+    public void Execute()
+    {
+        _adEvent.Raise(_adType);
+    }
+}
 
-//     }
-// }
-// public class LevelCompletedCommand : IGamePlayCommand
-// {
-//     public void Execute()
-//     {
+[CreateAssetMenu(menuName = "Events/Ad Event")]
+public class AdEventSO : BaseEventSO<AdType> { }
+public class SettingsService
+{
+    public void SetMusicVolume(float volume) { /* ... */ }
+    public void SetSFXVolume(float volume) { /* ... */ }
+    public void SetLanguage(string languageCode) { /* ... */ }
+}
 
-//     }
-// }
-// public class LevelFailedCommand : IGamePlayCommand
-// {
-//     public void Execute()
-//     {
+[CreateAssetMenu(menuName = "Events/Settings Changed")]
+public class SettingsChangedEventSO : BaseEventSO { }
 
-//     }
-// }
-// public class LevelRestartCommand : IGamePlayCommand
-// {
-//     public void Execute()
-//     {
-
-//     }
-// }
-// public class LevelContinueWithAdCommand : IGamePlayCommand
-// {
-//     public void Execute()
-//     {
-
-//     }
-// }
-
-// public class GoToScreenCommand : IUICommand
-// {
-//     public ScreenViewType Type;
-//     public GoToScreenCommand(ScreenViewType type) { Type = type; }
-//     public void Execute()
-//     {
-//         ScreenManager.Instance.GoToLayer(Type);
-//     }
-// }
-
-// public class UseJokerCommand : IJokerCommand
-// {
-//     JokerType _jokerType;
-//     public UseJokerCommand(JokerType jokerType){ _jokerType = jokerType; }
-//     public void Execute()
-//     {
-        
-//     }
-// }
-
-// public class BuyJokerCommand : IJokerCommand
-// {
-//     JokerType _jokerType;
-//     public BuyJokerCommand(JokerType jokerType){ _jokerType = jokerType; }
-//     public void Execute()
-//     {
-        
-//     }
-// }
-
-// public class WatchAdCommand : IAdCommand
-// {
-//     public void Execute() { }
-// }
-
-// public class ToggleSettingsCommand : ICommand
-// {
-//     public void Execute(){}
-// }
-
-// // ========== EVENTS (Base) ==========
-
-// public class BaseEventSO : ScriptableObject
-// {
-//     private event Action _onRaised;
-//     public void AddListener(Action listener) => _onRaised += listener;
-//     public void RemoveListener(Action listener) => _onRaised -= listener;
-//     public void Raise() => _onRaised?.Invoke();
-// }
-
-// public abstract class BaseEventSO<T> : ScriptableObject
-// {
-//     private event Action<T> _onRaised;
-//     public void AddListener(Action<T> listener) => _onRaised += listener;
-//     public void RemoveListener(Action<T> listener) => _onRaised -= listener;
-//     public void Raise(T value) => _onRaised?.Invoke(value);
-// }
-
-// public abstract class BaseEventSO<T1, T2> : ScriptableObject
-// {
-//     private event Action<T1, T2> _onRaised;
-//     public void AddListener(Action<T1, T2> listener) => _onRaised += listener;
-//     public void RemoveListener(Action<T1, T2> listener) => _onRaised -= listener;
-//     public void Raise(T1 value1, T2 value2) => _onRaised?.Invoke(value1, value2);
-// }
-
-// // ========== EVENTS (Concrete) ==========
-// [CreateAssetMenu(menuName = "Events/Command Event")]
-// public class CommandEventSO : BaseEventSO<ICommand> { }
-
-// [CreateAssetMenu(menuName = "Events/Audio Event")]
-// public class AudioEventSO : BaseEventSO<AudioType> { }
-// [CreateAssetMenu(menuName = "Events/SFX Event")]
-// public class SFXEventSO : BaseEventSO<SFXType, float> { }
-// [CreateAssetMenu(menuName = "Events/Animation Event")]
-// public class AnimationEventSO : BaseEventSO { }//parametre eklenecek
-
-// [CreateAssetMenu(menuName = "Events/Game State Changed")]
-// public class GameStateChangedEventSO : BaseEventSO { } 
-
-// [CreateAssetMenu(menuName = "Events/Resource Changed")]
-// public class ResourceChangedEventSO : BaseEventSO { }
-
-// // Şunlar da lazım:
-// [CreateAssetMenu(menuName = "Events/Joker Event")]
-// public class JokerEventSO : BaseEventSO<JokerType> { }
-
-// [CreateAssetMenu(menuName = "Events/Screen Event")]
-// public class ScreenEventSO : BaseEventSO<ScreenViewType> { }
-
-// [CreateAssetMenu(menuName = "Events/Popup Event")]
-// public class PopupEventSO : BaseEventSO<PopupType> { }
+[CreateAssetMenu(menuName = "Events/Error Event")]
+public class ErrorEventSO : BaseEventSO<string> { }
