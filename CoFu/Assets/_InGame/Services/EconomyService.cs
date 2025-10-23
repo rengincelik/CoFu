@@ -25,7 +25,7 @@ public class Currency
 }
 
 
-public class EconomyService : Singleton<EconomyService>
+public class EconomyService : ServiceBase
 {
     public Currency[] currencies;
     protected void Awake()
@@ -110,6 +110,11 @@ public class EconomyService : Singleton<EconomyService>
             Debug.Log($"TEST: 5 Gems eklendi. Yeni Miktar: {gems.Amount}");
             gems.SaveAmount();
         }
+    }
+
+    protected override void OnEventRaised()
+    {
+        Debug.Log("economy event dinlendi");
     }
 }
 

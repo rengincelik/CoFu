@@ -67,14 +67,17 @@
   <ItemGroup>
     <Compile Include="Assets\_InGame\Config\LevelConfig.cs" />
     <Compile Include="Assets\_InGame\Services\SequenceService.cs" />
+    <Compile Include="Assets\_InGame\Services\SettingsService.cs" />
     <Compile Include="Assets\_Joker\Joker_logic\ShuffleJoker.cs" />
     <Compile Include="Assets\_Joker\Joker_logic\CleanerJoker.cs" />
     <Compile Include="Assets\_Scripts\UI\Popup\Winpopup.cs" />
     <Compile Include="Assets\_InGame\Logic\ColorFusionTable.cs" />
     <Compile Include="Assets\_InGame\Services\AnimationService.cs" />
     <Compile Include="Assets\_InGame\Config\GridConfig.cs" />
+    <Compile Include="Assets\_InGame\Services\ServiceBase.cs" />
     <Compile Include="Assets\_Joker\Joker_logic\CollectWhiteJoker.cs" />
     <Compile Include="Assets\_Scripts\UI\Screen\LoadingScreen.cs" />
+    <Compile Include="Assets\_InGame\Services\JokerService.cs" />
     <Compile Include="Assets\_Core\Singleton.cs" />
     <Compile Include="Assets\_InGame\Services\AudioService.cs" />
     <Compile Include="Assets\_Scripts\UI\Popup\PausePopup.cs" />
@@ -83,6 +86,7 @@
     <Compile Include="Assets\v_EditorAssets\TutorialInfo\Scripts\Readme.cs" />
     <Compile Include="Assets\_Scripts\UI\_GameUI\ScreenItem.cs" />
     <Compile Include="Assets\_Scripts\UI\Screen\GamePlayScreen.cs" />
+    <Compile Include="Assets\_InGame\Services\AdService.cs" />
     <Compile Include="Assets\_Scripts\UI\Screen\MenuScreen.cs" />
     <Compile Include="Assets\_Joker\Joker_logic\AddTileJoker.cs" />
     <Compile Include="Assets\_Core\Extensions.cs" />

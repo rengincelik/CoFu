@@ -102,25 +102,25 @@ public class JokerHandler : MonoBehaviour
 
         // EconomyService'e doğrudan (Singleton ile) ulaşıyoruz.
         // Bu, ideal mimaride istenmez ama debug testi için tam istediğiniz şeydir.
-        EconomyService economy = EconomyService.Instance;
-        if (economy == null)
-        {
-            Debug.LogError("EconomyService sahnede bulunamadı!");
-            return;
-        }
+        // EconomyService economy = EconomyService.Instance;
+        // if (economy == null)
+        // {
+        //     Debug.LogError("EconomyService sahnede bulunamadı!");
+        //     return;
+        // }
 
         // Config'deki CurrencyType'ı string'e çevirip servisten istiyoruz
-        string currencyID = jokerConfig.ToString(); // Örn: "Gold"
-        Currency currency = economy.GetCurrency(currencyID);
+        // string currencyID = jokerConfig.ToString(); // Örn: "Gold"
+        // Currency currency = economy.GetCurrency(currencyID);
 
-        if (currency != null)
-        {
-            Debug.Log($"TEST: Gerçek data ile güncelleniyor. Mevcut {currencyID}: {currency.Amount}");
-            UpdateUI(currency.Amount);
-        }
-        else
-        {
-            Debug.LogError($"EconomyService'te '{currencyID}' adında bir para birimi bulunamadı!");
-        }
+        // if (currency != null)
+        // {
+        //     Debug.Log($"TEST: Gerçek data ile güncelleniyor. Mevcut {currencyID}: {currency.Amount}");
+        //     UpdateUI(currency.Amount);
+        // }
+        // else
+        // {
+        //     Debug.LogError($"EconomyService'te '{currencyID}' adında bir para birimi bulunamadı!");
+        // }
     }
 }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
 
-public class SequenceService : Singleton<SequenceService>
+public class SequenceService : ServiceBase
 {
     private readonly Dictionary<int, Sequence> activeSequences = new();
 
@@ -20,10 +20,11 @@ public class SequenceService : Singleton<SequenceService>
 
         foreach (var item in items)
         {
-            if (item == null )
+            if (item == null)
                 continue;
 
-            Tween tween = AnimationService.Instance.CreateTween(item.gameObject, item.animation);
+            Tween tween = TweenFactory.CreateTween(item.gameObject, item.animation);
+            
             if (tween == null)
                 continue;
 
@@ -70,6 +71,11 @@ public class SequenceService : Singleton<SequenceService>
         }
 
         activeSequences.Clear();
+    }
+
+    protected override void OnEventRaised()
+    {
+        Debug.Log("seq event dinlendi");
     }
 }
 

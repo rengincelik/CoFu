@@ -163,8 +163,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15c9a78827f263846b87235e263b51c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioEvent: {fileID: 11400000, guid: b5ec99b3f693bce42b9dd1945118338f, type: 2}
-  sfxEvent: {fileID: 0}
+  baseEventSO: {fileID: 0}
   musicSource: {fileID: 0}
   sfxSource: {fileID: 0}
 --- !u!1 &90639408
@@ -1204,50 +1203,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 7002542984946716091, guid: bbe70d13cecaab149a1d609ce342b0d8, type: 3}
   m_PrefabInstance: {fileID: 767594555}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &978823567
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 978823568}
-  - component: {fileID: 978823569}
-  m_Layer: 0
-  m_Name: anim_M
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &978823568
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 978823567}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 2017435134}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &978823569
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 978823567}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0016ec479f3a89042924bda06896a381, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &985433474
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1461,6 +1416,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd3e38881cd7a774893ba9b0b6b0d8a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  baseEventSO: {fileID: 0}
   currencies:
   - currencyID: Gold
     Amount: 100
@@ -1699,6 +1655,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18676154940260b4c84e904a6c0289dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  baseEventSO: {fileID: 0}
 --- !u!4 &1747576919
 Transform:
   m_ObjectHideFlags: 0
@@ -1782,7 +1739,6 @@ Transform:
   - {fileID: 1341522710}
   - {fileID: 1588478440}
   - {fileID: 20162837}
-  - {fileID: 978823568}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2044047140 stripped

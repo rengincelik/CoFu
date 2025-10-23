@@ -2,18 +2,16 @@
 using DG.Tweening;
 using UnityEngine;
 
-public class AudioService : Singleton<AudioService>
+public class AudioService : ServiceBase<MusicType,bool>
 {
-    [SerializeField] AudioEventSO audioEvent;
-    [SerializeField] SFXEventSO sfxEvent;
-
     [SerializeField] AudioSource musicSource; // Loop için
     [SerializeField] AudioSource sfxSource; // OneShot için
 
-    void OnEnable()
+    
+
+    protected override void OnEventRaised(MusicType value1, bool value2)
     {
-        // audioEvent.AddListener(PlayMusic);
-        // sfxEvent.AddListener(PlaySFX);
+        Debug.Log("audio event Dinlendi");
     }
 
     void PlayMusic(MusicType type)
@@ -34,5 +32,6 @@ public class AudioService : Singleton<AudioService>
         // AudioClip clip = GetSFXClip(type);
         // sfxSource.PlayOneShot(clip);
     }
+
 }
 

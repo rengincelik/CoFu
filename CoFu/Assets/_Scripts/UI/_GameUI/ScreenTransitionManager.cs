@@ -26,10 +26,10 @@ public class ScreenManager : Singleton<ScreenManager>
 
             if (active && s.openingSequences != null && s.openingSequences.Length > 0)
             {
-                if (SequenceService.Instance != null)
-                    SequenceService.Instance.PlaySequence(s.openingSequences);
-                else
-                    Debug.LogWarning("[ScreenManager] SequenceService instance is null.");
+                // if (SequenceService.Instance != null)
+                //     SequenceService.Instance.PlaySequence(s.openingSequences);
+                // else
+                //     Debug.LogWarning("[ScreenManager] SequenceService instance is null.");
             }
         }
     }

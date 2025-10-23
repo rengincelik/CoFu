@@ -1,4 +1,5 @@
 using System;
+using DG.Tweening;
 using NUnit.Framework;
 using UnityEngine;
 
@@ -12,13 +13,13 @@ public enum SFXType {ButtonClick, Victory, Fail, CoinCollect}
 
 // ========== INTERFACE ==========
 public interface ICommand { void Execute(); }
-public interface IUICommand : ICommand { }
-public interface IGamePlayCommand : ICommand { }
-public interface IJokerCommand : ICommand { }
-public interface IAdCommand : ICommand { }
+// public interface IUICommand : ICommand { }
+// public interface IGamePlayCommand : ICommand { }
+// public interface IJokerCommand : ICommand { }
+// public interface IAdCommand : ICommand { }
 
 // ========== COMMANDS ==========
-public class LevelStartCommand : IGamePlayCommand
+public class LevelStartCommand : ICommand
 {
     GameStateService _gameState;
     GameStateChangedEventSO _stateEvent;
@@ -51,17 +52,17 @@ public class LevelStartCommand : IGamePlayCommand
         // _stateEvent.Raise(); // Timer başlar, display güncellenir
         
         // 4. Müzik başlat
-        _audioEvent.Raise(MusicType.GamePlay);
+        // _audioEvent.Raise(MusicType.GamePlay);
     }
 }
 
-public class LevelCompletedCommand : IGamePlayCommand
+public class LevelCompletedCommand : ICommand
 {
     GameStateService _gameState;
     GameStateChangedEventSO _stateEvent;
-    ResourceChangedEventSO _resourceEvent;
+    // ResourceChangedEventSO _resourceEvent;
     AudioEventSO _audioEvent;
-    PopupEventSO _popupEvent;
+    // PopupEventSO _popupEvent;
     
     public void Execute()
     {
@@ -83,24 +84,29 @@ public class LevelCompletedCommand : IGamePlayCommand
     }
 }
 
-public class GoToScreenCommand : IUICommand
+public class GoToScreenCommand : ICommand
 {
     ScreenViewType _type;
-    ScreenEventSO _screenEvent; // ✅ Event kullan
-    
-    public GoToScreenCommand(ScreenViewType type, ScreenEventSO screenEvent)
-    {
-        _type = type;
-        _screenEvent = screenEvent;
-    }
-    
+
     public void Execute()
     {
-        _screenEvent.Raise(_type); // ScreenManager dinler
+        throw new NotImplementedException();
     }
+    // ScreenEventSO _screenEvent; // ✅ Event kullan
+
+    // public GoToScreenCommand(ScreenViewType type, ScreenEventSO screenEvent)
+    // {
+    //     _type = type;
+    //     _screenEvent = screenEvent;
+    // }
+
+    // public void Execute()
+    // {
+    //     _screenEvent.Raise(_type); // ScreenManager dinler
+    // }
 }
 
-public class UseJokerCommand : IJokerCommand
+public class UseJokerCommand : ICommand
 {
     JokerType _jokerType;
     JokerEventSO _jokerEvent;
@@ -114,6 +120,22 @@ public class UseJokerCommand : IJokerCommand
     public void Execute()
     {
         _jokerEvent.Raise(_jokerType); // JokerManager dinler, coin kontrol + kullan
+    }
+}
+public class ShowAdCommand : ICommand
+{
+    AdType _adType;
+    AdEventSO _adEvent;
+
+    public ShowAdCommand(AdType adType, AdEventSO adEvent)
+    {
+        _adType = adType;
+        _adEvent = adEvent;
+    }
+
+    public void Execute()
+    {
+        _adEvent.Raise(_adType);
     }
 }
 
@@ -143,64 +165,48 @@ public abstract class BaseEventSO<T1, T2> : ScriptableObject
     public void Raise(T1 value1, T2 value2) => _onRaised?.Invoke(value1, value2);
 }
 
+
 // ========== EVENTS (Concrete) ==========
 [CreateAssetMenu(menuName = "Events/Command Event")]
 public class CommandEventSO : BaseEventSO<ICommand> { }
 
 [CreateAssetMenu(menuName = "Events/Audio Event")]
-public class AudioEventSO : BaseEventSO<MusicType> { }
-[CreateAssetMenu(menuName = "Events/SFX Event")]
-public class SFXEventSO : BaseEventSO<SFXType, float> { }
-
-[CreateAssetMenu(menuName = "Events/Animation Event")]
-public class AnimationEventSO : BaseEventSO<AnimationType, PopupType> { } // ✅ İki parametre
+public class AudioEventSO : BaseEventSO<MusicType, bool> { }
 
 [CreateAssetMenu(menuName = "Events/Game State Changed")]
 public class GameStateChangedEventSO : BaseEventSO { }
-
-[CreateAssetMenu(menuName = "Events/Resource Changed")]
-public class ResourceChangedEventSO : BaseEventSO { }
-
-[CreateAssetMenu(menuName = "Events/Joker Event")] // ✅ Yeni
+[CreateAssetMenu(menuName = "Events/Settings Changed")]
+public class SettingsChangedEventSO : BaseEventSO { }
+[CreateAssetMenu(menuName = "Events/Joker Event")] 
 public class JokerEventSO : BaseEventSO<JokerType> { }
 
-[CreateAssetMenu(menuName = "Events/Screen Event")] // ✅ Yeni
-public class ScreenEventSO : BaseEventSO<ScreenViewType> { }
+[CreateAssetMenu(menuName ="Events/Sequence event")]
+public class PlaySequenceEventSO : BaseEventSO<Sequence> { }
+[CreateAssetMenu(menuName = "Events/Ad Event")]
+public class AdEventSO : BaseEventSO<AdType> { }
 
-[CreateAssetMenu(menuName = "Events/Popup Event")] // ✅ Yeni
-public class PopupEventSO : BaseEventSO<PopupType> { }
+//resource yerine Live, coin changed ayrı yaz
+
+// [CreateAssetMenu(menuName = "Events/Resource Changed")]
+// public class ResourceChangedEventSO : BaseEventSO { }
+
+// [CreateAssetMenu(menuName = "Events/Animation Event")]
+// public class AnimationEventSO : BaseEventSO { } // ✅ İki parametre
+
+
+
+// [CreateAssetMenu(menuName = "Events/Screen Event")] // ✅ Yeni
+// public class ScreenEventSO : BaseEventSO<ScreenViewType> { }
+// [CreateAssetMenu(menuName = "Events/Popup Event")] // ✅ Yeni
+// public class PopupEventSO : BaseEventSO<PopupType> { }
+
+
+
+[CreateAssetMenu(menuName = "Events/Error Event")]
+public class ErrorEventSO : BaseEventSO<string> { }
 
 
 public enum AdType { Rewarded, Interstitial, Banner }
 
-public class ShowAdCommand : IAdCommand
-{
-    AdType _adType;
-    AdEventSO _adEvent;
 
-    public ShowAdCommand(AdType adType, AdEventSO adEvent)
-    {
-        _adType = adType;
-        _adEvent = adEvent;
-    }
 
-    public void Execute()
-    {
-        _adEvent.Raise(_adType);
-    }
-}
-
-[CreateAssetMenu(menuName = "Events/Ad Event")]
-public class AdEventSO : BaseEventSO<AdType> { }
-public class SettingsService
-{
-    public void SetMusicVolume(float volume) { /* ... */ }
-    public void SetSFXVolume(float volume) { /* ... */ }
-    public void SetLanguage(string languageCode) { /* ... */ }
-}
-
-[CreateAssetMenu(menuName = "Events/Settings Changed")]
-public class SettingsChangedEventSO : BaseEventSO { }
-
-[CreateAssetMenu(menuName = "Events/Error Event")]
-public class ErrorEventSO : BaseEventSO<string> { }
