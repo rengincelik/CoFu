@@ -4,107 +4,64 @@ using NUnit.Framework;
 using UnityEngine;
 
 
-public enum MusicType { GamePlay, NonGamePlay }
-public enum SFXType {ButtonClick, Victory, Fail, CoinCollect}
-
-
-
-
+public enum MusicType { GamePlay, NonGamePlay ,ButtonClick, Victory, Fail, CoinCollect}
+public enum AdType { Rewarded, Interstitial, Banner }
 
 // ========== INTERFACE ==========
 public interface ICommand { void Execute(); }
-// public interface IUICommand : ICommand { }
-// public interface IGamePlayCommand : ICommand { }
-// public interface IJokerCommand : ICommand { }
-// public interface IAdCommand : ICommand { }
 
 // ========== COMMANDS ==========
 public class LevelStartCommand : ICommand
 {
-    GameStateService _gameState;
     GameStateChangedEventSO _stateEvent;
     AudioEventSO _audioEvent;
     
     public LevelStartCommand(
-        GameStateService gameState,
         GameStateChangedEventSO stateEvent,
         AudioEventSO audioEvent)
     {
-        _gameState = gameState;
         _stateEvent = stateEvent;
         _audioEvent = audioEvent;
     }
     
     public void Execute()
     {
-        // // 1. Can kontrol
-        // if (_gameState.GetLives() <= 0)
-        // {
-        //     // PopupEvent.Raise(NoLive); // Popup aç
-        //     return;
-        // }
-        
-        // // 2. Can harca
-        // _gameState.ConsumeLive();
-        
-        // // 3. State değiştir
-        // _gameState.SetState(GameState.Playing);
-        // _stateEvent.Raise(); // Timer başlar, display güncellenir
-        
-        // 4. Müzik başlat
-        // _audioEvent.Raise(MusicType.GamePlay);
+
     }
 }
 
 public class LevelCompletedCommand : ICommand
 {
-    GameStateService _gameState;
     GameStateChangedEventSO _stateEvent;
-    // ResourceChangedEventSO _resourceEvent;
     AudioEventSO _audioEvent;
-    // PopupEventSO _popupEvent;
     
     public void Execute()
     {
-        // // 1. State değiştir
-        // _gameState.SetState(GameState.LevelComplete);
-        // _stateEvent.Raise();
         
-        // // 2. Can kazan
-        // _gameState.AddLive();
-        // _resourceEvent.Raise();
-        
-        // // 3. Level artır
-        // _gameState.IncrementLevel();
-        // _resourceEvent.Raise();
-        
-        // // 4. Ses + Popup
-        // _audioEvent.Raise(AudioType.VictoryMusic);
-        // _popupEvent.Raise(PopupType.Win);
     }
 }
 
-public class GoToScreenCommand : ICommand
-{
-    ScreenViewType _type;
+// public class GoToScreenCommand : ICommand
+// {
+//     ScreenViewType _type;
 
-    public void Execute()
-    {
-        throw new NotImplementedException();
-    }
-    // ScreenEventSO _screenEvent; // ✅ Event kullan
+//     public void Execute()
+//     {
+//         throw new NotImplementedException();
+//     }
+//     // ScreenEventSO _screenEvent; // ✅ Event kullan
 
-    // public GoToScreenCommand(ScreenViewType type, ScreenEventSO screenEvent)
-    // {
-    //     _type = type;
-    //     _screenEvent = screenEvent;
-    // }
+//     // public GoToScreenCommand(ScreenViewType type, ScreenEventSO screenEvent)
+//     // {
+//     //     _type = type;
+//     //     _screenEvent = screenEvent;
+//     // }
 
-    // public void Execute()
-    // {
-    //     _screenEvent.Raise(_type); // ScreenManager dinler
-    // }
-}
+//     // public void Execute()
+//     // {
+//     //     _screenEvent.Raise(_type); // ScreenManager dinler
+//     // }
+// }
 
 public class UseJokerCommand : ICommand
 {
@@ -139,74 +96,70 @@ public class ShowAdCommand : ICommand
     }
 }
 
-// ========== EVENTS (Base) ==========
-
-public class BaseEventSO : ScriptableObject
+public class GameOpenCommand : ICommand
 {
-    private event Action _onRaised;
-    public void AddListener(Action listener) => _onRaised += listener;
-    public void RemoveListener(Action listener) => _onRaised -= listener;
-    public void Raise() => _onRaised?.Invoke();
+    //bunu belki otomatik yaparım commande gerek olmaz ama şimdilik dursun.
+
+    public void Execute()
+    {
+        //loading seq oynatılcak,
+        //sonra ekran değişcek menü opening seq oynatılcak
+        //opening ve menu musikleri çalabilir aynı da olabilir.
+        //oyuncu play butonun atıklanana kadar beklenecek
+        throw new NotImplementedException();
+    }
 }
 
-public abstract class BaseEventSO<T> : ScriptableObject
+public class PlayButtonClickedCommand : ICommand
 {
-    private event Action<T> _onRaised;
-    public void AddListener(Action<T> listener) => _onRaised += listener;
-    public void RemoveListener(Action<T> listener) => _onRaised -= listener;
-    public void Raise(T value) => _onRaised?.Invoke(value);
+    PlaySequenceEventSO _sequenceEvent;
+
+    PlayButtonClickedCommand(PlaySequenceEventSO sequenceEventSO)
+    {
+        _sequenceEvent = sequenceEventSO;
+    }
+    public void Execute()
+    {
+        
+    }
+
 }
 
-public abstract class BaseEventSO<T1, T2> : ScriptableObject
+public class NextButtonClickedCommand : ICommand
 {
-    private event Action<T1, T2> _onRaised;
-    public void AddListener(Action<T1, T2> listener) => _onRaised += listener;
-    public void RemoveListener(Action<T1, T2> listener) => _onRaised -= listener;
-    public void Raise(T1 value1, T2 value2) => _onRaised?.Invoke(value1, value2);
+    PlaySequenceEventSO _sequenceEvent;
+
+    NextButtonClickedCommand(PlaySequenceEventSO sequenceEventSO)
+    {
+        _sequenceEvent = sequenceEventSO;
+    }
+    public void Execute()
+    {
+        //kazanılan coinler eklencek
+        //win müsik çalaıncak
+        //bir can eklencek
+        
+    }
+
 }
 
 
-// ========== EVENTS (Concrete) ==========
-[CreateAssetMenu(menuName = "Events/Command Event")]
-public class CommandEventSO : BaseEventSO<ICommand> { }
+public class RetryButtonClickedCommand : ICommand
+{
+    PlaySequenceEventSO _sequenceEvent;
 
-[CreateAssetMenu(menuName = "Events/Audio Event")]
-public class AudioEventSO : BaseEventSO<MusicType, bool> { }
+    RetryButtonClickedCommand(PlaySequenceEventSO sequenceEventSO)
+    {
+        _sequenceEvent = sequenceEventSO;
+    }
+    public void Execute()
+    {
+        //start için can gitcek
+        //fain musik çalıncak
+        //oyun tekrardan başlatılca
+        //fail popup kapancak 
+        //play update olacak
+    }
 
-[CreateAssetMenu(menuName = "Events/Game State Changed")]
-public class GameStateChangedEventSO : BaseEventSO { }
-[CreateAssetMenu(menuName = "Events/Settings Changed")]
-public class SettingsChangedEventSO : BaseEventSO { }
-[CreateAssetMenu(menuName = "Events/Joker Event")] 
-public class JokerEventSO : BaseEventSO<JokerType> { }
-
-[CreateAssetMenu(menuName ="Events/Sequence event")]
-public class PlaySequenceEventSO : BaseEventSO<Sequence> { }
-[CreateAssetMenu(menuName = "Events/Ad Event")]
-public class AdEventSO : BaseEventSO<AdType> { }
-
-//resource yerine Live, coin changed ayrı yaz
-
-// [CreateAssetMenu(menuName = "Events/Resource Changed")]
-// public class ResourceChangedEventSO : BaseEventSO { }
-
-// [CreateAssetMenu(menuName = "Events/Animation Event")]
-// public class AnimationEventSO : BaseEventSO { } // ✅ İki parametre
-
-
-
-// [CreateAssetMenu(menuName = "Events/Screen Event")] // ✅ Yeni
-// public class ScreenEventSO : BaseEventSO<ScreenViewType> { }
-// [CreateAssetMenu(menuName = "Events/Popup Event")] // ✅ Yeni
-// public class PopupEventSO : BaseEventSO<PopupType> { }
-
-
-
-[CreateAssetMenu(menuName = "Events/Error Event")]
-public class ErrorEventSO : BaseEventSO<string> { }
-
-
-public enum AdType { Rewarded, Interstitial, Banner }
-
-
+}
 

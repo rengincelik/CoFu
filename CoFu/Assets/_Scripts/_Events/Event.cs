@@ -1,0 +1,71 @@
+// ========== EVENTS (Base) ==========
+
+using System;
+using DG.Tweening;
+using UnityEngine;
+
+public abstract class BaseEventSO : ScriptableObject
+{
+    private event Action _onRaised;
+    public void AddListener(Action listener) => _onRaised += listener;
+    public void RemoveListener(Action listener) => _onRaised -= listener;
+    public void Raise() => _onRaised?.Invoke();
+}
+
+public abstract class BaseEventSO<T> : ScriptableObject
+{
+    private event Action<T> _onRaised;
+    public void AddListener(Action<T> listener) => _onRaised += listener;
+    public void RemoveListener(Action<T> listener) => _onRaised -= listener;
+    public void Raise(T value) => _onRaised?.Invoke(value);
+}
+
+public abstract class BaseEventSO<T1, T2> : ScriptableObject
+{
+    private event Action<T1, T2> _onRaised;
+    public void AddListener(Action<T1, T2> listener) => _onRaised += listener;
+    public void RemoveListener(Action<T1, T2> listener) => _onRaised -= listener;
+    public void Raise(T1 value1, T2 value2) => _onRaised?.Invoke(value1, value2);
+}
+
+
+// ========== EVENTS (Concrete) ==========
+[CreateAssetMenu(menuName = "Events/Command Event")]
+public class CommandEventSO : BaseEventSO<ICommand> { }
+
+[CreateAssetMenu(menuName = "Events/Audio Event")]
+public class AudioEventSO : BaseEventSO<MusicType, bool> { }
+
+[CreateAssetMenu(menuName = "Events/Game State Changed")]
+public class GameStateChangedEventSO : BaseEventSO { }
+[CreateAssetMenu(menuName = "Events/Settings Changed")]
+public class SettingsChangedEventSO : BaseEventSO { }
+[CreateAssetMenu(menuName = "Events/Joker Event")] 
+public class JokerEventSO : BaseEventSO<JokerType> { }
+
+[CreateAssetMenu(menuName ="Events/Sequence event")]
+public class PlaySequenceEventSO : BaseEventSO<Sequence> { }
+[CreateAssetMenu(menuName = "Events/Ad Event")]
+public class AdEventSO : BaseEventSO<AdType> { }
+
+//resource yerine Live, coin changed ayrı yaz
+
+// [CreateAssetMenu(menuName = "Events/Resource Changed")]
+// public class ResourceChangedEventSO : BaseEventSO { }
+
+// [CreateAssetMenu(menuName = "Events/Animation Event")]
+// public class AnimationEventSO : BaseEventSO { } // ✅ İki parametre
+
+
+
+// [CreateAssetMenu(menuName = "Events/Screen Event")] // ✅ Yeni
+// public class ScreenEventSO : BaseEventSO<ScreenViewType> { }
+// [CreateAssetMenu(menuName = "Events/Popup Event")] // ✅ Yeni
+// public class PopupEventSO : BaseEventSO<PopupType> { }
+
+
+
+[CreateAssetMenu(menuName = "Events/Error Event")]
+public class ErrorEventSO : BaseEventSO<string> { }
+
+
