@@ -29,7 +29,7 @@ public class AnimationSequenceItem
     public GameObject gameObject;
     public ItemAnimation animation;
     public float delay;
-    public AnimationSequenceItem[] nestedItems; 
+    // public AnimationSequenceItem[] nestedItems; 
 }
 public enum AnimationType 
 { 

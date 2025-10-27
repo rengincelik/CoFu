@@ -68,8 +68,6 @@
     <Compile Include="Assets\_InGame\Config\LevelConfig.cs" />
     <Compile Include="Assets\_Shell\Managers\EconomyManager.cs" />
     <Compile Include="Assets\_Shell\Managers\ScreenTransitionManager.cs" />
-    <Compile Include="Assets\_Shell\UI\_GameUI\PopupItem.cs" />
-    <Compile Include="Assets\_Shell\UI\_GameUI\ScreenItem.cs" />
     <Compile Include="Assets\_Shell\UI\Popup\PausePopup.cs" />
     <Compile Include="Assets\_InGame\_Joker\Joker_logic\CleanerJoker.cs" />
     <Compile Include="Assets\_InGame\Logic\ColorFusionTable.cs" />
@@ -96,7 +94,7 @@
     <Compile Include="Assets\_Shell\_Core\_ServiceBase\ServiceBaseTT.cs" />
     <Compile Include="Assets\_InGame\_Joker\Joker_logic\AddTileJoker.cs" />
     <Compile Include="Assets\_InGame\Logic\ColorUnit.cs" />
-    <Compile Include="Assets\_Shell\UI\Popup\LoadingPopup.cs" />
+    <Compile Include="Assets\_Shell\Managers\PopupManager.cs" />
     <Compile Include="Assets\_Shell\UI\Popup\SettingsPopup.cs" />
     <Compile Include="Assets\_Shell\UI\Screen\MenuScreen.cs" />
     <Compile Include="Assets\_InGame\Logic\ColorCombinations.cs" />

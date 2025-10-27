@@ -6,8 +6,10 @@ public class ScreenManager : Singleton<ScreenManager>
 {
     [SerializeField] private List<ScreenView> screenViews;
     private ScreenView currentScreen;
+    [SerializeField] bool isStart = false;
 
-    private async void Start()
+
+    private async void StartGame()
     {
         await GoToLayerAsync(ScreenViewType.Loading);
         await GoToLayerAsync(ScreenViewType.Menu);
@@ -63,6 +65,10 @@ public class ScreenManager : Singleton<ScreenManager>
         currentScreen = null;
     }
 
+    [ContextMenu("start the game")]
+    public void StartTheGame() =>  StartGame();
+
+
     [ContextMenu("Go To Layer Play")]
     public void GoToLayerPlay() => _ = GoToLayerAsync(ScreenViewType.Play);
 
@@ -71,90 +77,7 @@ public class ScreenManager : Singleton<ScreenManager>
 
     [ContextMenu("Go To Layer Menu")]
     public void GoToLayerMenu() => _ = GoToLayerAsync(ScreenViewType.Menu);
+
 }
 
-// using UnityEngine;
-// using System.Collections.Generic;
-// using System.Collections;
-
-
-// public class ScreenManager : Singleton<ScreenManager>
-// {
-//     [SerializeField] public List<ScreenView> screenViews;
-//     ScreenView currentScreen;
-
-//     public void Start()
-//     {
-//         GoToLayer(ScreenViewType.Loading);
-//         GoToLayer(ScreenViewType.Menu);
-//     }
-//     public void GoToLayer(ScreenViewType type)
-//     {
-//         OutOfCurrentLayer();
-//         if (screenViews == null || screenViews.Count == 0)
-//         {
-//             Debug.LogWarning("[ScreenManager] screenViews list is null or empty.");
-//             return;
-//         }
-
-//         foreach (var s in screenViews)
-//         {
-//             if (s == null)
-//                 continue;
-
-//             bool active = s.type == type;
-//             s.gameObject.SetActive(active);
-//             if (active)
-//             {
-//                 // 1. Önce aktif et (ama görünmez)
-//                 s.gameObject.SetActive(true);
-
-//                 // 2. Tüm objeleri başlangıç state'ine getir
-//                 foreach (var item in s.openingSequences)
-//                 {
-//                     TweenFactory.PrepareInitialState(item.gameObject, item.animation);
-//                 }
-
-//                 // 3. Sonra animasyonu çalıştır
-//                 SequenceService.PlaySequence(s.openingSequences);
-//                 currentScreen = s;
-//             }
-//             else
-//             {
-//                 s.gameObject.SetActive(false);
-//             }
-//         }
-//     }
-
-//     public void OutOfCurrentLayer()
-//     {
-//         if (currentScreen == null) return;
-        
-//         SequenceService.PlaySequence(currentScreen.closingSequences);
-//         currentScreen.gameObject.SetActive(false);
-           
-//     }
-
-
-//     [ContextMenu("Go To Layer Play")]
-//     public void GoToLayerPlay()
-//     {
-//         GoToLayer(ScreenViewType.Play);
-//     }
-
-//     [ContextMenu("Go To Layer Loading")]
-//     public void GoToLayerLoading()
-//     {
-//         GoToLayer(ScreenViewType.Loading);
-//     }
-
-
-//     [ContextMenu("Go To Layer Menu")]
-//     public void GoToLayerMenu()
-//     {
-//         GoToLayer(ScreenViewType.Menu);
-//     }
-
-
-// }
 

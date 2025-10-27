@@ -1,10 +1,27 @@
 // FailPopup.cs
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class FailPopup : Popup
 {
     
+    [SerializeField] Button RestartButton;
+
+    void OnEnable()
+    {
+        RestartButton.onClick.AddListener(OnButtonClicked);
+
+    }
+    void OnDisable()
+    {
+        RestartButton.onClick.RemoveListener(OnButtonClicked);
+    }
+    void OnButtonClicked()
+    {
+        PopupManager.Instance.ClosePopup();
+        ScreenManager.Instance.GoToLayerPlay();
+    }
 
 }
 
