@@ -4,7 +4,7 @@
 using System;
 using UnityEngine;
 
-public class LifeManager : MonoBehaviour
+public class LifeManager : Singleton<LifeManager>
 {
     [SerializeField] LifeChangedEventSO _lifeChangedEventSO;
     [SerializeField] Life _life;

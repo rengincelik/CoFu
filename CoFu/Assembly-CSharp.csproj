@@ -65,6 +65,7 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\6000.0.36f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.UIToolkit.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\_Shell\_UseCase\Usecase.cs" />
     <Compile Include="Assets\_InGame\Config\LevelConfig.cs" />
     <Compile Include="Assets\_Shell\Managers\EconomyManager.cs" />
     <Compile Include="Assets\_Shell\Managers\ScreenTransitionManager.cs" />
@@ -104,7 +105,6 @@
     <Compile Include="Assets\_Shell\Managers\LifeManager.cs" />
     <Compile Include="Assets\_Shell\_Core\_ServiceBase\ServiceBase.cs" />
     <Compile Include="Assets\_Shell\UI\Popup\FailPopup.cs" />
-    <Compile Include="Assets\_Shell\_Command\Commands.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

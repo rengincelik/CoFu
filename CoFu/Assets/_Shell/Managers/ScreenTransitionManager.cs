@@ -6,13 +6,12 @@ public class ScreenManager : Singleton<ScreenManager>
 {
     [SerializeField] private List<ScreenView> screenViews;
     private ScreenView currentScreen;
-    [SerializeField] bool isStart = false;
 
 
-    private async void StartGame()
+    private void Start()
     {
-        await GoToLayerAsync(ScreenViewType.Loading);
-        await GoToLayerAsync(ScreenViewType.Menu);
+        IUseCase useCase = new GameOpenUseCase();
+        useCase.Execute();
     }
 
     public async Task GoToLayerAsync(ScreenViewType type)
@@ -65,8 +64,8 @@ public class ScreenManager : Singleton<ScreenManager>
         currentScreen = null;
     }
 
-    [ContextMenu("start the game")]
-    public void StartTheGame() =>  StartGame();
+    // [ContextMenu("start the game")]
+    // public void StartTheGame() =>  StartGame();
 
 
     [ContextMenu("Go To Layer Play")]

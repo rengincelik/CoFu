@@ -6,7 +6,6 @@ public class PopupManager : Singleton<PopupManager>
 {
     [SerializeField] private List<Popup> popups;
     private Popup popup;
-    [SerializeField] bool isStart = false;
 
     private Popup currentPopup;
 

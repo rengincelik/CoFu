@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class FailPopup : Popup
 {
+    // [SerializeField] SFXEventSO sFXEventSO;
+    [SerializeField] AudioClip clip;
     
     [SerializeField] Button RestartButton;
 
@@ -19,6 +21,9 @@ public class FailPopup : Popup
     }
     void OnButtonClicked()
     {
+        // sFXEventSO?.Raise(clip);
+
+        AudioListenerManager.Instance.PlaySFX(clip);
         PopupManager.Instance.ClosePopup();
         ScreenManager.Instance.GoToLayerPlay();
     }

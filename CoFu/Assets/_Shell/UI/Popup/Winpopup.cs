@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class WinPopup : Popup
 {
+    // [SerializeField] SFXEventSO sFXEventSO;
+    [SerializeField] AudioClip clip;
     [SerializeField] Button ContinueButton;
 
     void OnEnable()
@@ -18,6 +20,8 @@ public class WinPopup : Popup
     }
     void OnButtonClicked()
     {
+        // sFXEventSO?.Raise(clip);
+        AudioListenerManager.Instance.PlaySFX(clip);
         PopupManager.Instance.ClosePopup();
         ScreenManager.Instance.GoToLayerPlay();
     }
