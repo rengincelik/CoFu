@@ -1,12 +1,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Grid", menuName = "Level/GridConfig")]
+[CreateAssetMenu(fileName = "Grid", menuName = "InGame/GridConfig")]
 public class GridConfig : ScriptableObject
 {
     [Header("Grid Size")]
-    public int gridWidth = 5;
-    public int gridHeight = 5;
+    [Range(1,8)] public int gridWidth = 5;
+    [Range(1, 12)] public int gridHeight = 5;
 
     [HideInInspector]
     public bool[] spawnPattern;
@@ -15,7 +15,7 @@ public class GridConfig : ScriptableObject
     {
         var positions = new List<Vector2Int>();
 
-        if (spawnPattern == null || spawnPattern.Length != gridWidth * gridHeight)return positions;
+        if (spawnPattern == null || spawnPattern.Length != gridWidth * gridHeight) return positions;
 
         for (int y = 0; y < gridHeight; y++)
         {
@@ -59,4 +59,5 @@ public class GridConfig : ScriptableObject
             spawnPattern = newPattern;
         }
     }
+
 }
