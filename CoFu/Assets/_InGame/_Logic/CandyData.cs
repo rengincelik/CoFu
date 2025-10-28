@@ -1,31 +1,29 @@
 using System.Collections.Generic;
+using UnityEditor.U2D;
 using UnityEngine;
+using UnityEngine.U2D.Animation;
+[System.Serializable]
+public class CandyData
+{
+    public CandyType type;
+    public SpriteLibraryAsset spriteLibrary;
+    public int score = 10;
+}
+    
 
-[CreateAssetMenu(fileName = "CandyDatabase", menuName = "Level/CandyDatabase")]
+[CreateAssetMenu( menuName = "CandyDatabase")]
 public class CandyDatabase : ScriptableObject
 {
-    [System.Serializable]
-    public class CandyData
-    {
-        public CandyType type;
-        public Sprite[] sprites;
-        public int score = 10;
-    }
-
     public List<CandyData> candies;
-
-    public Sprite GetSprite(CandyType type, int frameIndex = 0)
+    public CandyData GetData(CandyType type)
+        => candies.Find(c => c.type == type);
+    public SpriteLibraryAsset GetLibrary(CandyType type)
     {
-        CandyData data = candies.Find(c => c.type == type);
-        if (data != null && data.sprites.Length > frameIndex)
-            return data.sprites[frameIndex];
-        return null;
+        var data = candies.Find(c => c.type == type);
+        return data?.spriteLibrary;
     }
 
-    public Sprite[] GetAnimationFrames(CandyType type)
-    {
-        CandyData data = candies.Find(c => c.type == type);
-        return data?.sprites;
-    }
-    
+
+
+
 }

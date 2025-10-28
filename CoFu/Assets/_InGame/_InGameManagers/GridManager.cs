@@ -6,8 +6,9 @@ public class GridManager : MonoBehaviour
 {
     [SerializeField] GridConfig gridConfig;
     [SerializeField] GameObject emtyTile;
+    [SerializeField] GameObject playTile;
 
-    float tileWidth, tileHeight;
+    float cellWidth, cellHeight;
     int gridWidth, gridHeight;
     [Range(0, 1)] public float verticalSpacing = 0.2f;
     [Range(0, 1)] public float horizontalSpacing = 0.2f;
@@ -15,14 +16,17 @@ public class GridManager : MonoBehaviour
     List<Vector2Int> GridPositions;
     List<GameObject> backGroundTiles = new List<GameObject>();
 
+    Tile[,] grid;
+
     void Initialize()
     {
         gridWidth = gridConfig.gridWidth;
         gridHeight = gridConfig.gridHeight;
         SpriteRenderer sr = emtyTile.GetComponent<SpriteRenderer>();
-        tileWidth = sr.bounds.size.x;
-        tileHeight = sr.bounds.size.y;
+        cellWidth = sr.bounds.size.x;
+        cellHeight = sr.bounds.size.y;
         GridPositions = gridConfig.GetSpawnPositions();
+        grid = new Tile[gridWidth, gridHeight];
     }
 
 
@@ -30,44 +34,80 @@ public class GridManager : MonoBehaviour
     {
         Initialize();
     }
-
-
-    [ContextMenu("Generate Grid")]
-    public void GenerateBackGroundGrid()
+    public void ApplyGravity()
     {
-        Initialize(); // Editor'da da çalışır
-        GenerateGrid();
+
+    }
+    public void SpawnNewTiles()
+    {
+        
     }
 
-    public void GenerateGrid()
+
+    [ContextMenu("Generate Back Grid")]
+    public void GenerateBackGroundGrid()
+    {
+        Initialize();
+        GenerateBackGrid();
+    }
+    [ContextMenu("Generate Play Grid")]
+    public void GeneratePlayGroundGrid()
+    {
+        Initialize(); 
+        GeneratePlayGrid();
+    }
+    public void GenerateBackGrid()
     {
         ClearGrid();
-        Vector3 worldStartPoint;
-        float totalWidth = gridWidth * tileWidth + horizontalSpacing * (gridWidth - 1);
-        float totalHeight = gridHeight * tileHeight + verticalSpacing * (gridHeight - 1);
-        worldStartPoint = new Vector3(-totalWidth / 2, -totalHeight / 2, 1);
-        // for (int i = 0; i < gridWidth; i++)
-        // {
-        //     for (int j = 0; j < gridHeight; j++)
-        //     {
-        //         Vector3 worldPosition = new Vector3(worldStartPoint.x + (horizontalSpacing + tileWidth)*i,
-        //             worldStartPoint.y + (verticalSpacing + tileHeight)*j,
-        //             worldStartPoint.z);
-        //         GameObject obj = Instantiate(emtyTile, worldPosition, Quaternion.identity, transform);
-        //         backGroundTiles.Add(obj);
-
-        //     }
-        // }
-        foreach (Vector2Int pos in GridPositions) // GridConfig'den gelen spawn positions
+        
+        Vector3 worldStartPoint=CalculateStartPosition();
+        foreach (Vector2Int pos in GridPositions)
         {
-            Vector3 worldPosition = new Vector3(
-                worldStartPoint.x + (tileWidth + horizontalSpacing) * pos.x + tileWidth / 2,
-                worldStartPoint.y + (tileHeight + verticalSpacing) * pos.y + tileHeight / 2,
-                1
-            );
+            Vector3 worldPosition = CalculateWorldPosition(worldStartPoint, pos);
             GameObject obj = Instantiate(emtyTile, worldPosition, Quaternion.identity, transform);
             backGroundTiles.Add(obj);
         }
+
+    }
+
+    public void GeneratePlayGrid()
+    {
+        ClearGrid();
+        
+        Vector3 worldStartPoint=CalculateStartPosition();
+
+        foreach (Vector2Int pos in GridPositions)
+        {
+            Vector3 worldPosition = CalculateWorldPosition(worldStartPoint, pos);
+            GameObject obj = Instantiate(playTile, worldPosition, Quaternion.identity, transform);
+            Tile tile = obj.GetComponent<Tile>();
+            tile.Init(GetRandomType(), CandyState.basic);
+            tile.worldPos = worldPosition;
+            grid[pos.x, pos.y] = tile;
+        }
+
+    }
+    public CandyType GetRandomType()
+    {
+        var values = System.Enum.GetValues(typeof(CandyType));
+        int index = Random.Range(0, values.Length);
+        return (CandyType)values.GetValue(index);
+    }
+    public Vector3 CalculateWorldPosition(Vector3 startPoint,Vector2Int pos)
+    {
+
+        return  new Vector3(
+            startPoint.x + (cellWidth + horizontalSpacing) * pos.x + cellWidth / 2,
+            startPoint.y + (cellHeight + verticalSpacing) * pos.y + cellHeight / 2,
+            1
+        );
+        
+    }
+    public Vector3 CalculateStartPosition()
+    {
+        float totalWidth = gridWidth * cellWidth + horizontalSpacing * (gridWidth - 1);
+        float totalHeight = gridHeight * cellHeight + verticalSpacing * (gridHeight - 1);
+        return new Vector3(-totalWidth / 2, -totalHeight / 2, 1);
 
     }
 
@@ -79,12 +119,15 @@ public class GridManager : MonoBehaviour
         foreach (GameObject tile in backGroundTiles)
         {
             if (tile != null)
-                DestroyImmediate(tile); // Editor'da DestroyImmediate kullan
+                DestroyImmediate(tile);
         }
-        backGroundTiles.Clear();
+        foreach (Tile tile in grid)
+        {
+            if (tile != null)
+                DestroyImmediate(tile.gameObject);
+        }
+        
     }
-
-
 
 
     
