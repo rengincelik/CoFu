@@ -104,8 +104,8 @@
     <Compile Include="Library\PackageCache\com.unity.ugui@24b10291b18f\Editor\TMP\TMPro_FontAssetCreatorWindow.cs" />
     <Compile Include="Library\PackageCache\com.unity.ugui@24b10291b18f\Editor\TMP\TMP_EditorUtility.cs" />
     <Compile Include="Library\PackageCache\com.unity.ugui@24b10291b18f\Editor\TMP\TMP_EditorResourceManager.cs" />
-    <Compile Include="Library\PackageCache\com.unity.ugui@24b10291b18f\Editor\TMP\PropertyDrawers\TMP_SpriteCharacterPropertyDrawer.cs" />
     <Compile Include="Library\PackageCache\com.unity.ugui@24b10291b18f\Editor\TMP\TMP_StyleSheetEditor.cs" />
+    <Compile Include="Library\PackageCache\com.unity.ugui@24b10291b18f\Editor\TMP\PropertyDrawers\TMP_SpriteCharacterPropertyDrawer.cs" />
     <Compile Include="Library\PackageCache\com.unity.ugui@24b10291b18f\Editor\TMP\PropertyDrawers\GlyphPairAdjustmentRecordPropertyDrawer.cs" />
     <Compile Include="Library\PackageCache\com.unity.ugui@24b10291b18f\Editor\TMP\PropertyDrawers\DropdownOptionListDrawer.cs" />
     <Compile Include="Library\PackageCache\com.unity.ugui@24b10291b18f\Editor\TMP\PropertyDrawers\LigatureSubstitutionRecordPropertyDrawer.cs" />

@@ -70,7 +70,6 @@
     <Compile Include="Assets\_Shell\Managers\EconomyManager.cs" />
     <Compile Include="Assets\_Shell\Managers\ScreenTransitionManager.cs" />
     <Compile Include="Assets\_SpriteDatabase\SpriteDatabaseEditor.cs" />
-    <Compile Include="Assets\_InGame\_InGameManagers\InputManager.cs" />
     <Compile Include="Assets\_Shell\UI\Popup\PausePopup.cs" />
     <Compile Include="Assets\_InGame\_Logic\Tile.cs" />
     <Compile Include="Assets\_Shell\Managers\AdManager.cs" />
@@ -87,6 +86,7 @@
     <Compile Include="Assets\_Shell\UI\_GameUI\Popup.cs" />
     <Compile Include="Assets\_InGame\_InGameManagers\SwipeManager.cs" />
     <Compile Include="Assets\_Shell\Managers\GameFlowManager.cs" />
+    <Compile Include="Assets\InputSystem_Actions.cs" />
     <Compile Include="Assets\_Shell\UI\Popup\Winpopup.cs" />
     <Compile Include="Assets\_Shell\_Core\_ServiceBase\ServiceBaseT.cs" />
     <Compile Include="Assets\_Shell\Managers\SettingsManager.cs" />
@@ -1108,13 +1108,14 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Assembly-CSharp-firstpass.csproj" />
+    <ProjectReference Include="Unity.RenderPipelines.Universal.2D.Runtime.csproj" />
     <ProjectReference Include="VFavorites.csproj" />
     <ProjectReference Include="Unity.InputSystem.ForUI.csproj" />
     <ProjectReference Include="UnityEditor.UI.csproj" />
     <ProjectReference Include="Unity.Searcher.Editor.csproj" />
     <ProjectReference Include="Unity.Rider.Editor.csproj" />
-    <ProjectReference Include="Unity.AI.Navigation.csproj" />
     <ProjectReference Include="PsdPlugin.csproj" />
+    <ProjectReference Include="Unity.AI.Navigation.csproj" />
     <ProjectReference Include="Unity.2D.Common.Editor.csproj" />
     <ProjectReference Include="Unity.2D.Common.Path.Editor.csproj" />
     <ProjectReference Include="Unity.RenderPipeline.Universal.ShaderLibrary.csproj" />
@@ -1155,8 +1156,8 @@
     <ProjectReference Include="Unity.VisualScripting.Shared.Editor.csproj" />
     <ProjectReference Include="Unity.VisualScripting.Core.Editor.csproj" />
     <ProjectReference Include="Unity.Multiplayer.Center.Common.csproj" />
-    <ProjectReference Include="Unity.AI.Navigation.Updater.csproj" />
     <ProjectReference Include="VFolders.csproj" />
+    <ProjectReference Include="Unity.AI.Navigation.Updater.csproj" />
     <ProjectReference Include="Unity.VisualScripting.Flow.Editor.csproj" />
     <ProjectReference Include="Unity.TextMeshPro.csproj" />
     <ProjectReference Include="Unity.2D.Tilemap.Extras.csproj" />
@@ -1181,7 +1182,6 @@
     <ProjectReference Include="Unity.VisualScripting.Flow.csproj" />
     <ProjectReference Include="Unity.Rendering.LightTransport.Runtime.csproj" />
     <ProjectReference Include="Unity.InputSystem.csproj" />
-    <ProjectReference Include="Unity.RenderPipelines.Universal.2D.Runtime.csproj" />
   </ItemGroup>
   <Import Project="Sdk.targets" Sdk="Microsoft.NET.Sdk" />
   <ItemGroup>

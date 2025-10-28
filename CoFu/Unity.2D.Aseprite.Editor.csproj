@@ -105,8 +105,8 @@
     <Compile Include="Library\PackageCache\com.unity.2d.aseprite@1f731787b516\Editor\Utilities\Zlib.cs" />
     <Compile Include="Library\PackageCache\com.unity.2d.aseprite@1f731787b516\Editor\SpriteData.cs" />
     <Compile Include="Library\PackageCache\com.unity.2d.aseprite@1f731787b516\Editor\Aseprite\Chunks\NoneChunk.cs" />
-    <Compile Include="Library\PackageCache\com.unity.2d.aseprite@1f731787b516\Editor\Inspector\AsepriteImporterEditor.cs" />
     <Compile Include="Library\PackageCache\com.unity.2d.aseprite@1f731787b516\Editor\Aseprite\Chunks\ColorProfileChunk.cs" />
+    <Compile Include="Library\PackageCache\com.unity.2d.aseprite@1f731787b516\Editor\Inspector\AsepriteImporterEditor.cs" />
     <Compile Include="Library\PackageCache\com.unity.2d.aseprite@1f731787b516\Editor\AsepriteSpriteEditorDataProvider.cs" />
     <Compile Include="Library\PackageCache\com.unity.2d.aseprite@1f731787b516\Editor\AsepriteImporterDataProvider.cs" />
     <Compile Include="Library\PackageCache\com.unity.2d.aseprite@1f731787b516\Editor\Aseprite\Chunks\LayerChunk.cs" />

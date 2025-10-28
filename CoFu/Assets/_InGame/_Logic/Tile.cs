@@ -1,19 +1,17 @@
-
+using System.Collections;
 using UnityEngine;
 using UnityEngine.U2D.Animation;
+using VFavorites.Libs;
 
-public enum CandyType { red, yellow, blue }
-public enum CandyState { basic, selected }
-
-[RequireComponent(typeof(SpriteDatabaseAnimator))]
 public class Tile : MonoBehaviour
 {
     public Vector2Int gridPos;
     CandyType candyType;
     CandyState candyState;
-    public bool isSelected = false;
+
     public SpriteDatabaseAnimator spriteDatabaseAnimator;
-    public Vector3 worldPos;
+
+    private bool isMoving = false;
 
     public void Init(CandyType type, CandyState state)
     {
@@ -21,16 +19,101 @@ public class Tile : MonoBehaviour
         candyState = state;
         spriteDatabaseAnimator.SetCategory($"{candyType}_{candyState}");
     }
+
     public void SetState(CandyState newState)
     {
         candyState = newState;
         spriteDatabaseAnimator.SetCategory($"{candyType}_{candyState}");
     }
-    void Update()
+
+    // GridManager'dan çağrılır
+    public void DestroyTile()
     {
-        transform.position = Vector3.Lerp(transform.position, worldPos, Time.deltaTime * 10f);
+        gameObject.Destroy();
+    }
+    public void MoveToPosition(Vector3 targetPos, float duration)
+    {
+        if (!isMoving)
+            StartCoroutine(MoveTo(targetPos, duration));
     }
 
+    IEnumerator MoveTo(Vector3 targetPos, float duration)
+    {
+        isMoving = true;
+        Vector3 start = transform.position;
+        float t = 0f;
+
+        while (t < 1f)
+        {
+            t += Time.deltaTime / duration;
+
+            // Opsiyonel: Ease out
+            float eased = 1f - Mathf.Pow(1f - t, 2f);
+
+            transform.position = Vector3.Lerp(start, targetPos, eased);
+            yield return null;
+        }
+
+        transform.position = targetPos;
+        isMoving = false;
+    }
+
+    public bool IsMoving() => isMoving;
+    public CandyType GetCandyType => candyType;
 }
+
+
+public enum CandyType { red, yellow, blue }
+public enum CandyState { basic, selected }
+
+
+
+// [RequireComponent(typeof(SpriteDatabaseAnimator))]
+// public class Tile : MonoBehaviour
+// {
+//     public Vector2Int gridPos;
+//     CandyType candyType;
+//     CandyState candyState;
+//     public bool isSelected = false;
+//     public SpriteDatabaseAnimator spriteDatabaseAnimator;
+//     public Vector3 worldPos;
+
+//     public void Init(CandyType type, CandyState state)
+//     {
+//         candyType = type;
+//         candyState = state;
+//         spriteDatabaseAnimator.SetCategory($"{candyType}_{candyState}");
+//     }
+//     public void SetState(CandyState newState)
+//     {
+//         candyState = newState;
+//         spriteDatabaseAnimator.SetCategory($"{candyType}_{candyState}");
+//     }
+//     // void Update()
+//     // {
+//     //     transform.position = Vector3.Lerp(transform.position, worldPos, Time.deltaTime * 50f);
+//     // }
+//     public IEnumerator MoveTo(Vector3 targetPos, float duration)
+//     {
+//         Vector3 start = transform.position;
+//         float t = 0f;
+
+//         while (t < 1f)
+//         {
+//             t += Time.deltaTime / duration;
+//             transform.position = Vector3.Lerp(start, targetPos, t);
+//             yield return null;
+//         }
+
+//         transform.position = targetPos;
+//     }
+//     public void MoveToPosition(Vector3 target, float duration)
+//     {
+//         StartCoroutine(MoveTo(target, duration));
+//     }
+
+
+
+// }
 
 
