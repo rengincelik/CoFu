@@ -36,10 +36,10 @@ public class GridManager : MonoBehaviour
         Initialize();
     }
 
-
     public bool ApplyGravity()
     {
         bool anyTileMoved = false;
+        Vector3 worldStartPoint = CalculateStartPosition();
 
         for (int x = 0; x < gridWidth; x++)
         {
@@ -52,15 +52,11 @@ public class GridManager : MonoBehaviour
                         if (grid[x, checkY] != null)
                         {
                             Tile movingTile = grid[x, checkY];
-
                             grid[x, checkY] = null;
                             grid[x, y] = movingTile;
-
                             movingTile.gridPos = new Vector2Int(x, y);
 
-                            Vector3 worldStartPoint = CalculateStartPosition();
-                            Vector3 newWorldPos = CalculateWorldPosition(worldStartPoint, new Vector2Int(x, y));
-
+                            Vector3 newWorldPos = CalculateWorldPosition(worldStartPoint, movingTile.gridPos);
                             movingTile.MoveToPosition(newWorldPos, 0.4f);
 
                             anyTileMoved = true;
@@ -70,10 +66,8 @@ public class GridManager : MonoBehaviour
                 }
             }
         }
-
         return anyTileMoved;
     }
-
 
     [ContextMenu("Generate Play Grid")]
     public void GeneratePlayGroundGrid()
@@ -81,7 +75,6 @@ public class GridManager : MonoBehaviour
         Initialize();
         StartCoroutine(SpawnInitialGridWithDelay());
     }
-
 
     IEnumerator SpawnInitialGridWithDelay()
     {
@@ -94,7 +87,6 @@ public class GridManager : MonoBehaviour
         {
             if (!columnGroups.ContainsKey(pos.x))
                 columnGroups[pos.x] = new List<Vector2Int>();
-
             columnGroups[pos.x].Add(pos);
         }
 
@@ -111,12 +103,13 @@ public class GridManager : MonoBehaviour
                     GameObject obj = Instantiate(playTile, spawnWorldPosition, Quaternion.identity, transform);
                     Tile tile = obj.GetComponent<Tile>();
 
-                    tile.Init(GetRandomType(), CandyState.basic);
+                    tile.Init(GetRandomTypeWithoutMatch(pos.x, pos.y), CandyState.basic);
                     tile.gridPos = pos;
 
                     grid[pos.x, pos.y] = tile;
                     tile.MoveToPosition(finalWorldPosition, 0.5f);
                 }
+                //buraya yedek bir tile lazım
 
                 yield return new WaitForSeconds(0.08f);
             }
@@ -186,8 +179,69 @@ public class GridManager : MonoBehaviour
                     // bir kolonda kaç tane boşluk varsa, o kadar karo en üstten düşürülür. 
                     // Bu kod, mevcut boşluğa yeni bir karo atar ve bir sonraki ApplyGravity
                     // çağrısında o karonun aşağı inmesini bekler.
+
                 }
             }
+        }
+    }
+    
+
+
+    List<Tile> FindAllMatches()
+    {
+        List<Tile> allMatches = new List<Tile>();
+
+        for (int x = 0; x < gridWidth; x++)
+        {
+            for (int y = 0; y < gridHeight; y++)
+            {
+                if (grid[x, y] != null)
+                {
+                    if (CheckHorizontalMatch(grid[x, y], out List<Tile> hMatches))
+                    {
+                        allMatches.AddRange(hMatches);
+                    }
+
+                    if (CheckVerticalMatch(grid[x, y], out List<Tile> vMatches))
+                    {
+                        allMatches.AddRange(vMatches);
+                    }
+                }
+            }
+        }
+
+        return allMatches.Distinct().ToList();
+    }
+
+
+    IEnumerator ProcessCascade()
+    {
+        List<Tile> allMatches = FindAllMatches();
+
+        if (allMatches.Count > 0)
+        {
+            Debug.Log($"Cascade: {allMatches.Count} matches found");
+
+            // Destroy
+            yield return StartCoroutine(HandleMatches(allMatches));
+
+            // Gravity
+            ApplyGravity();
+            yield return new WaitForSeconds(0.5f);
+
+            // Spawn
+            SpawnNewTiles();
+            yield return new WaitForSeconds(0.4f);
+                        // Gravity
+            ApplyGravity();
+            yield return new WaitForSeconds(0.5f);
+
+            // Recursive check
+            yield return StartCoroutine(ProcessCascade());
+        }
+        else
+        {
+            Debug.Log("Cascade complete - no more matches");
         }
     }
 
@@ -305,6 +359,7 @@ public class GridManager : MonoBehaviour
         return grid[newX, newY];
     }
 
+
     IEnumerator SwapSequence(Tile tile1, Tile tile2)
     {
         Debug.Log("=== SWAP STARTED ===");
@@ -317,45 +372,28 @@ public class GridManager : MonoBehaviour
 
         yield return new WaitForSeconds(0.25f);
 
-        bool hasMatch = CheckHorizontalMatch(tile1, out List<Tile> horizontalMatching1) ||
-        CheckVerticalMatch(tile1, out List<Tile> verticalMatching1) ||
-        CheckHorizontalMatch(tile2, out List<Tile> horizontalMatching2) ||
-        CheckVerticalMatch(tile2, out List<Tile> verticalMatching2);
+        // Match kontrol
+        bool hasMatch = CheckHorizontalMatch(tile1, out _) ||
+                        CheckVerticalMatch(tile1, out _) ||
+                        CheckHorizontalMatch(tile2, out _) ||
+                        CheckVerticalMatch(tile2, out _);
 
         if (!hasMatch)
         {
-            Debug.Log("hasMatch");
+            Debug.Log("No match - reversing");
             SwapTilesInGrid(tile1, tile2);
             yield return new WaitForSeconds(0.3f);
         }
         else
         {
-                // Tüm eşleşmeleri toplamak için bir liste
-            List<Tile> allMatches = new List<Tile>();
-
-            // 4 yön kontrolü
-            if (CheckHorizontalMatch(tile1, out List<Tile> h1))
-                allMatches.AddRange(h1);
-
-            if (CheckVerticalMatch(tile1, out List<Tile> v1))
-                allMatches.AddRange(v1);
-
-            if (CheckHorizontalMatch(tile2, out List<Tile> h2))
-                allMatches.AddRange(h2);
-
-            if (CheckVerticalMatch(tile2, out List<Tile> v2))
-                allMatches.AddRange(v2);
-
-            // tekrar eden tile’ları çıkar (örneğin köşede kesişenler)
-            allMatches = allMatches.Distinct().ToList();
-
-            yield return StartCoroutine(HandleMatches(allMatches));
-            ApplyGravity();
+            // ✅ Cascade başlat
+            yield return StartCoroutine(ProcessCascade());
         }
 
         isProcessing = false;
-        Debug.Log($"=== SWAP FINISHED === isProcessing: {isProcessing}");
+        Debug.Log("=== SWAP FINISHED ===");
     }
+
     IEnumerator HandleMatches(List<Tile> tiles)
     {
         foreach(var t in tiles)
@@ -363,7 +401,51 @@ public class GridManager : MonoBehaviour
             grid[t.gridPos.x, t.gridPos.y] = null;
             t.DestroyTile();
             yield return new WaitForSeconds(0.05f);
+            
         }
+    }
+    CandyType GetRandomTypeWithoutMatch(int x, int y)
+    {
+        int maxAttempts = 10; // Sonsuz loop önleme
+        int attempts = 0;
+
+        while (attempts < maxAttempts)
+        {
+            CandyType randomType = GetRandomType();
+
+            // Sol 2 kontrol
+            bool leftMatch = false;
+            if (x >= 2 && grid[x - 1, y] != null && grid[x - 2, y] != null)
+            {
+                if (grid[x - 1, y].GetCandyType == randomType &&
+                    grid[x - 2, y].GetCandyType == randomType)
+                {
+                    leftMatch = true;
+                }
+            }
+
+            // Alt 2 kontrol
+            bool bottomMatch = false;
+            if (y >= 2 && grid[x, y - 1] != null && grid[x, y - 2] != null)
+            {
+                if (grid[x, y - 1].GetCandyType == randomType &&
+                    grid[x, y - 2].GetCandyType == randomType)
+                {
+                    bottomMatch = true;
+                }
+            }
+
+            // Match yoksa bu type'ı kullan
+            if (!leftMatch && !bottomMatch)
+            {
+                return randomType;
+            }
+
+            attempts++;
+        }
+
+        // Fallback (çok nadir olur)
+        return GetRandomType();
     }
 
     void SwapTilesInGrid(Tile tile1, Tile tile2)
@@ -402,7 +484,7 @@ public class GridManager : MonoBehaviour
 
         // sola doğru kontrol
         int left = x - 1;
-        while (left >= 0 && grid[left, y].GetCandyType == type)
+        while (left >= 0 && grid[left, y] != null && grid[left, y].GetCandyType == type)
         {
             tiles.Add(grid[left, y]);
             left--;
@@ -410,7 +492,7 @@ public class GridManager : MonoBehaviour
 
         // sağa doğru kontrol
         int right = x + 1;
-        while (right < gridWidth && grid[right, y].GetCandyType == type)
+        while (right < gridWidth && grid[right, y] != null && grid[right, y].GetCandyType == type)
         {
             tiles.Add(grid[right, y]);
             right++;
@@ -428,13 +510,13 @@ public class GridManager : MonoBehaviour
         CandyType type = tile.GetCandyType;
         tiles.Add(tile);
         int top = y + 1;
-        while (top <= gridHeight && grid[x, top].GetCandyType == type)
+        while (top < gridHeight && grid[x, top] !=null && grid[x, top].GetCandyType == type)
         {
             tiles.Add(grid[x, top]);
             top++;
         }
         int down = y - 1;
-        while (down >= 0 && grid[x, down].GetCandyType == type)
+        while (down >= 0 &&grid[x,down] !=null && grid[x, down].GetCandyType == type)
         {
             tiles.Add(grid[x, down]);
             down--;

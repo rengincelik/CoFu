@@ -305,6 +305,182 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: 1920af_8
+      rect:
+        serializedVersion: 2
+        x: 431
+        y: 644
+        width: 60
+        height: 63
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a401747f7d8b37843aee3e6d5c372684
+      internalID: 2085890639
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 1920af_9
+      rect:
+        serializedVersion: 2
+        x: 432
+        y: 564
+        width: 57
+        height: 56
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b4f74e08f16bbed4c8c250e43f957e3c
+      internalID: -258999521
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 1920af_10
+      rect:
+        serializedVersion: 2
+        x: 523
+        y: 645
+        width: 56
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1a012b63eed616249a1ebd63e54736e5
+      internalID: -2033156440
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 1920af_11
+      rect:
+        serializedVersion: 2
+        x: 521
+        y: 565
+        width: 60
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 73e9b0564b9d155479a7116df823434c
+      internalID: 1527350811
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 1920af_12
+      rect:
+        serializedVersion: 2
+        x: 612
+        y: 645
+        width: 59
+        height: 58
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9f2ea06495889cb4cb85f3d30c1af80d
+      internalID: 102818288
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 1920af_13
+      rect:
+        serializedVersion: 2
+        x: 613
+        y: 568
+        width: 57
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2716cc9ff2ce2ad468a0b58e896d3119
+      internalID: -1596525981
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 1920af_14
+      rect:
+        serializedVersion: 2
+        x: 702
+        y: 646
+        width: 59
+        height: 59
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c738c1d54e36fc9449083e2a65efd046
+      internalID: -2027356870
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 1920af_15
+      rect:
+        serializedVersion: 2
+        x: 699
+        y: 564
+        width: 63
+        height: 61
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4a8298c4a74373943a7eb8355d833487
+      internalID: 713752868
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     customData: 
     physicsShape: []
@@ -321,12 +497,20 @@ TextureImporter:
     nameFileIdTable:
       1920af_0: 928808563
       1920af_1: -974300028
+      1920af_10: -2033156440
+      1920af_11: 1527350811
+      1920af_12: 102818288
+      1920af_13: -1596525981
+      1920af_14: -2027356870
+      1920af_15: 713752868
       1920af_2: -1573142965
       1920af_3: 522268167
       1920af_4: 1530193391
       1920af_5: -818952296
       1920af_6: -1313335937
       1920af_7: 1215696667
+      1920af_8: 2085890639
+      1920af_9: -258999521
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

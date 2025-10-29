@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEditor.U2D;
 using UnityEngine;
 using UnityEngine.U2D.Animation;
+
 [System.Serializable]
 public class CandyData
 {
@@ -27,3 +28,4 @@ public class CandyDatabase : ScriptableObject
 
 
 }
+

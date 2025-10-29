@@ -63,7 +63,8 @@ public class Tile : MonoBehaviour
 }
 
 
-public enum CandyType { red, yellow, blue }
+public enum CandyType { red, yellow, blue, lightblue, lightpink, pink, green, orange }
+
 public enum CandyState { basic, selected }
 
 
