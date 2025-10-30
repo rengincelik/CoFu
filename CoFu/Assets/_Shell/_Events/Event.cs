@@ -3,6 +3,7 @@
 using System;
 using DG.Tweening;
 using UnityEngine;
+using Cysharp.Threading.Tasks;
 
 public abstract class BaseEventSO : ScriptableObject
 {
@@ -30,53 +31,48 @@ public abstract class BaseEventSO<T1, T2> : ScriptableObject
 
 // // ========== EVENTS (Concrete) ==========
 
-[CreateAssetMenu(menuName = "Events/Ad Event")]
-public class AdEventSO : BaseEventSO<AdType> { }
+
+// Concrete event
+[CreateAssetMenu(menuName = "Events/UseCaseEvent")]
+public class UseCaseEventSO : BaseEventSO<IUseCase>
+{
+    public void RaiseExecute(IUseCase useCase)
+    {
+        // Raise event synchronously
+        Raise(useCase);
+
+        // Fire-and-forget async execution
+        _ = ExecuteUseCaseAsync(useCase);
+    }
+
+    private async UniTask ExecuteUseCaseAsync(IUseCase useCase)
+    {
+        try
+        {
+            await useCase.Execute();
+        }
+        catch (Exception ex)
+        {
+            Debug.LogError($"UseCase execution failed: {ex}");
+        }
+    }
+    
+}
+
 
 [CreateAssetMenu(menuName = "Events/Coin Changed Event")]
-public class CurrencyChangedEventSO : BaseEventSO<Currency> { }
+public class CurrencyChangedEventSO : BaseEventSO { }
 
 [CreateAssetMenu(menuName = "Events/Live Changed Event")]
-public class LifeChangedEventSO : BaseEventSO<Life> { }
+public class LifeChangedEventSO : BaseEventSO { }
+
 [CreateAssetMenu(menuName = "Events/Settings Changed")]
 public class SettingsChangedEventSO : BaseEventSO { }
 
 
 
-// [CreateAssetMenu(menuName = "Events/Command Event")]
-// public class CommandEventSO : BaseEventSO<IUseCase> { }
-
-// [CreateAssetMenu(menuName = "Events/Music Event")]
-// public class MusicEventSO : BaseEventSO<MusicType, bool> { }
-// [CreateAssetMenu(menuName = "Events/SFX Event")]
-// public class SFXEventSO : BaseEventSO<AudioClip> { }
-
-// [CreateAssetMenu(menuName = "Events/Game State Changed")]
-// public class GameStateChangedEventSO : BaseEventSO { }
-
-// [CreateAssetMenu(menuName = "Events/Joker Event")] 
-// public class JokerEventSO : BaseEventSO { }
-
-// [CreateAssetMenu(menuName = "Events/LevelStart Event")]
-// public class LevelStartEventSO:BaseEventSO{}
-
-// // [CreateAssetMenu(menuName = "Events/Resource Changed")]
-// // public class ResourceChangedEventSO : BaseEventSO { }
-
-// // [CreateAssetMenu(menuName = "Events/Animation Event")]
-// // public class AnimationEventSO : BaseEventSO { } // ✅ İki parametre
-
-
-
-// // [CreateAssetMenu(menuName = "Events/Screen Event")] // ✅ Yeni
-// // public class ScreenEventSO : BaseEventSO<ScreenViewType> { }
-// // [CreateAssetMenu(menuName = "Events/Popup Event")] // ✅ Yeni
-// // public class PopupEventSO : BaseEventSO<PopupType> { }
-
-
-
-// [CreateAssetMenu(menuName = "Events/Error Event")]
-// public class ErrorEventSO : BaseEventSO<string> { }
+// [CreateAssetMenu(menuName = "Events/Ad Event")]
+// public class AdShownedEventSO : BaseEventSO<AdType> { }
 
 
 

@@ -4,21 +4,35 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class GridManager : MonoBehaviour
+
+public class GridManager : Singleton<GridManager>
 {
+    #region Serialized Fields
     [SerializeField] GridConfig gridConfig;
     [SerializeField] GameObject emtyTile;
     [SerializeField] GameObject playTile;
 
-    float cellWidth, cellHeight;
-    int gridWidth, gridHeight;
     [Range(0, 1)] public float verticalSpacing = 0.2f;
     [Range(0, 1)] public float horizontalSpacing = 0.2f;
+    #endregion
 
+    #region Private Fields
+    float cellWidth, cellHeight;
+    int gridWidth, gridHeight;
     List<Vector2Int> GridPositions;
     List<GameObject> backGroundTiles = new List<GameObject>();
-
     Tile[,] grid;
+    public bool isProcessing = false;
+    #endregion
+
+    #region Unity Lifecycle
+    void Awake()
+    {
+        Initialize();
+    }
+    #endregion
+
+    #region Initialization & Grid Generation
     void Initialize()
     {
         gridWidth = gridConfig.gridWidth;
@@ -30,222 +44,12 @@ public class GridManager : MonoBehaviour
         grid = new Tile[gridWidth, gridHeight];
     }
 
-
-    void Awake()
-    {
-        Initialize();
-    }
-
-    public bool ApplyGravity()
-    {
-        bool anyTileMoved = false;
-        Vector3 worldStartPoint = CalculateStartPosition();
-
-        for (int x = 0; x < gridWidth; x++)
-        {
-            for (int y = 0; y < gridHeight; y++)
-            {
-                if (IsSpawnPosition(x, y) && grid[x, y] == null)
-                {
-                    for (int checkY = y + 1; checkY < gridHeight; checkY++)
-                    {
-                        if (grid[x, checkY] != null)
-                        {
-                            Tile movingTile = grid[x, checkY];
-                            grid[x, checkY] = null;
-                            grid[x, y] = movingTile;
-                            movingTile.gridPos = new Vector2Int(x, y);
-
-                            Vector3 newWorldPos = CalculateWorldPosition(worldStartPoint, movingTile.gridPos);
-                            movingTile.MoveToPosition(newWorldPos, 0.4f);
-
-                            anyTileMoved = true;
-                            break;
-                        }
-                    }
-                }
-            }
-        }
-        return anyTileMoved;
-    }
-
     [ContextMenu("Generate Play Grid")]
     public void GeneratePlayGroundGrid()
     {
         Initialize();
         StartCoroutine(SpawnInitialGridWithDelay());
     }
-
-    IEnumerator SpawnInitialGridWithDelay()
-    {
-        ClearPlayGrid();
-        Vector3 worldStartPoint = CalculateStartPosition();
-
-        Dictionary<int, List<Vector2Int>> columnGroups = new Dictionary<int, List<Vector2Int>>();
-
-        foreach (Vector2Int pos in GridPositions)
-        {
-            if (!columnGroups.ContainsKey(pos.x))
-                columnGroups[pos.x] = new List<Vector2Int>();
-            columnGroups[pos.x].Add(pos);
-        }
-
-        for (int x = 0; x < gridWidth; x++)
-        {
-            if (columnGroups.ContainsKey(x))
-            {
-                foreach (Vector2Int pos in columnGroups[x])
-                {
-                    Vector3 finalWorldPosition = CalculateWorldPosition(worldStartPoint, pos);
-                    float spawnHeightOffset = gridHeight * (cellHeight + verticalSpacing);
-                    Vector3 spawnWorldPosition = finalWorldPosition + Vector3.up * spawnHeightOffset;
-
-                    GameObject obj = Instantiate(playTile, spawnWorldPosition, Quaternion.identity, transform);
-                    Tile tile = obj.GetComponent<Tile>();
-
-                    tile.Init(GetRandomTypeWithoutMatch(pos.x, pos.y), CandyState.basic);
-                    tile.gridPos = pos;
-
-                    grid[pos.x, pos.y] = tile;
-                    tile.MoveToPosition(finalWorldPosition, 0.5f);
-                }
-                //buraya yedek bir tile lazım
-
-                yield return new WaitForSeconds(0.08f);
-            }
-        }
-
-        yield return new WaitForSeconds(0.6f);
-    }
-
-    bool IsSpawnPosition(int x, int y)
-    {
-        if (x < 0 || x >= gridWidth || y < 0 || y >= gridHeight)
-            return false;
-
-        int index = y * gridWidth + x;
-        return gridConfig.spawnPattern[index];
-    }
-
-    public void SpawnNewTiles()
-    {
-        Vector3 worldStartPoint = CalculateStartPosition();
-
-        // Her kolon için
-        for (int x = 0; x < gridWidth; x++)
-        {
-            // En üst sıradan başla ve yukarı doğru kontrol etmeye gerek yok (sadece en üste yeni tile koyacağız)
-            for (int y = gridHeight - 1; y >= 0; y--)
-            {
-                // Bu pozisyon spawn pattern'da var mı VE boş mu?
-                if (IsSpawnPosition(x, y) && grid[x, y] == null)
-                {
-                    // **Sadece en üstte boş olan pozisyonlara spawn etme mantığı:**
-                    // Gravity uygulandıktan sonra, bir kolonun en üstündeki boşluklar için 
-                    // yeni bir karo yaratılmalı. 
-                    // Ancak tile'ı yaratırken, sanki bir üst satırdaymış gibi davranmalıyız.
-
-                    Vector2Int spawnPos = new Vector2Int(x, y);
-
-                    // 1. Tile'ın nihai hedef pozisyonu (yani boş olan grid[x, y] pozisyonu)
-                    Vector3 finalWorldPosition = CalculateWorldPosition(worldStartPoint, spawnPos);
-
-                    // 2. Tile'ın spawn edileceği yüksek pozisyonu hesapla.
-                    // Yaratılan tile, grid'in hemen üstünden düşmelidir.
-                    // x, y pozisyonunun bir üst sırası gibi düşünülmeli.
-
-                    // İlk başta karoyu, grid'in hemen üstündeki boşluğun bir adım üstüne yerleştir.
-                    float spawnYOffset = (cellHeight + verticalSpacing);
-                    Vector3 spawnWorldPosition = finalWorldPosition + Vector3.up * spawnYOffset;
-
-                    // Karoyu yarat
-                    GameObject obj = Instantiate(playTile, spawnWorldPosition, Quaternion.identity, transform);
-                    Tile tile = obj.GetComponent<Tile>();
-
-                    // Tile bileşenini initialize et.
-                    tile.Init(GetRandomType(), CandyState.basic);
-
-                    // Tile'ın grid pozisyonunu ve hedef dünya pozisyonunu ayarla
-                    tile.gridPos = spawnPos;
-
-                    // Grid array'ine yerleştir
-                    grid[x, y] = tile;
-
-                    // Bu boşluk dolduğuna göre, bu kolonda daha aşağıda bir boşluk varsa, 
-                    // o da bir sonraki ApplyGravity() çağrısında dolacaktır.
-                    // Bu döngü, boşlukları yukarıdan aşağıya doğru doldurur.
-
-                    // Not: Match-3 oyunlarında genellikle, sadece en üstteki boşluklar için değil, 
-                    // bir kolonda kaç tane boşluk varsa, o kadar karo en üstten düşürülür. 
-                    // Bu kod, mevcut boşluğa yeni bir karo atar ve bir sonraki ApplyGravity
-                    // çağrısında o karonun aşağı inmesini bekler.
-
-                }
-            }
-        }
-    }
-    
-
-
-    List<Tile> FindAllMatches()
-    {
-        List<Tile> allMatches = new List<Tile>();
-
-        for (int x = 0; x < gridWidth; x++)
-        {
-            for (int y = 0; y < gridHeight; y++)
-            {
-                if (grid[x, y] != null)
-                {
-                    if (CheckHorizontalMatch(grid[x, y], out List<Tile> hMatches))
-                    {
-                        allMatches.AddRange(hMatches);
-                    }
-
-                    if (CheckVerticalMatch(grid[x, y], out List<Tile> vMatches))
-                    {
-                        allMatches.AddRange(vMatches);
-                    }
-                }
-            }
-        }
-
-        return allMatches.Distinct().ToList();
-    }
-
-
-    IEnumerator ProcessCascade()
-    {
-        List<Tile> allMatches = FindAllMatches();
-
-        if (allMatches.Count > 0)
-        {
-            Debug.Log($"Cascade: {allMatches.Count} matches found");
-
-            // Destroy
-            yield return StartCoroutine(HandleMatches(allMatches));
-
-            // Gravity
-            ApplyGravity();
-            yield return new WaitForSeconds(0.5f);
-
-            // Spawn
-            SpawnNewTiles();
-            yield return new WaitForSeconds(0.4f);
-                        // Gravity
-            ApplyGravity();
-            yield return new WaitForSeconds(0.5f);
-
-            // Recursive check
-            yield return StartCoroutine(ProcessCascade());
-        }
-        else
-        {
-            Debug.Log("Cascade complete - no more matches");
-        }
-    }
-
-
 
     [ContextMenu("Generate Back Grid")]
     public void GenerateBackGroundGrid()
@@ -254,11 +58,9 @@ public class GridManager : MonoBehaviour
         GenerateBackGrid();
     }
 
-
-    public void GenerateBackGrid()
+    void GenerateBackGrid()
     {
         ClearBackGrid();
-
         Vector3 worldStartPoint = CalculateStartPosition();
         foreach (Vector2Int pos in GridPositions)
         {
@@ -266,81 +68,288 @@ public class GridManager : MonoBehaviour
             GameObject obj = Instantiate(emtyTile, worldPosition, Quaternion.identity, transform);
             backGroundTiles.Add(obj);
         }
-
     }
+    #endregion
 
-
-    public CandyType GetRandomType()
+    #region Initial Spawn
+    IEnumerator SpawnInitialGridWithDelay()
     {
-        var values = System.Enum.GetValues(typeof(CandyType));
-        int index = Random.Range(0, values.Length);
-        return (CandyType)values.GetValue(index);
-    }
-    public Vector3 CalculateWorldPosition(Vector3 startPoint, Vector2Int pos)
-    {
+        ClearPlayGrid();
+        Vector3 worldStartPoint = CalculateStartPosition();
 
-        return new Vector3(
-            startPoint.x + (cellWidth + horizontalSpacing) * pos.x + cellWidth / 2,
-            startPoint.y + (cellHeight + verticalSpacing) * pos.y + cellHeight / 2,
-            0
-        );
+        var columnGroups = GroupPositionsByColumn();
 
-    }
-    public Vector3 CalculateStartPosition()
-    {
-        float totalWidth = gridWidth * cellWidth + horizontalSpacing * (gridWidth - 1);
-        float totalHeight = gridHeight * cellHeight + verticalSpacing * (gridHeight - 1);
-        return new Vector3(-totalWidth / 2, -totalHeight / 2, 0);
-
-    }
-
-
-
-    [ContextMenu("Clear Play Grid")]
-    public void ClearPlayGrid()
-    {
-
-        foreach (Tile tile in grid)
+        for (int x = 0; x < gridWidth; x++)
         {
-            if (tile != null)
-                DestroyImmediate(tile.gameObject);
+            if (columnGroups.ContainsKey(x))
+            {
+                foreach (Vector2Int pos in columnGroups[x])
+                {
+                    Vector3 finalPos = CalculateWorldPosition(worldStartPoint, pos);
+                    float spawnHeight = gridHeight * (cellHeight + verticalSpacing);
+                    Vector3 spawnPos = finalPos + Vector3.up * spawnHeight;
+
+                    GameObject obj = Instantiate(playTile, spawnPos, Quaternion.identity, transform);
+                    Tile tile = obj.GetComponent<Tile>();
+
+                    tile.Init(GetRandomTypeWithoutMatch(pos.x, pos.y), CandyState.basic);
+                    tile.gridPos = pos;
+                    grid[pos.x, pos.y] = tile;
+
+                    tile.MoveToPosition(finalPos, 0.5f);
+                }
+                yield return new WaitForSeconds(0.08f);
+            }
+        }
+        yield return new WaitForSeconds(0.6f);
+    }
+
+    Dictionary<int, List<Vector2Int>> GroupPositionsByColumn()
+    {
+        var groups = new Dictionary<int, List<Vector2Int>>();
+        foreach (Vector2Int pos in GridPositions)
+        {
+            if (!groups.ContainsKey(pos.x))
+                groups[pos.x] = new List<Vector2Int>();
+            groups[pos.x].Add(pos);
+        }
+        return groups;
+    }
+    #endregion
+
+    #region Gravity & Spawning
+    public bool ApplyGravity()
+    {
+        bool anyMoved = false;
+        Vector3 startPoint = CalculateStartPosition();
+
+        for (int x = 0; x < gridWidth; x++)
+        {
+            for (int y = 0; y < gridHeight; y++)
+            {
+                if (!IsSpawnPosition(x, y) || grid[x, y] != null) continue;
+
+                for (int checkY = y + 1; checkY < gridHeight; checkY++)
+                {
+                    if (grid[x, checkY] != null)
+                    {
+                        Tile tile = grid[x, checkY];
+                        grid[x, checkY] = null;
+                        grid[x, y] = tile;
+                        tile.gridPos = new Vector2Int(x, y);
+
+                        Vector3 target = CalculateWorldPosition(startPoint, tile.gridPos);
+                        tile.MoveToPosition(target, 0.4f);
+
+                        anyMoved = true;
+                        break;
+                    }
+                }
+            }
+        }
+        return anyMoved;
+    }
+    public void SpawnNewTiles()
+    {
+        Vector3 startPoint = CalculateStartPosition();
+
+        for (int x = 0; x < gridWidth; x++)
+        {
+            int topEmptyY = -1;
+
+            for (int y = gridHeight - 1; y >= 0; y--)
+            {
+                if (IsSpawnPosition(x, y) && grid[x, y] == null)
+                {
+                    topEmptyY = y;
+                    break;
+                }
+            }
+
+            if (topEmptyY == -1) continue;
+
+            Vector2Int spawnPos = new Vector2Int(x, topEmptyY);
+            Vector3 finalPos = CalculateWorldPosition(startPoint, spawnPos);
+            float spawnYOffset = (cellHeight + verticalSpacing);
+            Vector3 spawnWorldPos = finalPos + Vector3.up * spawnYOffset;
+
+            GameObject obj = Instantiate(playTile, spawnWorldPos, Quaternion.identity, transform);
+            Tile tile = obj.GetComponent<Tile>();
+
+            // ✅ Match kontrolü ile spawn
+            tile.Init(GetRandomTypeWithoutMatch(x, topEmptyY), CandyState.basic);
+            tile.gridPos = spawnPos;
+            grid[x, topEmptyY] = tile;
+
+            tile.MoveToPosition(finalPos, 0.4f);
+        }
+    }
+
+
+    #endregion
+
+    #region Match Detection
+    List<Tile> FindAllMatches()
+    {
+        var matches = new HashSet<Tile>();
+
+        for (int x = 0; x < gridWidth; x++)
+        {
+            for (int y = 0; y < gridHeight; y++)
+            {
+                if (grid[x, y] == null) continue;
+
+                // Only check right & up to avoid duplicates
+                TryAddHorizontalMatch(x, y, matches);
+                TryAddVerticalMatch(x, y, matches);
+            }
         }
 
+        return matches.ToList();
     }
 
-    [ContextMenu("Clear Back Grid")]
-    public void ClearBackGrid()
+    void TryAddHorizontalMatch(int x, int y, HashSet<Tile> matches)
     {
-        foreach (GameObject tile in backGroundTiles)
+        var line = new List<Tile>();
+        CandyType type = grid[x, y].GetCandyType;
+
+        for (int i = x; i < gridWidth; i++)
         {
-            if (tile != null)
-                DestroyImmediate(tile);
+            if (grid[i, y] != null && grid[i, y].GetCandyType == type)
+                line.Add(grid[i, y]);
+            else break;
         }
 
-
+        if (line.Count >= 3)
+            matches.UnionWith(line);
     }
 
-    [ContextMenu("Test Gravity")]
-    void TestGravity()
+    void TryAddVerticalMatch(int x, int y, HashSet<Tile> matches)
     {
-        bool moved = ApplyGravity();
-        Debug.Log($"Gravity applied. Tiles moved: {moved}");
+        var line = new List<Tile>();
+        CandyType type = grid[x, y].GetCandyType;
+
+        for (int j = y; j < gridHeight; j++)
+        {
+            if (grid[x, j] != null && grid[x, j].GetCandyType == type)
+                line.Add(grid[x, j]);
+            else break;
+        }
+
+        if (line.Count >= 3)
+            matches.UnionWith(line);
+    }
+    #endregion
+
+    #region Cascade System
+    IEnumerator ProcessCascade()
+    {
+        // 1. Match kontrolü
+        List<Tile> matches = FindAllMatches();
+
+        if (matches.Count > 0)
+        {
+            Debug.Log($"Cascade: {matches.Count} tiles matched");
+
+            yield return StartCoroutine(HandleMatches(matches));
+            ApplyGravity();
+            yield return new WaitForSeconds(0.5f);
+
+            SpawnNewTiles();
+            yield return new WaitForSeconds(0.4f);
+
+            ApplyGravity();
+            yield return new WaitForSeconds(0.5f);
+
+            // ✅ Tekrar cascade (match veya boşluk kontrolü)
+            yield return StartCoroutine(ProcessCascade());
+        }
+        else
+        {
+            // ✅ Match yok ama boş hücre var mı?
+            if (HasEmptyCells())
+            {
+                Debug.Log("No matches but empty cells - spawning");
+
+                SpawnNewTiles();
+                yield return new WaitForSeconds(0.4f);
+
+                ApplyGravity();
+                yield return new WaitForSeconds(0.5f);
+
+                // Tekrar kontrol
+                yield return StartCoroutine(ProcessCascade());
+            }
+            else
+            {
+                Debug.Log("Cascade complete - no matches and no empty cells");
+            }
+        }
     }
 
 
-    public bool isProcessing = false;
+    // ✅ Yeni helper fonksiyon
+    bool HasEmptyCells()
+    {
+        for (int x = 0; x < gridWidth; x++)
+        {
+            for (int y = 0; y < gridHeight; y++)
+            {
+                if (IsSpawnPosition(x, y) && grid[x, y] == null)
+                {
+                    return true; // Boş hücre var
+                }
+            }
+        }
+        return false; // Hepsi dolu
+    }
 
+    // IEnumerator ProcessCascade()
+    // {
+    //     List<Tile> matches = FindAllMatches();
+
+    //     if (matches.Count > 0)
+    //     {
+    //         Debug.Log($"Cascade: {matches.Count} tiles matched");
+
+    //         yield return StartCoroutine(HandleMatches(matches));
+    //         ApplyGravity();
+    //         yield return new WaitForSeconds(0.5f);
+
+    //         SpawnNewTiles();
+    //         yield return new WaitForSeconds(0.4f);
+
+    //         ApplyGravity();
+    //         yield return new WaitForSeconds(0.5f);
+
+    //         yield return StartCoroutine(ProcessCascade());
+    //     }
+    //     else
+    //     {
+    //         Debug.Log("Cascade complete");
+    //     }
+    // }
+
+    IEnumerator HandleMatches(List<Tile> tiles)
+    {
+        foreach (var tile in tiles)
+        {
+            grid[tile.gridPos.x, tile.gridPos.y] = null;
+            tile.DestroyTile();
+            yield return new WaitForSeconds(0.05f);
+        }
+    }
+    #endregion
+
+    #region Swap Logic
     public void RequestSwap(Tile tile, Vector2Int direction)
     {
         if (isProcessing) return;
 
         Tile neighbor = GetNeighborTile(tile, direction);
-
         if (neighbor == null)
         {
-            // Geçersiz swap - komşu yok
             tile.SetState(CandyState.basic);
-            Debug.Log("Invalid swap - no neighbor");
             return;
         }
 
@@ -349,181 +358,162 @@ public class GridManager : MonoBehaviour
 
     Tile GetNeighborTile(Tile tile, Vector2Int direction)
     {
-        int newX = tile.gridPos.x + direction.x;
-        int newY = tile.gridPos.y + direction.y;
-
-        // Bounds check
-        if (newX < 0 || newX >= gridWidth || newY < 0 || newY >= gridHeight)
-            return null;
-
-        return grid[newX, newY];
+        int nx = tile.gridPos.x + direction.x;
+        int ny = tile.gridPos.y + direction.y;
+        if (nx < 0 || nx >= gridWidth || ny < 0 || ny >= gridHeight) return null;
+        return grid[nx, ny];
     }
 
-
-    IEnumerator SwapSequence(Tile tile1, Tile tile2)
+    IEnumerator SwapSequence(Tile t1, Tile t2)
     {
-        Debug.Log("=== SWAP STARTED ===");
         isProcessing = true;
-
-        tile1.SetState(CandyState.basic);
-        tile2.SetState(CandyState.basic);
-
-        SwapTilesInGrid(tile1, tile2);
-
+        SwapTilesInGrid(t1, t2);
         yield return new WaitForSeconds(0.25f);
 
-        // Match kontrol
-        bool hasMatch = CheckHorizontalMatch(tile1, out _) ||
-                        CheckVerticalMatch(tile1, out _) ||
-                        CheckHorizontalMatch(tile2, out _) ||
-                        CheckVerticalMatch(tile2, out _);
+        bool hasMatch = HasMatchAt(t1.gridPos) || HasMatchAt(t2.gridPos);
 
         if (!hasMatch)
         {
-            Debug.Log("No match - reversing");
-            SwapTilesInGrid(tile1, tile2);
+            SwapTilesInGrid(t1, t2);
             yield return new WaitForSeconds(0.3f);
         }
         else
         {
-            // ✅ Cascade başlat
             yield return StartCoroutine(ProcessCascade());
         }
 
         isProcessing = false;
-        Debug.Log("=== SWAP FINISHED ===");
     }
 
-    IEnumerator HandleMatches(List<Tile> tiles)
+    bool HasMatchAt(Vector2Int pos)
     {
-        foreach(var t in tiles)
-        {
-            grid[t.gridPos.x, t.gridPos.y] = null;
-            t.DestroyTile();
-            yield return new WaitForSeconds(0.05f);
-            
-        }
+        return CheckHorizontalMatch(grid[pos.x, pos.y], out _) ||
+               CheckVerticalMatch(grid[pos.x, pos.y], out _);
     }
-    CandyType GetRandomTypeWithoutMatch(int x, int y)
+
+    void SwapTilesInGrid(Tile t1, Tile t2)
     {
-        int maxAttempts = 10; // Sonsuz loop önleme
-        int attempts = 0;
+        Vector2Int p1 = t1.gridPos, p2 = t2.gridPos;
 
-        while (attempts < maxAttempts)
-        {
-            CandyType randomType = GetRandomType();
+        grid[p1.x, p1.y] = t2;
+        grid[p2.x, p2.y] = t1;
 
-            // Sol 2 kontrol
-            bool leftMatch = false;
-            if (x >= 2 && grid[x - 1, y] != null && grid[x - 2, y] != null)
-            {
-                if (grid[x - 1, y].GetCandyType == randomType &&
-                    grid[x - 2, y].GetCandyType == randomType)
-                {
-                    leftMatch = true;
-                }
-            }
+        t1.gridPos = p2;
+        t2.gridPos = p1;
 
-            // Alt 2 kontrol
-            bool bottomMatch = false;
-            if (y >= 2 && grid[x, y - 1] != null && grid[x, y - 2] != null)
-            {
-                if (grid[x, y - 1].GetCandyType == randomType &&
-                    grid[x, y - 2].GetCandyType == randomType)
-                {
-                    bottomMatch = true;
-                }
-            }
-
-            // Match yoksa bu type'ı kullan
-            if (!leftMatch && !bottomMatch)
-            {
-                return randomType;
-            }
-
-            attempts++;
-        }
-
-        // Fallback (çok nadir olur)
-        return GetRandomType();
+        Vector3 start = CalculateStartPosition();
+        t1.MoveToPosition(CalculateWorldPosition(start, p2), 0.2f);
+        t2.MoveToPosition(CalculateWorldPosition(start, p1), 0.2f);
     }
+    #endregion
 
-    void SwapTilesInGrid(Tile tile1, Tile tile2)
-    {
-        // Grid array'de swap
-        Vector2Int pos1 = tile1.gridPos;
-        Vector2Int pos2 = tile2.gridPos;
-
-        grid[pos1.x, pos1.y] = tile2;
-        grid[pos2.x, pos2.y] = tile1;
-
-        // gridPos güncelle
-        tile1.gridPos = pos2;
-        tile2.gridPos = pos1;
-
-        // worldPos hesapla ve hareket ettir
-        Vector3 worldStartPoint = CalculateStartPosition();
-
-        Vector3 newPos1 = CalculateWorldPosition(worldStartPoint, pos2);
-        Vector3 newPos2 = CalculateWorldPosition(worldStartPoint, pos1);
-
-        tile1.MoveToPosition(newPos1, 0.2f);
-        tile2.MoveToPosition(newPos2, 0.2f);
-    }
-
-
+    #region Match Check Helpers
     bool CheckHorizontalMatch(Tile tile, out List<Tile> tiles)
     {
         tiles = new List<Tile>();
-        int x = tile.gridPos.x;
-        int y = tile.gridPos.y;
-        CandyType type = tile.GetCandyType;
+        if (tile == null) return false;
 
-        // Başlangıç olarak mevcut tile'ı ekle
+        int x = tile.gridPos.x, y = tile.gridPos.y;
+        CandyType type = tile.GetCandyType;
         tiles.Add(tile);
 
-        // sola doğru kontrol
-        int left = x - 1;
-        while (left >= 0 && grid[left, y] != null && grid[left, y].GetCandyType == type)
-        {
-            tiles.Add(grid[left, y]);
-            left--;
-        }
-
-        // sağa doğru kontrol
-        int right = x + 1;
-        while (right < gridWidth && grid[right, y] != null && grid[right, y].GetCandyType == type)
-        {
-            tiles.Add(grid[right, y]);
-            right++;
-        }
+        for (int i = x - 1; i >= 0 && grid[i, y]?.GetCandyType == type; i--) tiles.Add(grid[i, y]);
+        for (int i = x + 1; i < gridWidth && grid[i, y]?.GetCandyType == type; i++) tiles.Add(grid[i, y]);
 
         return tiles.Count >= 3;
     }
-
 
     bool CheckVerticalMatch(Tile tile, out List<Tile> tiles)
     {
         tiles = new List<Tile>();
-        int x = tile.gridPos.x;
-        int y = tile.gridPos.y;
+        if (tile == null) return false;
+
+        int x = tile.gridPos.x, y = tile.gridPos.y;
         CandyType type = tile.GetCandyType;
         tiles.Add(tile);
-        int top = y + 1;
-        while (top < gridHeight && grid[x, top] !=null && grid[x, top].GetCandyType == type)
-        {
-            tiles.Add(grid[x, top]);
-            top++;
-        }
-        int down = y - 1;
-        while (down >= 0 &&grid[x,down] !=null && grid[x, down].GetCandyType == type)
-        {
-            tiles.Add(grid[x, down]);
-            down--;
-        }
+
+        for (int j = y - 1; j >= 0 && grid[x, j]?.GetCandyType == type; j--) tiles.Add(grid[x, j]);
+        for (int j = y + 1; j < gridHeight && grid[x, j]?.GetCandyType == type; j++) tiles.Add(grid[x, j]);
+
         return tiles.Count >= 3;
     }
+    #endregion
 
+    #region Utility
+    public CandyType GetRandomType()
+    {
+        var values = System.Enum.GetValues(typeof(CandyType));
+        return (CandyType)values.GetValue(Random.Range(0, values.Length));
+    }
 
+    CandyType GetRandomTypeWithoutMatch(int x, int y)
+    {
+        int attempts = 0;
+        while (attempts++ < 10)
+        {
+            CandyType type = GetRandomType();
+
+            bool leftMatch = x >= 2 && grid[x - 1, y]?.GetCandyType == type && grid[x - 2, y]?.GetCandyType == type;
+            bool bottomMatch = y >= 2 && grid[x, y - 1]?.GetCandyType == type && grid[x, y - 2]?.GetCandyType == type;
+
+            if (!leftMatch && !bottomMatch) return type;
+        }
+        return GetRandomType();
+    }
+
+    bool IsSpawnPosition(int x, int y)
+    {
+        if (x < 0 || x >= gridWidth || y < 0 || y >= gridHeight) return false;
+        int index = y * gridWidth + x;
+        return gridConfig.spawnPattern[index];
+    }
+
+    public Vector3 CalculateWorldPosition(Vector3 start, Vector2Int pos)
+    {
+        return new Vector3(
+            start.x + (cellWidth + horizontalSpacing) * pos.x + cellWidth / 2,
+            start.y + (cellHeight + verticalSpacing) * pos.y + cellHeight / 2,
+            0
+        );
+    }
+
+    public Vector3 CalculateStartPosition()
+    {
+        float w = gridWidth * cellWidth + horizontalSpacing * (gridWidth - 1);
+        float h = gridHeight * cellHeight + verticalSpacing * (gridHeight - 1);
+        return new Vector3(-w / 2, -h / 2, 0);
+    }
+    #endregion
+
+    #region Cleanup
+    [ContextMenu("Clear Play Grid")]
+    public void ClearPlayGrid()
+    {
+        if (grid == null) return;
+        for (int x = 0; x < gridWidth; x++)
+            for (int y = 0; y < gridHeight; y++)
+                if (grid[x, y] != null)
+                    DestroyImmediate(grid[x, y].gameObject);
+        grid = new Tile[gridWidth, gridHeight];
+    }
+
+    [ContextMenu("Clear Back Grid")]
+    public void ClearBackGrid()
+    {
+        foreach (var tile in backGroundTiles)
+            if (tile != null) DestroyImmediate(tile);
+        backGroundTiles.Clear();
+    }
+
+    [ContextMenu("Test Gravity")]
+    void TestGravity()
+    {
+        bool moved = ApplyGravity();
+        Debug.Log($"Gravity: {moved}");
+    }
+    #endregion
 }
+
+
+
 

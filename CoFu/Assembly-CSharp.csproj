@@ -85,26 +85,23 @@
     <Compile Include="Assets\_InGame\_InGameManagers\LevelManager.cs" />
     <Compile Include="Assets\_Shell\UI\_GameUI\Popup.cs" />
     <Compile Include="Assets\_InGame\_InGameManagers\SwipeManager.cs" />
-    <Compile Include="Assets\_Shell\Managers\GameFlowManager.cs" />
+    <Compile Include="Assets\_Shell\Managers\UseCaseExecuter.cs" />
     <Compile Include="Assets\InputSystem_Actions.cs" />
     <Compile Include="Assets\_Shell\UI\Popup\Winpopup.cs" />
-    <Compile Include="Assets\_Shell\_Core\_ServiceBase\ServiceBaseT.cs" />
     <Compile Include="Assets\_Shell\Managers\SettingsManager.cs" />
     <Compile Include="Assets\v_EditorAssets\TutorialInfo\Scripts\Readme.cs" />
     <Compile Include="Assets\_Shell\_Events\Event.cs" />
-    <Compile Include="Assets\_Shell\UI\ItemANim\ItemAnimation.cs" />
     <Compile Include="Assets\__\Singleton.cs" />
     <Compile Include="Assets\_InGame\_InGameManagers\GridManager.cs" />
     <Compile Include="Assets\_InGame\_Logic\CandyData.cs" />
     <Compile Include="Assets\_Shell\Services\SequenceService.cs" />
-    <Compile Include="Assets\_Shell\_Core\_ServiceBase\ServiceBaseTT.cs" />
     <Compile Include="Assets\_Shell\Managers\PopupManager.cs" />
+    <Compile Include="Assets\_InGame\_InGameManagers\GameCommandExecuter.cs" />
     <Compile Include="Assets\_Shell\UI\Popup\SettingsPopup.cs" />
     <Compile Include="Assets\_Shell\UI\Screen\MenuScreen.cs" />
     <Compile Include="Assets\_Shell\UI\_GameUI\Screen.cs" />
     <Compile Include="Assets\_Shell\UI\Screen\LoadingScreen.cs" />
     <Compile Include="Assets\_Shell\Managers\LifeManager.cs" />
-    <Compile Include="Assets\_Shell\_Core\_ServiceBase\ServiceBase.cs" />
     <Compile Include="Assets\_Shell\UI\Popup\FailPopup.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -1130,10 +1127,12 @@
     <ProjectReference Include="Unity.Timeline.csproj" />
     <ProjectReference Include="Unity.RenderPipelines.Core.Editor.Shared.csproj" />
     <ProjectReference Include="UnityEngine.UI.csproj" />
+    <ProjectReference Include="UniTask.TextMeshPro.csproj" />
     <ProjectReference Include="Unity.RenderPipelines.Core.ShaderLibrary.csproj" />
     <ProjectReference Include="Unity.PlasticSCM.Editor.csproj" />
     <ProjectReference Include="Unity.2D.Aseprite.Editor.csproj" />
     <ProjectReference Include="Unity.Multiplayer.Center.Editor.csproj" />
+    <ProjectReference Include="UniTask.Linq.csproj" />
     <ProjectReference Include="Unity.Mathematics.Editor.csproj" />
     <ProjectReference Include="Unity.RenderPipelines.GPUDriven.Runtime.csproj" />
     <ProjectReference Include="Unity.InternalAPIEditorBridge.001.csproj" />
@@ -1142,6 +1141,7 @@
     <ProjectReference Include="PPv2URPConverters.csproj" />
     <ProjectReference Include="Unity.2D.PixelPerfect.Editor.csproj" />
     <ProjectReference Include="Unity.Rendering.LightTransport.Editor.csproj" />
+    <ProjectReference Include="UniTask.DOTween.csproj" />
     <ProjectReference Include="Unity.VisualScripting.Core.csproj" />
     <ProjectReference Include="Unity.InternalAPIEngineBridge.001.csproj" />
     <ProjectReference Include="Unity.2D.Tilemap.Editor.csproj" />
@@ -1172,6 +1172,7 @@
     <ProjectReference Include="Unity.2D.SpriteShape.Editor.csproj" />
     <ProjectReference Include="Unity.2D.Sprite.Editor.csproj" />
     <ProjectReference Include="Unity.AI.Navigation.Editor.ConversionSystem.csproj" />
+    <ProjectReference Include="UniTask.Addressables.csproj" />
     <ProjectReference Include="Unity.2D.Psdimporter.Editor.csproj" />
     <ProjectReference Include="Unity.TextMeshPro.Editor.csproj" />
     <ProjectReference Include="Unity.Burst.Editor.csproj" />
@@ -1182,6 +1183,7 @@
     <ProjectReference Include="Unity.VisualScripting.Flow.csproj" />
     <ProjectReference Include="Unity.Rendering.LightTransport.Runtime.csproj" />
     <ProjectReference Include="Unity.InputSystem.csproj" />
+    <ProjectReference Include="UniTask.csproj" />
   </ItemGroup>
   <Import Project="Sdk.targets" Sdk="Microsoft.NET.Sdk" />
   <ItemGroup>

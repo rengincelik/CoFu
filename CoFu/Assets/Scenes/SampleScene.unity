@@ -266,72 +266,23 @@ MonoBehaviour:
   type: 0
   audioClip: {fileID: 8300000, guid: cbc5acc6876ea8646a4ff2226920ca7b, type: 3}
   openingSequences:
-  - gameObject: {fileID: 1526985650}
-    animation:
-      animation: 0
-      duration: 0
-    delay: 5
-  - gameObject: {fileID: 1938326563}
-    animation:
-      animation: 0
-      duration: 0
-    delay: 1
-  - gameObject: {fileID: 0}
-    animation:
-      animation: 0
-      duration: 0
-    delay: 1
-  - gameObject: {fileID: 128723080}
-    animation:
-      animation: 0
-      duration: 0
-    delay: 1
-  - gameObject: {fileID: 7092616140012011845}
-    animation:
-      animation: 0
-      duration: 0
-    delay: 1
-  - gameObject: {fileID: 90843253346377181}
-    animation:
-      animation: 0
-      duration: 0
-    delay: 1
-  - gameObject: {fileID: 5629732503818712493}
-    animation:
-      animation: 0
-      duration: 0
-    delay: 1
-  - gameObject: {fileID: 1963856633291861076}
-    animation:
-      animation: 0
-      duration: 0
-    delay: 1
-  - gameObject: {fileID: 1963856633291861076}
-    animation:
-      animation: 0
-      duration: 0
-    delay: 1
+  - gameObjects:
+    - {fileID: 2172697256694441956}
+    - {fileID: 1526985650}
+    - {fileID: 1938326563}
+    - {fileID: 128723080}
+    animations: 0d000000
+    duration: 1
+    delay: 0
   closingSequences:
-  - gameObject: {fileID: 128723080}
-    animation:
-      animation: 3
-      duration: 2
+  - gameObjects:
+    - {fileID: 2172697256694441956}
+    - {fileID: 1526985650}
+    - {fileID: 1938326563}
+    - {fileID: 128723080}
+    animations: 04000000
+    duration: 1
     delay: 0
-  - gameObject: {fileID: 1938326563}
-    animation:
-      animation: 3
-      duration: 2
-    delay: 0
-  - gameObject: {fileID: 1526985650}
-    animation:
-      animation: 3
-      duration: 2
-    delay: 0
-  - gameObject: {fileID: 2172697256694441956}
-    animation:
-      animation: 3
-      duration: 2
-    delay: 2
 --- !u!114 &193870904
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -679,7 +630,7 @@ Camera:
   m_GameObject: {fileID: 330585543}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
+  m_ClearFlags: 2
   m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
@@ -798,7 +749,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!82 &330868600
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1040,7 +991,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &333734766
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1053,6 +1004,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8b07ccb6c189fa42a09ae8078c32304, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  useCaseEventSO: {fileID: 11400000, guid: 0faedd914e6e22f46864adc92eb2f3fa, type: 2}
   screenViews:
   - {fileID: 193870903}
   - {fileID: 831984394}
@@ -1208,6 +1160,38 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 361110194}
   m_CullTransparentMesh: 1
+--- !u!1 &391656416
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 391656417}
+  m_Layer: 0
+  m_Name: Managers
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &391656417
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 391656416}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1239571903}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0
@@ -1341,7 +1325,7 @@ GameObject:
   - component: {fileID: 500414605}
   - component: {fileID: 500414604}
   m_Layer: 0
-  m_Name: GameObject_2
+  m_Name: GridManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1379,8 +1363,8 @@ MonoBehaviour:
   gridConfig: {fileID: 11400000, guid: 114090405feb8fe47b9cce8d0bad8325, type: 2}
   emtyTile: {fileID: 101382650300124344, guid: dc358585105afcf43a5d5dbed30b8d90, type: 3}
   playTile: {fileID: 4174619866689822499, guid: 12fd4c041ca27a2499fed9bca3d9ad73, type: 3}
-  verticalSpacing: 0.2
-  horizontalSpacing: 0.2
+  verticalSpacing: 0.061
+  horizontalSpacing: 0.061
   isProcessing: 0
 --- !u!4 &500414606
 Transform:
@@ -1902,37 +1886,21 @@ MonoBehaviour:
   type: 2
   audioClip: {fileID: 8300000, guid: cbc5acc6876ea8646a4ff2226920ca7b, type: 3}
   openingSequences:
-  - gameObject: {fileID: 1956123026}
-    animation:
-      animation: 0
-      duration: 0
+  - gameObjects:
+    - {fileID: 1956123026}
+    - {fileID: 1580710355}
+    - {fileID: 903612433}
+    animations: 00000000
+    duration: 0
     delay: 0
-  - gameObject: {fileID: 903612433}
-    animation:
-      animation: 2
-      duration: 2
-    delay: 1
-  - gameObject: {fileID: 1580710355}
-    animation:
-      animation: 2
-      duration: 2
-    delay: 1
   closingSequences:
-  - gameObject: {fileID: 1580710355}
-    animation:
-      animation: 3
-      duration: 0
+  - gameObjects:
+    - {fileID: 1956123026}
+    - {fileID: 1580710355}
+    - {fileID: 903612433}
+    animations: 00000000
+    duration: 0
     delay: 0
-  - gameObject: {fileID: 903612433}
-    animation:
-      animation: 3
-      duration: 0
-    delay: 0
-  - gameObject: {fileID: 1956123026}
-    animation:
-      animation: 1
-      duration: 0
-    delay: 2
 --- !u!114 &831984395
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2034,7 +2002,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &832575518
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2374,7 +2342,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1002977074
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2593,6 +2561,51 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1231751638}
   m_CullTransparentMesh: 1
+--- !u!1 &1239571901
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1239571903}
+  - component: {fileID: 1239571902}
+  m_Layer: 0
+  m_Name: useCase
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1239571902
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1239571901}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f42795f856f7cb84ea1aec0159b29a38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  useCaseEventSO: {fileID: 11400000, guid: 0faedd914e6e22f46864adc92eb2f3fa, type: 2}
+--- !u!4 &1239571903
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1239571901}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 391656417}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1356897960
 GameObject:
   m_ObjectHideFlags: 0
@@ -2664,57 +2677,26 @@ MonoBehaviour:
   type: 1
   audioClip: {fileID: 8300000, guid: cbc5acc6876ea8646a4ff2226920ca7b, type: 3}
   openingSequences:
-  - gameObject: {fileID: 1172618168780874926}
-    animation:
-      animation: 0
-      duration: 1
+  - gameObjects:
+    - {fileID: 1172618168780874926}
+    - {fileID: 252938639418501535}
+    - {fileID: 5856060301628997767}
+    - {fileID: 1767577585539224141}
+    - {fileID: 2610371992146451084}
+    animations: 0c000000
+    duration: 1
     delay: 0
-  - gameObject: {fileID: 252938639418501535}
-    animation:
-      animation: 2
-      duration: 1
-    delay: 1
-  - gameObject: {fileID: 5856060301628997767}
-    animation:
-      animation: 2
-      duration: 1
-    delay: 2
-  - gameObject: {fileID: 1767577585539224141}
-    animation:
-      animation: 2
-      duration: 1
-    delay: 2
-  - gameObject: {fileID: 2610371992146451084}
-    animation:
-      animation: 2
-      duration: 1
-    delay: 2
   closingSequences:
-  - gameObject: {fileID: 2610371992146451084}
-    animation:
-      animation: 3
-      duration: 1
+  - gameObjects:
+    - {fileID: 1172618168780874926}
+    - {fileID: 252938639418501535}
+    - {fileID: 5856060301628997767}
+    - {fileID: 1767577585539224141}
+    - {fileID: 2610371992146451084}
+    animations: 0d0000000b000000
+    duration: 1
     delay: 0
-  - gameObject: {fileID: 1767577585539224141}
-    animation:
-      animation: 3
-      duration: 1
-    delay: 2
-  - gameObject: {fileID: 5856060301628997767}
-    animation:
-      animation: 3
-      duration: 1
-    delay: 2
-  - gameObject: {fileID: 252938639418501535}
-    animation:
-      animation: 3
-      duration: 1
-    delay: 2
-  - gameObject: {fileID: 1172618168780874926}
-    animation:
-      animation: 3
-      duration: 1
-    delay: 3
+  useCaseEventSO: {fileID: 11400000, guid: 0faedd914e6e22f46864adc92eb2f3fa, type: 2}
   clip: {fileID: 8300000, guid: cbc5acc6876ea8646a4ff2226920ca7b, type: 3}
   playButton: {fileID: 1096859942783283109}
 --- !u!114 &1374320239
@@ -4442,12 +4424,17 @@ MonoBehaviour:
   popupType: 0
   audioClip: {fileID: 8300000, guid: cbc5acc6876ea8646a4ff2226920ca7b, type: 3}
   openingSequences:
-  - gameObject: {fileID: 1120934438780248763}
-    animation:
-      animation: 0
-      duration: 3
-    delay: 2
-  closingSequences: []
+  - gameObjects:
+    - {fileID: 2500154352118162807}
+    animations: 0c000000
+    duration: 0
+    delay: 0
+  closingSequences:
+  - gameObjects:
+    - {fileID: 2500154352118162807}
+    animations: 04000000
+    duration: 0
+    delay: 0
 --- !u!114 &897895848314507729
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6391,10 +6378,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 1, b: 0.99057627, a: 0.4117647}
+  m_Color: {r: 0, g: 1, b: 0.99057627, a: 0.13333334}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
+  m_Maskable: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -6869,38 +6856,22 @@ MonoBehaviour:
   popupType: 1
   audioClip: {fileID: 8300000, guid: cbc5acc6876ea8646a4ff2226920ca7b, type: 3}
   openingSequences:
-  - gameObject: {fileID: 909999781}
-    animation:
-      animation: 0
-      duration: 2
-    delay: 2
-  - gameObject: {fileID: 556535337}
-    animation:
-      animation: 0
-      duration: 2
-    delay: 2
-  - gameObject: {fileID: 1718644297}
-    animation:
-      animation: 0
-      duration: 1
-    delay: 1
+  - gameObjects:
+    - {fileID: 909999781}
+    - {fileID: 556535337}
+    - {fileID: 1718644297}
+    animations: 0c000000
+    duration: 0
+    delay: 0
   closingSequences:
-  - gameObject: {fileID: 909999781}
-    animation:
-      animation: 0
-      duration: 0
+  - gameObjects:
+    - {fileID: 909999781}
+    - {fileID: 556535337}
+    - {fileID: 1718644297}
+    animations: 0c000000
+    duration: 0
     delay: 0
-  - gameObject: {fileID: 556535337}
-    animation:
-      animation: 0
-      duration: 0
-    delay: 0
-  - gameObject: {fileID: 1718644297}
-    animation:
-      animation: 0
-      duration: 0
-    delay: 0
-  clip: {fileID: 0}
+  clip: {fileID: 8300000, guid: eacf16c31d0dae642b15e3a3496def2a, type: 3}
   ContinueButton: {fileID: 1718644299}
 --- !u!224 &5731003971323087813
 RectTransform:
@@ -6972,7 +6943,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2172697256694441956}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -20}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7021,18 +6992,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   popupType: 3
   audioClip: {fileID: 8300000, guid: cbc5acc6876ea8646a4ff2226920ca7b, type: 3}
-  openingSequences:
-  - gameObject: {fileID: 200382808}
-    animation:
-      animation: 0
-      duration: 0
-    delay: 0
-  closingSequences:
-  - gameObject: {fileID: 200382808}
-    animation:
-      animation: 0
-      duration: 0
-    delay: 0
+  openingSequences: []
+  closingSequences: []
   soundToggle: {fileID: 0}
   musicToggle: {fileID: 0}
   vibrationToggle: {fileID: 0}
@@ -8253,38 +8214,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   popupType: 2
   audioClip: {fileID: 8300000, guid: cbc5acc6876ea8646a4ff2226920ca7b, type: 3}
-  openingSequences:
-  - gameObject: {fileID: 4044252667786098777}
-    animation:
-      animation: 0
-      duration: 2
-    delay: 0
-  - gameObject: {fileID: 4221627475980249631}
-    animation:
-      animation: 0
-      duration: 2
-    delay: 0
-  - gameObject: {fileID: 8186197763724943248}
-    animation:
-      animation: 0
-      duration: 2
-    delay: 0
-  closingSequences:
-  - gameObject: {fileID: 4044252667786098777}
-    animation:
-      animation: 0
-      duration: 0
-    delay: 0
-  - gameObject: {fileID: 4221627475980249631}
-    animation:
-      animation: 0
-      duration: 0
-    delay: 0
-  - gameObject: {fileID: 8186197763724943248}
-    animation:
-      animation: 0
-      duration: 0
-    delay: 0
+  openingSequences: []
+  closingSequences: []
   clip: {fileID: 0}
   RestartButton: {fileID: 6519324015362573925}
 --- !u!114 &8456346654997232832
@@ -8607,3 +8538,4 @@ SceneRoots:
   - {fileID: 1771859361680121781}
   - {fileID: 5653308109388021622}
   - {fileID: 500414606}
+  - {fileID: 391656417}

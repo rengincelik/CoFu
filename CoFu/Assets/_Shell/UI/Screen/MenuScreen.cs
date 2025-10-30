@@ -6,7 +6,8 @@ using UnityEngine.UI;
 
 public class MenuScreen : ScreenView
 {
-    // [SerializeField] SFXEventSO sFXEventSO;
+    
+    [SerializeField] UseCaseEventSO useCaseEventSO;
     [SerializeField] AudioClip clip;
     [SerializeField] private Button playButton;
 
@@ -23,19 +24,12 @@ public class MenuScreen : ScreenView
     }
 
 
-    // wrapper metod
     private void OnPlayClicked()
     {
-        // sFXEventSO?.Raise(clip);
-        AudioListenerManager.Instance.PlaySFX(clip);
-        _ = GoToPlayAsync(); // async Task metodunu çağır
+        IUseCase useCase = new LevelStartUseCase();
+        useCaseEventSO.RaiseExecute(useCase);
+        
     }
 
-
-    // async metod
-    private async Task GoToPlayAsync()
-    {
-        await ScreenManager.Instance.GoToLayerAsync(ScreenViewType.Play);
-    }
 
 }

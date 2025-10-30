@@ -2,17 +2,17 @@ using UnityEngine;
 
 public class AdManager :MonoBehaviour
 {
-    [SerializeField] private AdEventSO adEventSO;
+    // [SerializeField] private AdEventSO adEventSO;
 
-    void OnEnable()
-    {
-        adEventSO?.AddListener(OnEventRaised);
-    }
+    // void OnEnable()
+    // {
+    //     adEventSO?.AddListener(OnEventRaised);
+    // }
 
-    void OnDisable()
-    {
-        adEventSO?.RemoveListener(OnEventRaised);
-    }
+    // void OnDisable()
+    // {
+    //     adEventSO?.RemoveListener(OnEventRaised);
+    // }
 
     void OnEventRaised(AdType adType)
     {

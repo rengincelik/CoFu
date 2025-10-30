@@ -21,9 +21,8 @@ public class WinPopup : Popup
     void OnButtonClicked()
     {
         // sFXEventSO?.Raise(clip);
-        AudioListenerManager.Instance.PlaySFX(clip);
+        // AudioListenerManager.Instance.PlaySFX(clip);
         PopupManager.Instance.ClosePopup();
-        ScreenManager.Instance.GoToLayerPlay();
     }
 
 

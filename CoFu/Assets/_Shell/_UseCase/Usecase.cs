@@ -3,146 +3,86 @@ using System.Threading.Tasks;
 using DG.Tweening;
 using NUnit.Framework;
 using UnityEngine;
+using Cysharp.Threading.Tasks;
+using Unity.VisualScripting;
 
 
 public enum AdType { Rewarded, Interstitial, Banner }
 
-// ========== INTERFACE ==========
-public interface IUseCase { void Execute(); }
+public interface IUseCase { UniTask Execute(); }
 
-// ========== COMMANDS ==========
 public class GameOpenUseCase : IUseCase
 {
-    public void Execute()
+    public async UniTask Execute()
     {
-        _ = GameStartAsync();
-        
-
-    }
-    private async Task GameStartAsync()
-    {
-        AudioListenerManager.Instance.PlayMusic(MusicType.NonGamePlay);
+        Debug.Log("GameOpenUseCase");
+        // AudioListenerManager.Instance.PlayMusic(MusicType.NonGamePlay);
         await ScreenManager.Instance.GoToLayerAsync(ScreenViewType.Loading);
-        AudioListenerManager.Instance.PlayMusic(MusicType.NonGamePlay);
+        // AudioListenerManager.Instance.PlayMusic(MusicType.NonGamePlay);
         await ScreenManager.Instance.GoToLayerAsync(ScreenViewType.Menu);
+
     }
 
 }
 
 public class LevelStartUseCase : IUseCase
 {
-    public void Execute()
+    public async UniTask Execute()
     {
-        _ = GoToPlayAsync();
-        AudioListenerManager.Instance.PlayMusic(MusicType.GamePlay);
-    }
-    private async Task GoToPlayAsync()
-    {
+        Debug.Log("LevelStartUseCase");
         await ScreenManager.Instance.GoToLayerAsync(ScreenViewType.Play);
+        // AudioListenerManager.Instance.PlayMusic(MusicType.GamePlay);
+        GridManager.Instance.GeneratePlayGroundGrid();
     }
 
 }
 
-public class LevelCompletedUseCase : IUseCase
+public class LevelWonUseCase : IUseCase
 {
-    public void Execute()
+    public async UniTask Execute()
     {
-        _ = GoToPlayAsync();
+        await PopupManager.Instance.OpenPopupAsync(PopupType.Win);
     }
-    private async Task GoToPlayAsync()
+      
+}
+
+public class LevelFailedUseCase : IUseCase
+{
+    public async UniTask Execute()
     {
-        await ScreenManager.Instance.GoToLayerAsync(ScreenViewType.Play);
+        await PopupManager.Instance.OpenPopupAsync(PopupType.Fail);
     }
 }
 
-
-// public class UseJokerCommand : IUseCase
+// public class PlayButtonClickedUseCase : IUseCase
 // {
-//     JokerType _jokerType;
-//     JokerEventSO _jokerEvent;
-    
-//     public UseJokerCommand(JokerType jokerType, JokerEventSO jokerEvent)
+//     public async UniTask Execute()
 //     {
-//         _jokerType = jokerType;
-//         _jokerEvent = jokerEvent;
+//         LifeManager.Instance.TrySpendLife();
+//         IUseCase useCase = new LevelStartUseCase();
+//         await useCase.Execute();
 //     }
+
     
-//     public void Execute()
-//     {
-//         _jokerEvent?.Raise(); // JokerManager dinler, coin kontrol + kullan
-//     }
 // }
 
-// public class ShowAdCommand : IUseCase
+// public class NextButtonClickedUseCase : IUseCase
 // {
-//     AdType _adType;
-//     AdEventSO _adEvent;
-
-//     public ShowAdCommand(AdType adType, AdEventSO adEvent)
+//     public async UniTask Execute()
 //     {
-//         _adType = adType;
-//         _adEvent = adEvent;
+//         await ScreenManager.Instance.GoToLayerAsync(ScreenViewType.Play);
 //     }
 
-//     public void Execute()
-//     {
-//         _adEvent.Raise(_adType);
-//     }
 // }
 
-public class GameOpenCommand : IUseCase
-{
-    //bunu belki otomatik yaparım commande gerek olmaz ama şimdilik dursun.
+// public class RetryButtonClickedUseCase : IUseCase
+// {
+//     public async UniTask Execute()
+//     {
+//         //start için can gitcek
+//         await PopupManager.Instance.ClosePopupAsync();
+//         await ScreenManager.Instance.GoToLayerAsync(ScreenViewType.Play);
+//     }
 
-    public void Execute()
-    {
-        //loading seq oynatılcak,
-        //sonra ekran değişcek menü opening seq oynatılcak
-        //opening ve menu musikleri çalabilir aynı da olabilir.
-        //oyuncu play butonun atıklanana kadar beklenecek
-        throw new NotImplementedException();
-    }
-}
-
-public class PlayButtonClickedUseCase : IUseCase
-{
-    public void Execute()
-    {
-        LifeManager.Instance.TrySpendLife();
-        IUseCase useCase = new LevelStartUseCase();
-        useCase.Execute();
-    }
-
-    
-}
-
-public class NextButtonClickedUseCase : IUseCase
-{
-    public void Execute()
-    {
-
-        _ = GoToPlayAsync();
-    }
-    private async Task GoToPlayAsync()
-    {
-        await ScreenManager.Instance.GoToLayerAsync(ScreenViewType.Play);
-    }
-
-}
-
-public class RetryButtonClickedUseCase : IUseCase
-{
-    public void Execute()
-    {
-        //start için can gitcek
-        
-        _ = GoToPlayAsync();
-    }
-    private async Task GoToPlayAsync()
-    {
-        await PopupManager.Instance.ClosePopupAsync();
-        await ScreenManager.Instance.GoToLayerAsync(ScreenViewType.Play);
-    }
-
-}
+// }
 

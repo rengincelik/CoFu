@@ -10,5 +10,5 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 0}
-  m_Name: New Command Event SO
-  m_EditorClassIdentifier: Assembly-CSharp::CommandEventSO
+  m_Name: New Use Case Event SO
+  m_EditorClassIdentifier: Assembly-CSharp::UseCaseEventSO

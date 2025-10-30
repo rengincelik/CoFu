@@ -23,9 +23,8 @@ public class FailPopup : Popup
     {
         // sFXEventSO?.Raise(clip);
 
-        AudioListenerManager.Instance.PlaySFX(clip);
+        // AudioListenerManager.Instance.PlaySFX(clip);
         PopupManager.Instance.ClosePopup();
-        ScreenManager.Instance.GoToLayerPlay();
     }
 
 }

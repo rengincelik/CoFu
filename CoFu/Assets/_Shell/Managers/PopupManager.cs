@@ -1,11 +1,11 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Cysharp.Threading.Tasks;
 
 public class PopupManager : Singleton<PopupManager>
 {
     [SerializeField] private List<Popup> popups;
-    private Popup popup;
 
     private Popup currentPopup;
 
@@ -19,7 +19,7 @@ public class PopupManager : Singleton<PopupManager>
         }
         return null;
     }
-    public async Task OpenPopupAsync(PopupType type)
+    public async UniTask OpenPopupAsync(PopupType type)
     {
 
         if (currentPopup != null) return;
@@ -37,7 +37,7 @@ public class PopupManager : Singleton<PopupManager>
         {
             foreach (var item in p.openingSequences)
             {
-                TweenFactory.PrepareInitialState(item.gameObject, item.animation);
+                TweenFactory.PrepareInitialState(item.gameObjects, item.animations);
             }
 
             await SequenceService.PlaySequenceAsync(p.openingSequences);
@@ -50,7 +50,7 @@ public class PopupManager : Singleton<PopupManager>
 
     }
 
-    public async Task ClosePopupAsync()
+    public async UniTask ClosePopupAsync()
     {
         if (currentPopup == null) return;
 

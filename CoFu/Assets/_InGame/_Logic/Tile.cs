@@ -63,58 +63,10 @@ public class Tile : MonoBehaviour
 }
 
 
-public enum CandyType { red, yellow, blue, lightblue, lightpink, pink, green, orange }
+// public enum CandyType { red, yellow, blue, lightblue, lightpink, pink, green, orange }
+public enum CandyType { red, yellow, blue,  green, orange }
 
 public enum CandyState { basic, selected }
 
-
-
-// [RequireComponent(typeof(SpriteDatabaseAnimator))]
-// public class Tile : MonoBehaviour
-// {
-//     public Vector2Int gridPos;
-//     CandyType candyType;
-//     CandyState candyState;
-//     public bool isSelected = false;
-//     public SpriteDatabaseAnimator spriteDatabaseAnimator;
-//     public Vector3 worldPos;
-
-//     public void Init(CandyType type, CandyState state)
-//     {
-//         candyType = type;
-//         candyState = state;
-//         spriteDatabaseAnimator.SetCategory($"{candyType}_{candyState}");
-//     }
-//     public void SetState(CandyState newState)
-//     {
-//         candyState = newState;
-//         spriteDatabaseAnimator.SetCategory($"{candyType}_{candyState}");
-//     }
-//     // void Update()
-//     // {
-//     //     transform.position = Vector3.Lerp(transform.position, worldPos, Time.deltaTime * 50f);
-//     // }
-//     public IEnumerator MoveTo(Vector3 targetPos, float duration)
-//     {
-//         Vector3 start = transform.position;
-//         float t = 0f;
-
-//         while (t < 1f)
-//         {
-//             t += Time.deltaTime / duration;
-//             transform.position = Vector3.Lerp(start, targetPos, t);
-//             yield return null;
-//         }
-
-//         transform.position = targetPos;
-//     }
-//     public void MoveToPosition(Vector3 target, float duration)
-//     {
-//         StartCoroutine(MoveTo(target, duration));
-//     }
-
-
-
-// }
 
 

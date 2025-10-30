@@ -64,7 +64,7 @@ public class LifeManager : Singleton<LifeManager>
         }
 
         _life.Amount--;
-        _lifeChangedEventSO?.Raise(_life);
+        _lifeChangedEventSO?.Raise();
         LifeSaveService.SaveLife(_life);
         return true;
     }
@@ -74,7 +74,7 @@ public class LifeManager : Singleton<LifeManager>
         if (_life.Amount >= Life.MaxLife) return;
 
         _life.Amount++;
-        _lifeChangedEventSO?.Raise(_life);
+        _lifeChangedEventSO?.Raise();
         LifeSaveService.SaveLife(_life);
     }
 }

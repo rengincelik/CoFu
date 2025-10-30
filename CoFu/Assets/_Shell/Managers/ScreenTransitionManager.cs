@@ -1,22 +1,27 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Cysharp.Threading.Tasks;
+using Unity.VisualScripting;
 
 public class ScreenManager : Singleton<ScreenManager>
 {
+    [SerializeField] UseCaseEventSO useCaseEventSO;
     [SerializeField] private List<ScreenView> screenViews;
     private ScreenView currentScreen;
 
 
     private void Start()
     {
-        IUseCase useCase = new GameOpenUseCase();
-        useCase.Execute();
+        useCaseEventSO.RaiseExecute(new GameOpenUseCase());
+
     }
 
-    public async Task GoToLayerAsync(ScreenViewType type)
+    public async UniTask GoToLayerAsync(ScreenViewType type)
     {
+
         await OutOfCurrentLayerAsync();
+
 
         if (screenViews == null || screenViews.Count == 0)
         {
@@ -33,13 +38,11 @@ public class ScreenManager : Singleton<ScreenManager>
 
             if (active)
             {
-                // 1. Önce objeyi aktif et ama tüm öğeleri başlangıç state'ine getir
                 foreach (var item in s.openingSequences)
                 {
-                    TweenFactory.PrepareInitialState(item.gameObject, item.animation);
+                    TweenFactory.PrepareInitialState(item.gameObjects, item.animations);
                 }
 
-                // 2. Animasyonu oynat ve bitmesini bekle
                 await SequenceService.PlaySequenceAsync(s.openingSequences);
 
                 currentScreen = s;
@@ -51,7 +54,7 @@ public class ScreenManager : Singleton<ScreenManager>
         }
     }
 
-    public async Task OutOfCurrentLayerAsync()
+    public async UniTask OutOfCurrentLayerAsync()
     {
         if (currentScreen == null) return;
 
@@ -64,8 +67,6 @@ public class ScreenManager : Singleton<ScreenManager>
         currentScreen = null;
     }
 
-    // [ContextMenu("start the game")]
-    // public void StartTheGame() =>  StartGame();
 
 
     [ContextMenu("Go To Layer Play")]
