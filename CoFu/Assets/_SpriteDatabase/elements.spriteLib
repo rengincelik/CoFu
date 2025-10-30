@@ -1,0 +1,101 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &1
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5e6fedc2472449cead18ef23b5cb30d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Library:
+  - m_Name: fire
+    m_Hash: 417204687
+    m_CategoryList: []
+    m_OverrideEntries:
+    - m_Name: ChatGPT Image 30 Eki 2025 17_14_09_0
+      m_Hash: 1056256575
+      m_Sprite: {fileID: -164377750, guid: 3972bf107ad6d4049a8a7ebb9489d7a1, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -164377750, guid: 3972bf107ad6d4049a8a7ebb9489d7a1, type: 3}
+    - m_Name: ChatGPT Image 30 Eki 2025 17_14_09_1
+      m_Hash: 166855337
+      m_Sprite: {fileID: -86662987, guid: 3972bf107ad6d4049a8a7ebb9489d7a1, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -86662987, guid: 3972bf107ad6d4049a8a7ebb9489d7a1, type: 3}
+    - m_Name: ChatGPT Image 30 Eki 2025 17_14_09_2
+      m_Hash: 284906259
+      m_Sprite: {fileID: -1660368070, guid: 3972bf107ad6d4049a8a7ebb9489d7a1, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -1660368070, guid: 3972bf107ad6d4049a8a7ebb9489d7a1, type: 3}
+    - m_Name: ChatGPT Image 30 Eki 2025 17_14_09_3
+      m_Hash: 670851973
+      m_Sprite: {fileID: -1949825434, guid: 3972bf107ad6d4049a8a7ebb9489d7a1, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -1949825434, guid: 3972bf107ad6d4049a8a7ebb9489d7a1, type: 3}
+    - m_Name: ChatGPT Image 30 Eki 2025 17_14_09_4
+      m_Hash: 966325798
+      m_Sprite: {fileID: -791493044, guid: 3972bf107ad6d4049a8a7ebb9489d7a1, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -791493044, guid: 3972bf107ad6d4049a8a7ebb9489d7a1, type: 3}
+    m_FromMain: 0
+    m_EntryOverrideCount: 5
+  - m_Name: water
+    m_Hash: 993203418
+    m_CategoryList: []
+    m_OverrideEntries:
+    - m_Name: ChatGPT Image 30 Eki 2025 17_29_35_0
+      m_Hash: 674000374
+      m_Sprite: {fileID: 968982266, guid: b8866465d7fccd34da7308bac25bafb9, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 968982266, guid: b8866465d7fccd34da7308bac25bafb9, type: 3}
+    - m_Name: ChatGPT Image 30 Eki 2025 17_29_35_1
+      m_Hash: 522935648
+      m_Sprite: {fileID: -420649907, guid: b8866465d7fccd34da7308bac25bafb9, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -420649907, guid: b8866465d7fccd34da7308bac25bafb9, type: 3}
+    - m_Name: ChatGPT Image 30 Eki 2025 17_29_35_2
+      m_Hash: 102894810
+      m_Sprite: {fileID: 1724821314, guid: b8866465d7fccd34da7308bac25bafb9, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 1724821314, guid: b8866465d7fccd34da7308bac25bafb9, type: 3}
+    - m_Name: ChatGPT Image 30 Eki 2025 17_29_35_3
+      m_Hash: 824523852
+      m_Sprite: {fileID: 1004398480, guid: b8866465d7fccd34da7308bac25bafb9, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 1004398480, guid: b8866465d7fccd34da7308bac25bafb9, type: 3}
+    m_FromMain: 0
+    m_EntryOverrideCount: 4
+  - m_Name: air
+    m_Hash: 1012971771
+    m_CategoryList: []
+    m_OverrideEntries:
+    - m_Name: ChatGPT Image 30 Eki 2025 17_36_30_0
+      m_Hash: 969283196
+      m_Sprite: {fileID: -909490341, guid: ca3e27eda95a5104e8d702191b010f92, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -909490341, guid: ca3e27eda95a5104e8d702191b010f92, type: 3}
+    - m_Name: ChatGPT Image 30 Eki 2025 17_36_30_1
+      m_Hash: 247539434
+      m_Sprite: {fileID: -1865155060, guid: ca3e27eda95a5104e8d702191b010f92, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -1865155060, guid: ca3e27eda95a5104e8d702191b010f92, type: 3}
+    - m_Name: ChatGPT Image 30 Eki 2025 17_36_30_2
+      m_Hash: 399013712
+      m_Sprite: {fileID: -1694613610, guid: ca3e27eda95a5104e8d702191b010f92, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -1694613610, guid: ca3e27eda95a5104e8d702191b010f92, type: 3}
+    - m_Name: ChatGPT Image 30 Eki 2025 17_36_30_3
+      m_Hash: 550455238
+      m_Sprite: {fileID: -1503236961, guid: ca3e27eda95a5104e8d702191b010f92, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -1503236961, guid: ca3e27eda95a5104e8d702191b010f92, type: 3}
+    m_FromMain: 0
+    m_EntryOverrideCount: 4
+  m_PrimaryLibraryGUID: 
+  m_ModificationHash: 638974429592313417
+  m_Version: 1

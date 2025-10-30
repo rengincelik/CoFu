@@ -149,42 +149,82 @@ public class GridManager : Singleton<GridManager>
         }
         return anyMoved;
     }
+    // public void SpawnNewTiles()
+    // {
+    //     Vector3 startPoint = CalculateStartPosition();
+
+    //     for (int x = 0; x < gridWidth; x++)
+    //     {
+    //         int topEmptyY = -1;
+
+    //         for (int y = gridHeight - 1; y >= 0; y--)
+    //         {
+    //             if (IsSpawnPosition(x, y) && grid[x, y] == null)
+    //             {
+    //                 topEmptyY = y;
+    //                 break;
+    //             }
+    //         }
+
+    //         if (topEmptyY == -1) continue;
+
+    //         Vector2Int spawnPos = new Vector2Int(x, topEmptyY);
+    //         Vector3 finalPos = CalculateWorldPosition(startPoint, spawnPos);
+    //         float spawnYOffset = (cellHeight + verticalSpacing);
+    //         Vector3 spawnWorldPos = finalPos + Vector3.up * spawnYOffset;
+
+    //         GameObject obj = Instantiate(playTile, spawnWorldPos, Quaternion.identity, transform);
+    //         Tile tile = obj.GetComponent<Tile>();
+
+    //         // ✅ Match kontrolü ile spawn
+    //         tile.Init(GetRandomTypeWithoutMatch(x, topEmptyY), CandyState.basic);
+    //         tile.gridPos = spawnPos;
+    //         grid[x, topEmptyY] = tile;
+
+    //         tile.MoveToPosition(finalPos, 0.4f);
+    //     }
+    // }
+
     public void SpawnNewTiles()
     {
         Vector3 startPoint = CalculateStartPosition();
 
         for (int x = 0; x < gridWidth; x++)
         {
-            int topEmptyY = -1;
+            // ✅ Bu kolonda kaç boş hücre var say
+            List<int> emptyYPositions = new List<int>();
 
-            for (int y = gridHeight - 1; y >= 0; y--)
+            for (int y = 0; y < gridHeight; y++)
             {
                 if (IsSpawnPosition(x, y) && grid[x, y] == null)
                 {
-                    topEmptyY = y;
-                    break;
+                    emptyYPositions.Add(y);
                 }
             }
 
-            if (topEmptyY == -1) continue;
+            if (emptyYPositions.Count == 0) continue;
 
-            Vector2Int spawnPos = new Vector2Int(x, topEmptyY);
-            Vector3 finalPos = CalculateWorldPosition(startPoint, spawnPos);
-            float spawnYOffset = (cellHeight + verticalSpacing);
-            Vector3 spawnWorldPos = finalPos + Vector3.up * spawnYOffset;
+            // ✅ Her boş pozisyon için spawn et
+            for (int i = 0; i < emptyYPositions.Count; i++)
+            {
+                int targetY = emptyYPositions[i];
 
-            GameObject obj = Instantiate(playTile, spawnWorldPos, Quaternion.identity, transform);
-            Tile tile = obj.GetComponent<Tile>();
+                // Spawn pozisyonu: Grid üstünde, sırayla yüksekte
+                float spawnHeight = (gridHeight + i + 1) * (cellHeight + verticalSpacing);
+                Vector3 finalPos = CalculateWorldPosition(startPoint, new Vector2Int(x, targetY));
+                Vector3 spawnPos = new Vector3(finalPos.x, startPoint.y + spawnHeight, finalPos.z);
 
-            // ✅ Match kontrolü ile spawn
-            tile.Init(GetRandomTypeWithoutMatch(x, topEmptyY), CandyState.basic);
-            tile.gridPos = spawnPos;
-            grid[x, topEmptyY] = tile;
+                GameObject obj = Instantiate(playTile, spawnPos, Quaternion.identity, transform);
+                Tile tile = obj.GetComponent<Tile>();
 
-            tile.MoveToPosition(finalPos, 0.4f);
+                tile.Init(GetRandomTypeWithoutMatch(x, targetY), CandyState.basic);
+                tile.gridPos = new Vector2Int(x, targetY);
+                grid[x, targetY] = tile;
+
+                tile.MoveToPosition(finalPos, 0.4f);
+            }
         }
     }
-
 
     #endregion
 
@@ -242,70 +282,9 @@ public class GridManager : Singleton<GridManager>
     #endregion
 
     #region Cascade System
-    IEnumerator ProcessCascade()
-    {
-        // 1. Match kontrolü
-        List<Tile> matches = FindAllMatches();
-
-        if (matches.Count > 0)
-        {
-            Debug.Log($"Cascade: {matches.Count} tiles matched");
-
-            yield return StartCoroutine(HandleMatches(matches));
-            ApplyGravity();
-            yield return new WaitForSeconds(0.5f);
-
-            SpawnNewTiles();
-            yield return new WaitForSeconds(0.4f);
-
-            ApplyGravity();
-            yield return new WaitForSeconds(0.5f);
-
-            // ✅ Tekrar cascade (match veya boşluk kontrolü)
-            yield return StartCoroutine(ProcessCascade());
-        }
-        else
-        {
-            // ✅ Match yok ama boş hücre var mı?
-            if (HasEmptyCells())
-            {
-                Debug.Log("No matches but empty cells - spawning");
-
-                SpawnNewTiles();
-                yield return new WaitForSeconds(0.4f);
-
-                ApplyGravity();
-                yield return new WaitForSeconds(0.5f);
-
-                // Tekrar kontrol
-                yield return StartCoroutine(ProcessCascade());
-            }
-            else
-            {
-                Debug.Log("Cascade complete - no matches and no empty cells");
-            }
-        }
-    }
-
-
-    // ✅ Yeni helper fonksiyon
-    bool HasEmptyCells()
-    {
-        for (int x = 0; x < gridWidth; x++)
-        {
-            for (int y = 0; y < gridHeight; y++)
-            {
-                if (IsSpawnPosition(x, y) && grid[x, y] == null)
-                {
-                    return true; // Boş hücre var
-                }
-            }
-        }
-        return false; // Hepsi dolu
-    }
-
     // IEnumerator ProcessCascade()
     // {
+    //     // 1. Match kontrolü
     //     List<Tile> matches = FindAllMatches();
 
     //     if (matches.Count > 0)
@@ -322,14 +301,69 @@ public class GridManager : Singleton<GridManager>
     //         ApplyGravity();
     //         yield return new WaitForSeconds(0.5f);
 
+    //         // ✅ Tekrar cascade (match veya boşluk kontrolü)
     //         yield return StartCoroutine(ProcessCascade());
     //     }
     //     else
     //     {
-    //         Debug.Log("Cascade complete");
+    //         // ✅ Match yok ama boş hücre var mı?
+    //         if (HasEmptyCells())
+    //         {
+    //             Debug.Log("No matches but empty cells - spawning");
+
+    //             SpawnNewTiles();
+    //             yield return new WaitForSeconds(0.4f);
+
+    //             ApplyGravity();
+    //             yield return new WaitForSeconds(0.5f);
+
+    //             // Tekrar kontrol
+    //             yield return StartCoroutine(ProcessCascade());
+    //         }
+    //         else
+    //         {
+    //             Debug.Log("Cascade complete - no matches and no empty cells");
+    //         }
     //     }
     // }
 
+    IEnumerator ProcessCascade()
+    {
+        List<Tile> matches = FindAllMatches();
+
+        if (matches.Count > 0)
+        {
+            yield return StartCoroutine(HandleMatches(matches));
+
+            ApplyGravity();
+            yield return new WaitForSeconds(0.5f);
+
+            SpawnNewTiles(); // ✅ Tüm boşlukları doldurur
+            yield return new WaitForSeconds(0.5f);
+
+            // ✅ Tekrar match kontrol
+            yield return StartCoroutine(ProcessCascade());
+        }
+        else
+        {
+            Debug.Log("Cascade complete");
+        }
+    }
+
+    bool HasEmptyCells()
+    {
+        for (int x = 0; x < gridWidth; x++)
+        {
+            for (int y = 0; y < gridHeight; y++)
+            {
+                if (IsSpawnPosition(x, y) && grid[x, y] == null)
+                {
+                    return true; // Boş hücre var
+                }
+            }
+        }
+        return false; // Hepsi dolu
+    }
     IEnumerator HandleMatches(List<Tile> tiles)
     {
         foreach (var tile in tiles)
