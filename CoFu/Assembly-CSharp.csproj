@@ -66,22 +66,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\_Shell\_UseCase\Usecase.cs" />
-    <Compile Include="Assets\_InGame\Config\LevelConfig.cs" />
     <Compile Include="Assets\_Shell\Managers\EconomyManager.cs" />
     <Compile Include="Assets\_Shell\Managers\ScreenTransitionManager.cs" />
     <Compile Include="Assets\_Shell\UI\Popup\PausePopup.cs" />
-    <Compile Include="Assets\_InGame\_Joker\Joker_logic\CleanerJoker.cs" />
-    <Compile Include="Assets\_InGame\Logic\ColorFusionTable.cs" />
     <Compile Include="Assets\_Shell\Managers\AdManager.cs" />
     <Compile Include="Assets\_Shell\Services\TweenFactory.cs" />
-    <Compile Include="Assets\_InGame\Config\GridConfig.cs" />
     <Compile Include="Assets\__\Extensions.cs" />
     <Compile Include="Assets\_Shell\Services\LifeService.cs" />
     <Compile Include="Assets\_Shell\Services\SaveService.cs" />
     <Compile Include="Assets\_Shell\UI\Screen\GamePlayScreen.cs" />
     <Compile Include="Assets\_Shell\Managers\AudioManager.cs" />
-    <Compile Include="Assets\_InGame\_Joker\JokerHandler.cs" />
-    <Compile Include="Assets\_InGame\_Joker\Joker_logic\CollectWhiteJoker.cs" />
     <Compile Include="Assets\_Shell\UI\_GameUI\Popup.cs" />
     <Compile Include="Assets\_Shell\Managers\GameFlowManager.cs" />
     <Compile Include="Assets\_Shell\UI\Popup\Winpopup.cs" />
@@ -93,15 +87,11 @@
     <Compile Include="Assets\__\Singleton.cs" />
     <Compile Include="Assets\_Shell\Services\SequenceService.cs" />
     <Compile Include="Assets\_Shell\_Core\_ServiceBase\ServiceBaseTT.cs" />
-    <Compile Include="Assets\_InGame\_Joker\Joker_logic\AddTileJoker.cs" />
-    <Compile Include="Assets\_InGame\Logic\ColorUnit.cs" />
     <Compile Include="Assets\_Shell\Managers\PopupManager.cs" />
     <Compile Include="Assets\_Shell\UI\Popup\SettingsPopup.cs" />
     <Compile Include="Assets\_Shell\UI\Screen\MenuScreen.cs" />
-    <Compile Include="Assets\_InGame\Logic\ColorCombinations.cs" />
     <Compile Include="Assets\_Shell\UI\_GameUI\Screen.cs" />
     <Compile Include="Assets\_Shell\UI\Screen\LoadingScreen.cs" />
-    <Compile Include="Assets\_InGame\_Joker\Joker_logic\ShuffleJoker.cs" />
     <Compile Include="Assets\_Shell\Managers\LifeManager.cs" />
     <Compile Include="Assets\_Shell\_Core\_ServiceBase\ServiceBase.cs" />
     <Compile Include="Assets\_Shell\UI\Popup\FailPopup.cs" />
