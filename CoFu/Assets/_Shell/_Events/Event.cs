@@ -1,82 +1,53 @@
 // // ========== EVENTS (Base) ==========
 
 using System;
-using DG.Tweening;
 using UnityEngine;
+using Cysharp.Threading.Tasks;
 
-public abstract class BaseEventSO : ScriptableObject
+
+
+
+// Concrete event
+[CreateAssetMenu(menuName = "Events/UseCaseEvent")]
+public class UseCaseEventSO : BaseEventSO<IUseCase>
 {
-    private event Action _onRaised;
-    public void AddListener(Action listener) => _onRaised += listener;
-    public void RemoveListener(Action listener) => _onRaised -= listener;
-    public void Raise() => _onRaised?.Invoke();
+    public void RaiseExecute(IUseCase useCase)
+    {
+        // Raise event synchronously
+        Raise(useCase);
+
+        // Fire-and-forget async execution
+        _ = ExecuteUseCaseAsync(useCase);
+    }
+
+    private async UniTask ExecuteUseCaseAsync(IUseCase useCase)
+    {
+        try
+        {
+            await useCase.Execute();
+        }
+        catch (Exception ex)
+        {
+            Debug.LogError($"UseCase execution failed: {ex}");
+        }
+    }
+    
 }
 
-public abstract class BaseEventSO<T> : ScriptableObject
-{
-    private event Action<T> _onRaised;
-    public void AddListener(Action<T> listener) => _onRaised += listener;
-    public void RemoveListener(Action<T> listener) => _onRaised -= listener;
-    public void Raise(T value) => _onRaised?.Invoke(value);
-}
-
-public abstract class BaseEventSO<T1, T2> : ScriptableObject
-{
-    private event Action<T1, T2> _onRaised;
-    public void AddListener(Action<T1, T2> listener) => _onRaised += listener;
-    public void RemoveListener(Action<T1, T2> listener) => _onRaised -= listener;
-    public void Raise(T1 value1, T2 value2) => _onRaised?.Invoke(value1, value2);
-}
-
-// // ========== EVENTS (Concrete) ==========
-
-[CreateAssetMenu(menuName = "Events/Ad Event")]
-public class AdEventSO : BaseEventSO<AdType> { }
 
 [CreateAssetMenu(menuName = "Events/Coin Changed Event")]
-public class CurrencyChangedEventSO : BaseEventSO<Currency> { }
+public class CurrencyChangedEventSO : BaseEventSO { }
 
 [CreateAssetMenu(menuName = "Events/Live Changed Event")]
-public class LifeChangedEventSO : BaseEventSO<Life> { }
+public class LifeChangedEventSO : BaseEventSO { }
+
 [CreateAssetMenu(menuName = "Events/Settings Changed")]
 public class SettingsChangedEventSO : BaseEventSO { }
 
 
 
-// [CreateAssetMenu(menuName = "Events/Command Event")]
-// public class CommandEventSO : BaseEventSO<IUseCase> { }
-
-// [CreateAssetMenu(menuName = "Events/Music Event")]
-// public class MusicEventSO : BaseEventSO<MusicType, bool> { }
-// [CreateAssetMenu(menuName = "Events/SFX Event")]
-// public class SFXEventSO : BaseEventSO<AudioClip> { }
-
-// [CreateAssetMenu(menuName = "Events/Game State Changed")]
-// public class GameStateChangedEventSO : BaseEventSO { }
-
-// [CreateAssetMenu(menuName = "Events/Joker Event")] 
-// public class JokerEventSO : BaseEventSO { }
-
-// [CreateAssetMenu(menuName = "Events/LevelStart Event")]
-// public class LevelStartEventSO:BaseEventSO{}
-
-// // [CreateAssetMenu(menuName = "Events/Resource Changed")]
-// // public class ResourceChangedEventSO : BaseEventSO { }
-
-// // [CreateAssetMenu(menuName = "Events/Animation Event")]
-// // public class AnimationEventSO : BaseEventSO { } // ✅ İki parametre
-
-
-
-// // [CreateAssetMenu(menuName = "Events/Screen Event")] // ✅ Yeni
-// // public class ScreenEventSO : BaseEventSO<ScreenViewType> { }
-// // [CreateAssetMenu(menuName = "Events/Popup Event")] // ✅ Yeni
-// // public class PopupEventSO : BaseEventSO<PopupType> { }
-
-
-
-// [CreateAssetMenu(menuName = "Events/Error Event")]
-// public class ErrorEventSO : BaseEventSO<string> { }
+[CreateAssetMenu(menuName = "Events/Audio Changed")]
+public class AudioChangedEventSO : BaseEventSO<AudioConfig> { }
 
 
 

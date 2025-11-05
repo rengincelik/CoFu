@@ -250,7 +250,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &193870903
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -266,72 +266,23 @@ MonoBehaviour:
   type: 0
   audioClip: {fileID: 8300000, guid: cbc5acc6876ea8646a4ff2226920ca7b, type: 3}
   openingSequences:
-  - gameObject: {fileID: 1526985650}
-    animation:
-      animation: 0
-      duration: 0
-    delay: 5
-  - gameObject: {fileID: 1938326563}
-    animation:
-      animation: 0
-      duration: 0
-    delay: 1
-  - gameObject: {fileID: 0}
-    animation:
-      animation: 0
-      duration: 0
-    delay: 1
-  - gameObject: {fileID: 128723080}
-    animation:
-      animation: 0
-      duration: 0
-    delay: 1
-  - gameObject: {fileID: 7092616140012011845}
-    animation:
-      animation: 0
-      duration: 0
-    delay: 1
-  - gameObject: {fileID: 90843253346377181}
-    animation:
-      animation: 0
-      duration: 0
-    delay: 1
-  - gameObject: {fileID: 5629732503818712493}
-    animation:
-      animation: 0
-      duration: 0
-    delay: 1
-  - gameObject: {fileID: 1963856633291861076}
-    animation:
-      animation: 0
-      duration: 0
-    delay: 1
-  - gameObject: {fileID: 1963856633291861076}
-    animation:
-      animation: 0
-      duration: 0
-    delay: 1
+  - gameObjects:
+    - {fileID: 2172697256694441956}
+    - {fileID: 1526985650}
+    - {fileID: 1938326563}
+    - {fileID: 128723080}
+    animations: 00000000
+    duration: 0
+    delay: 0
   closingSequences:
-  - gameObject: {fileID: 128723080}
-    animation:
-      animation: 3
-      duration: 2
+  - gameObjects:
+    - {fileID: 2172697256694441956}
+    - {fileID: 1526985650}
+    - {fileID: 1938326563}
+    - {fileID: 128723080}
+    animations: 00000000
+    duration: 0
     delay: 0
-  - gameObject: {fileID: 1938326563}
-    animation:
-      animation: 3
-      duration: 2
-    delay: 0
-  - gameObject: {fileID: 1526985650}
-    animation:
-      animation: 3
-      duration: 2
-    delay: 0
-  - gameObject: {fileID: 2172697256694441956}
-    animation:
-      animation: 3
-      duration: 2
-    delay: 2
 --- !u!114 &193870904
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1005,6 +956,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15c9a78827f263846b87235e263b51c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  musicClip: []
+  sfxClip: []
   musicSource: {fileID: 330868601}
   sfxSource: {fileID: 330868600}
 --- !u!4 &330868603
@@ -1055,7 +1008,6 @@ MonoBehaviour:
   - {fileID: 193870903}
   - {fileID: 831984394}
   - {fileID: 1374320238}
-  isStart: 0
 --- !u!4 &333734767
 Transform:
   m_ObjectHideFlags: 0
@@ -1833,37 +1785,21 @@ MonoBehaviour:
   type: 2
   audioClip: {fileID: 8300000, guid: cbc5acc6876ea8646a4ff2226920ca7b, type: 3}
   openingSequences:
-  - gameObject: {fileID: 1956123026}
-    animation:
-      animation: 0
-      duration: 0
+  - gameObjects:
+    - {fileID: 1956123026}
+    - {fileID: 1580710355}
+    - {fileID: 903612433}
+    animations: 0c0000000a000000
+    duration: 1
     delay: 0
-  - gameObject: {fileID: 903612433}
-    animation:
-      animation: 2
-      duration: 2
-    delay: 1
-  - gameObject: {fileID: 1580710355}
-    animation:
-      animation: 2
-      duration: 2
-    delay: 1
   closingSequences:
-  - gameObject: {fileID: 1580710355}
-    animation:
-      animation: 3
-      duration: 0
+  - gameObjects:
+    - {fileID: 1956123026}
+    - {fileID: 1580710355}
+    - {fileID: 903612433}
+    animations: 0d0000000b000000
+    duration: 1
     delay: 0
-  - gameObject: {fileID: 903612433}
-    animation:
-      animation: 3
-      duration: 0
-    delay: 0
-  - gameObject: {fileID: 1956123026}
-    animation:
-      animation: 1
-      duration: 0
-    delay: 2
 --- !u!114 &831984395
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2323,7 +2259,6 @@ MonoBehaviour:
   - {fileID: 5681665726576657996}
   - {fileID: 8446950288997262236}
   - {fileID: 5946066462195119696}
-  isStart: 0
 --- !u!4 &1002977075
 Transform:
   m_ObjectHideFlags: 0
@@ -2596,57 +2531,25 @@ MonoBehaviour:
   type: 1
   audioClip: {fileID: 8300000, guid: cbc5acc6876ea8646a4ff2226920ca7b, type: 3}
   openingSequences:
-  - gameObject: {fileID: 1172618168780874926}
-    animation:
-      animation: 0
-      duration: 1
+  - gameObjects:
+    - {fileID: 1172618168780874926}
+    - {fileID: 252938639418501535}
+    - {fileID: 5856060301628997767}
+    - {fileID: 1767577585539224141}
+    - {fileID: 2610371992146451084}
+    animations: 00000000
+    duration: 1
     delay: 0
-  - gameObject: {fileID: 252938639418501535}
-    animation:
-      animation: 2
-      duration: 1
-    delay: 1
-  - gameObject: {fileID: 5856060301628997767}
-    animation:
-      animation: 2
-      duration: 1
-    delay: 2
-  - gameObject: {fileID: 1767577585539224141}
-    animation:
-      animation: 2
-      duration: 1
-    delay: 2
-  - gameObject: {fileID: 2610371992146451084}
-    animation:
-      animation: 2
-      duration: 1
-    delay: 2
   closingSequences:
-  - gameObject: {fileID: 2610371992146451084}
-    animation:
-      animation: 3
-      duration: 1
+  - gameObjects:
+    - {fileID: 1172618168780874926}
+    - {fileID: 5856060301628997767}
+    - {fileID: 252938639418501535}
+    - {fileID: 1767577585539224141}
+    - {fileID: 2610371992146451084}
+    animations: 00000000
+    duration: 1
     delay: 0
-  - gameObject: {fileID: 1767577585539224141}
-    animation:
-      animation: 3
-      duration: 1
-    delay: 2
-  - gameObject: {fileID: 5856060301628997767}
-    animation:
-      animation: 3
-      duration: 1
-    delay: 2
-  - gameObject: {fileID: 252938639418501535}
-    animation:
-      animation: 3
-      duration: 1
-    delay: 2
-  - gameObject: {fileID: 1172618168780874926}
-    animation:
-      animation: 3
-      duration: 1
-    delay: 3
   clip: {fileID: 8300000, guid: cbc5acc6876ea8646a4ff2226920ca7b, type: 3}
   playButton: {fileID: 1096859942783283109}
 --- !u!114 &1374320239
@@ -2890,7 +2793,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1376868197
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3837,6 +3740,51 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2048583235}
   m_CullTransparentMesh: 1
+--- !u!1 &2078456000
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2078456002}
+  - component: {fileID: 2078456001}
+  m_Layer: 0
+  m_Name: GameObject_1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2078456001
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2078456000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f42795f856f7cb84ea1aec0159b29a38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  useCaseEventSO: {fileID: 11400000, guid: c87c5df9b9ce1af438ef1b6b15f1eb88, type: 2}
+--- !u!4 &2078456002
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2078456000}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2117469644
 GameObject:
   m_ObjectHideFlags: 0
@@ -3929,9 +3877,9 @@ RectTransform:
   - {fileID: 5731003971323087813}
   m_Father: {fileID: 2370815423020141577}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 75.75001, y: -50}
   m_SizeDelta: {x: 150, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &15440373897450189
@@ -4034,7 +3982,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7148425604413895489}
-  - component: {fileID: 7385078981149996436}
   m_Layer: 5
   m_Name: Joker
   m_TagString: Untagged
@@ -4127,24 +4074,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &383271665889175820
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7092616140012011845}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 68d2f88b72b5c9047a77649a7c79a218, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  jokerConfig: {fileID: 0}
-  activeIconImage: {fileID: 0}
-  deactiveIconImage: {fileID: 0}
-  ad_Button: {fileID: 8456346654997232832}
-  use_Button: {fileID: 1366251781064785752}
-  costText: {fileID: 4155236839869981962}
 --- !u!224 &443606527288278712
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4374,10 +4303,9 @@ MonoBehaviour:
   popupType: 0
   audioClip: {fileID: 8300000, guid: cbc5acc6876ea8646a4ff2226920ca7b, type: 3}
   openingSequences:
-  - gameObject: {fileID: 1120934438780248763}
-    animation:
-      animation: 0
-      duration: 3
+  - gameObjects: []
+    animations: 
+    duration: 0
     delay: 2
   closingSequences: []
 --- !u!114 &897895848314507729
@@ -5177,7 +5105,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8734722063969927880}
-  - component: {fileID: 8970794915469607965}
   m_Layer: 5
   m_Name: Joker
   m_TagString: Untagged
@@ -5522,24 +5449,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &2963224122823286244
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5629732503818712493}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 68d2f88b72b5c9047a77649a7c79a218, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  jokerConfig: {fileID: 0}
-  activeIconImage: {fileID: 0}
-  deactiveIconImage: {fileID: 0}
-  ad_Button: {fileID: 6418792021148289064}
-  use_Button: {fileID: 4520274747486342064}
-  costText: {fileID: 1577533982652420578}
 --- !u!224 &3055370079131929168
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5603,9 +5512,9 @@ RectTransform:
   - {fileID: 7189511439602368301}
   m_Father: {fileID: 2370815423020141577}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 578.75, y: -50}
   m_SizeDelta: {x: 150, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &3216740045880629085
@@ -6757,7 +6666,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3194777964344744753}
-  - component: {fileID: 2963224122823286244}
   m_Layer: 5
   m_Name: Joker
   m_TagString: Untagged
@@ -6801,36 +6709,30 @@ MonoBehaviour:
   popupType: 1
   audioClip: {fileID: 8300000, guid: cbc5acc6876ea8646a4ff2226920ca7b, type: 3}
   openingSequences:
-  - gameObject: {fileID: 909999781}
-    animation:
-      animation: 0
-      duration: 2
+  - gameObjects: []
+    animations: 
+    duration: 0
     delay: 2
-  - gameObject: {fileID: 556535337}
-    animation:
-      animation: 0
-      duration: 2
+  - gameObjects: []
+    animations: 
+    duration: 0
     delay: 2
-  - gameObject: {fileID: 1718644297}
-    animation:
-      animation: 0
-      duration: 1
+  - gameObjects: []
+    animations: 
+    duration: 0
     delay: 1
   closingSequences:
-  - gameObject: {fileID: 909999781}
-    animation:
-      animation: 0
-      duration: 0
+  - gameObjects: []
+    animations: 
+    duration: 0
     delay: 0
-  - gameObject: {fileID: 556535337}
-    animation:
-      animation: 0
-      duration: 0
+  - gameObjects: []
+    animations: 
+    duration: 0
     delay: 0
-  - gameObject: {fileID: 1718644297}
-    animation:
-      animation: 0
-      duration: 0
+  - gameObjects: []
+    animations: 
+    duration: 0
     delay: 0
   clip: {fileID: 0}
   ContinueButton: {fileID: 1718644299}
@@ -6954,16 +6856,14 @@ MonoBehaviour:
   popupType: 3
   audioClip: {fileID: 8300000, guid: cbc5acc6876ea8646a4ff2226920ca7b, type: 3}
   openingSequences:
-  - gameObject: {fileID: 200382808}
-    animation:
-      animation: 0
-      duration: 0
+  - gameObjects: []
+    animations: 
+    duration: 0
     delay: 0
   closingSequences:
-  - gameObject: {fileID: 200382808}
-    animation:
-      animation: 0
-      duration: 0
+  - gameObjects: []
+    animations: 
+    duration: 0
     delay: 0
   soundToggle: {fileID: 0}
   musicToggle: {fileID: 0}
@@ -7551,7 +7451,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7030889951817689}
-  - component: {fileID: 383271665889175820}
   m_Layer: 5
   m_Name: Joker
   m_TagString: Untagged
@@ -7576,9 +7475,9 @@ RectTransform:
   - {fileID: 3216740045880629085}
   m_Father: {fileID: 2370815423020141577}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 327.25003, y: -50}
   m_SizeDelta: {x: 150, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &7189511439602368301
@@ -7629,24 +7528,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4075646819356674844}
   m_CullTransparentMesh: 1
---- !u!114 &7385078981149996436
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 90843253346377181}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 68d2f88b72b5c9047a77649a7c79a218, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  jokerConfig: {fileID: 0}
-  activeIconImage: {fileID: 0}
-  deactiveIconImage: {fileID: 0}
-  ad_Button: {fileID: 1618568813157146712}
-  use_Button: {fileID: 8203679978080019392}
-  costText: {fileID: 6523156591095380370}
 --- !u!114 &7470377057254082789
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8186,36 +8067,30 @@ MonoBehaviour:
   popupType: 2
   audioClip: {fileID: 8300000, guid: cbc5acc6876ea8646a4ff2226920ca7b, type: 3}
   openingSequences:
-  - gameObject: {fileID: 4044252667786098777}
-    animation:
-      animation: 0
-      duration: 2
+  - gameObjects: []
+    animations: 
+    duration: 0
     delay: 0
-  - gameObject: {fileID: 4221627475980249631}
-    animation:
-      animation: 0
-      duration: 2
+  - gameObjects: []
+    animations: 
+    duration: 0
     delay: 0
-  - gameObject: {fileID: 8186197763724943248}
-    animation:
-      animation: 0
-      duration: 2
+  - gameObjects: []
+    animations: 
+    duration: 0
     delay: 0
   closingSequences:
-  - gameObject: {fileID: 4044252667786098777}
-    animation:
-      animation: 0
-      duration: 0
+  - gameObjects: []
+    animations: 
+    duration: 0
     delay: 0
-  - gameObject: {fileID: 4221627475980249631}
-    animation:
-      animation: 0
-      duration: 0
+  - gameObjects: []
+    animations: 
+    duration: 0
     delay: 0
-  - gameObject: {fileID: 8186197763724943248}
-    animation:
-      animation: 0
-      duration: 0
+  - gameObjects: []
+    animations: 
+    duration: 0
     delay: 0
   clip: {fileID: 0}
   RestartButton: {fileID: 6519324015362573925}
@@ -8436,9 +8311,9 @@ RectTransform:
   - {fileID: 3938275010248533716}
   m_Father: {fileID: 2370815423020141577}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 830.25006, y: -50}
   m_SizeDelta: {x: 150, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &8906243180618475269
@@ -8460,24 +8335,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 500, y: 800}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &8970794915469607965
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1963856633291861076}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 68d2f88b72b5c9047a77649a7c79a218, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  jokerConfig: {fileID: 0}
-  activeIconImage: {fileID: 0}
-  deactiveIconImage: {fileID: 0}
-  ad_Button: {fileID: 897895848314507729}
-  use_Button: {fileID: 7771782764887921225}
-  costText: {fileID: 4649210276328540187}
 --- !u!114 &9007188165372143135
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8528,6 +8385,7 @@ SceneRoots:
   - {fileID: 410087041}
   - {fileID: 832575519}
   - {fileID: 330868603}
+  - {fileID: 2078456002}
   - {fileID: 333734767}
   - {fileID: 1002977075}
   - {fileID: 831984398}

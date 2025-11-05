@@ -2,7 +2,11 @@
 using DG.Tweening;
 using UnityEngine;
 
-
+[System.Serializable]
+public class AudioConfig
+{
+    public MusicType musicType;
+}
 public enum MusicType { GamePlay, NonGamePlay ,ButtonClick, Victory, Fail, CoinCollect}
 public class AudioListenerManager : Singleton<AudioListenerManager>
 {

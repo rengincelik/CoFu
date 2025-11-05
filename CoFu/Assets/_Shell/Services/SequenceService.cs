@@ -24,7 +24,7 @@ public static class SequenceService
             if (item == null)
                 continue;
 
-            Tween tween = TweenFactory.CreateTween(item.gameObject, item.animation);
+            Tween tween = TweenFactory.CreateTween(item.gameObjects, item.animations,item.duration);
             
             if (tween == null)
                 continue;
@@ -33,7 +33,7 @@ public static class SequenceService
                 tween.SetDelay(item.delay);
 
             seq.Insert(currentTime, tween);
-            currentTime += item.animation.duration; // istersen delay yerine transitionDuration kullan
+            currentTime += item.duration; // istersen delay yerine transitionDuration kullan
         }
 
         // Unique ID ile kayıt

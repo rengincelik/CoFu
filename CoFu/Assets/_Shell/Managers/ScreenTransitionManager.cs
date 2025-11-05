@@ -36,7 +36,7 @@ public class ScreenManager : Singleton<ScreenManager>
                 // 1. Önce objeyi aktif et ama tüm öğeleri başlangıç state'ine getir
                 foreach (var item in s.openingSequences)
                 {
-                    TweenFactory.PrepareInitialState(item.gameObject, item.animation);
+                    TweenFactory.PrepareInitialState(item.gameObjects, item.animations);
                 }
 
                 // 2. Animasyonu oynat ve bitmesini bekle

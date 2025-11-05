@@ -31,7 +31,7 @@ public class EconomyManager:MonoBehaviour
         }
 
         currency.Amount -= amount;
-        currencyChangedEventSO?.Raise(currency);
+        currencyChangedEventSO?.Raise();
         return true;
     }
     
@@ -43,7 +43,7 @@ public class EconomyManager:MonoBehaviour
         if (currency == null) return;
 
         currency.Amount += amount;
-        currencyChangedEventSO?.Raise(currency);
+        currencyChangedEventSO?.Raise();
     }
     
     public int GetAmount(string id)

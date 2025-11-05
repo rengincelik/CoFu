@@ -37,7 +37,7 @@ public class PopupManager : Singleton<PopupManager>
         {
             foreach (var item in p.openingSequences)
             {
-                TweenFactory.PrepareInitialState(item.gameObject, item.animation);
+                TweenFactory.PrepareInitialState(item.gameObjects, item.animations);
             }
 
             await SequenceService.PlaySequenceAsync(p.openingSequences);
