@@ -4,37 +4,247 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CoFu - Rengin Çelik</title>
-    <link rel="stylesheet" href="../../styles.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #0a0a0a;
+            color: #e0e0e0;
+            line-height: 1.6;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            padding: 80px 20px;
+            text-align: center;
+            border-bottom: 2px solid #00d4ff;
+        }
+        
+        header h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+            color: #00d4ff;
+            text-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
+        }
+        
+        header p {
+            font-size: 1.3em;
+            color: #b0b0b0;
+            margin-bottom: 30px;
+        }
+        
+        nav {
+            margin-top: 30px;
+        }
+        
+        nav a {
+            color: #00d4ff;
+            margin: 0 15px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+            padding: 8px 16px;
+            border-radius: 4px;
+        }
+        
+        nav a:hover {
+            background: rgba(0, 212, 255, 0.1);
+            transform: translateY(-2px);
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+        
+        section {
+            margin-bottom: 60px;
+            background: #151515;
+            padding: 40px;
+            border-radius: 12px;
+            border: 1px solid #252525;
+            transition: all 0.3s;
+        }
+        
+        section:hover {
+            border-color: #00d4ff;
+            box-shadow: 0 0 30px rgba(0, 212, 255, 0.1);
+        }
+        
+        h2 {
+            font-size: 2em;
+            margin-bottom: 25px;
+            color: #00d4ff;
+            position: relative;
+            padding-bottom: 15px;
+        }
+        
+        h2::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, #00d4ff, transparent);
+        }
+        
+        .feature-list {
+            list-style: none;
+            margin-top: 20px;
+        }
+        
+        .feature-list li {
+            padding-left: 25px;
+            position: relative;
+            margin-bottom: 12px;
+            color: #b0b0b0;
+        }
+        
+        .feature-list li::before {
+            content: '▹';
+            position: absolute;
+            left: 0;
+            color: #00d4ff;
+            font-size: 1.2em;
+        }
+        
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .tech-item {
+            background: #1a1a1a;
+            padding: 15px 20px;
+            border-radius: 8px;
+            border-left: 3px solid #00d4ff;
+            color: #b0b0b0;
+        }
+        
+        .tech-item strong {
+            color: #00d4ff;
+            display: block;
+            margin-bottom: 5px;
+        }
+        
+        .links-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .link-card {
+            background: #1a1a1a;
+            padding: 25px;
+            border-radius: 8px;
+            border: 1px solid #252525;
+            text-align: center;
+            transition: all 0.3s;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+        
+        .link-card:hover {
+            border-color: #00d4ff;
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(0, 212, 255, 0.2);
+        }
+        
+        .link-card h3 {
+            color: #00d4ff;
+            margin-bottom: 10px;
+            font-size: 1.2em;
+        }
+        
+        .link-card p {
+            color: #888;
+            font-size: 0.9em;
+        }
+        
+        footer {
+            background: #0a0a0a;
+            padding: 30px 20px;
+            text-align: center;
+            border-top: 1px solid #252525;
+            color: #666;
+        }
+        
+        @media (max-width: 768px) {
+            header h1 { font-size: 2em; }
+            header p { font-size: 1.1em; }
+            section { padding: 25px; }
+            .tech-grid, .links-grid { grid-template-columns: 1fr; }
+        }
+    </style>
 </head>
 <body>
 <header>
     <h1>CoFu</h1>
-    <p>Match 3 style mobile puzzle game.</p>
+    <p>Match-3 Style Mobile Puzzle Game</p>
     <nav>
-        <a href="../../index.html">Home</a>
+        <a href="../../index.html">← Back to Portfolio</a>
     </nav>
 </header>
 
 <div class="container">
     <section>
         <h2>About the Project</h2>
-        <p>This is a mobile/WebGL Unity game where the player combines same colored tiles.</p>
+        <p>CoFu is a mobile puzzle game where players combine same-colored tiles in a match-3 style gameplay. Built with performance optimization and engaging mechanics for mobile platforms.</p>
+        <p style="margin-top: 15px;">The game features smooth physics-based interactions, intuitive controls, and a scalable architecture using Scriptable Objects for data management.</p>
     </section>
 
     <section>
-        <h2>Technologies</h2>
-        <ul>
-            <li>Unity (3D physics, SO based)</li>
-            <li>C# (Observer pattern, event-driven UI)</li>
+        <h2>Key Features</h2>
+        <ul class="feature-list">
+            <li>Smooth tile matching mechanics with satisfying feedback</li>
+            <li>Physics-based tile interactions for dynamic gameplay</li>
+            <li>Event-driven UI system for responsive interface</li>
+            <li>Scalable level progression system</li>
+            <li>Optimized for mobile performance</li>
         </ul>
     </section>
 
     <section>
-        <h2>Links</h2>
-        <ul>
-            <li><a href="https://github.com/rengincelik/CoFu/blob/main/index.html" target="_blank">GitHub Repo</a></li>
-            <li><a href="https://rengincelik.github.io/portfolio/projects/CoFu/" target="_blank">Play / WebGL Demo</a></li>
-        </ul>
+        <h2>Technologies & Architecture</h2>
+        <div class="tech-grid">
+            <div class="tech-item">
+                <strong>Unity 3D</strong>
+                Physics system, particle effects
+            </div>
+            <div class="tech-item">
+                <strong>C# Programming</strong>
+                Observer pattern, OOP principles
+            </div>
+            <div class="tech-item">
+                <strong>Scriptable Objects</strong>
+                Data-driven architecture
+            </div>
+            <div class="tech-item">
+                <strong>Event System</strong>
+                Decoupled UI communication
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <h2>Play & Source Code</h2>
+        <div class="links-grid">
+            <a href="https://rengincelik.github.io/portfolio/projects/CoFu/" target="_blank" class="link-card">
+                <h3>🎮 Play Game</h3>
+                <p>Try the WebGL demo in your browser</p>
+            </a>
+            <a href="https://github.com/rengincelik/CoFu/blob/main/index.html" target="_blank" class="link-card">
+                <h3>📂 GitHub Repo</h3>
+                <p>View source code and documentation</p>
+            </a>
+        </div>
     </section>
 </div>
 
